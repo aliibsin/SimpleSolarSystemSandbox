@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import sun from './planets/sun';
 
 console.log('webpack is working')
 
@@ -12,18 +13,19 @@ bgTexture.load("src/assets/stars_milky_way.jpg", function(bgTexture) {
 });
 
 
-const sphereGeometry = new THREE.SphereBufferGeometry(.5, 100, 100);
-const sunTexture = new THREE.TextureLoader().load("src/assets/sun.jpg")
-const material = new THREE.MeshBasicMaterial({map: sunTexture});
+// const sphereGeometry = new THREE.SphereBufferGeometry(.5, 100, 100);
+// const sunTexture = new THREE.TextureLoader().load("src/assets/sun.jpg")
+// const material = new THREE.MeshBasicMaterial({map: sunTexture});
 
-const sun = new THREE.Mesh(sphereGeometry, material)
+// const sun = new THREE.Mesh(sphereGeometry, material)
 scene.add(sun)
 
 
 const pointLight = new THREE.PointLight(0xffffff, 0.51)
-pointLight.position.x = 2
-pointLight.position.y = 3
-pointLight.position.z = 4
+pointLight.position.set(2, 3, 4);
+// pointLight.position.x = 2
+// pointLight.position.y = 3
+// pointLight.position.z = 4
 scene.add(pointLight)
 
 
@@ -65,6 +67,8 @@ const tick = () =>
 
     // Update objects
     sun.rotation.y = .1 * elapsedTime
+    // sun.rotation.z = .1 * elapsedTime
+    // sun.rotation.x = .1 * elapsedTime
 
     // Update Orbital Controls
     // controls.update()
