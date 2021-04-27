@@ -10,26 +10,11 @@ const bgTexture = new THREE.TextureLoader();
 bgTexture.load("src/assets/stars_milky_way.jpg", function(bgTexture) {
   scene.background = bgTexture;
 });
-// const bgMesh = new THREE.Mesh(
-//   new THREE.PlaneGeometry(100, 100, 0),
-//   new THREE.MeshBasicMaterial({map: bgTexture})
-// );
-
-// bgMesh.material.depthTest = false;
-// bgMesh.material.depthWrite = false;
-
-// const bgScene = new THREE.Scene();
-// var bgCamera = new THREE.Camera();
-// bgScene.add(bgCamera);
-// bgScene.add(bgMesh);
 
 
-const sphereGeometry = new THREE.SphereBufferGeometry(.5, 64, 64);
+const sphereGeometry = new THREE.SphereBufferGeometry(.5, 100, 100);
 const sunTexture = new THREE.TextureLoader().load("src/assets/sun.jpg")
 const material = new THREE.MeshBasicMaterial({map: sunTexture});
-// material.metalness = 0.3;
-// material.roughness = 0.7
-// material.color = new THREE.Color(0x00ff00)
 
 const sun = new THREE.Mesh(sphereGeometry, material)
 scene.add(sun)
@@ -49,7 +34,7 @@ const sizes = {
 
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
-  // alpha: true
+  alpha: true
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -79,7 +64,7 @@ const tick = () =>
     const elapsedTime = clock.getElapsedTime()
 
     // Update objects
-    sun.rotation.y = .5 * elapsedTime
+    sun.rotation.y = .1 * elapsedTime
 
     // Update Orbital Controls
     // controls.update()
