@@ -2,10 +2,11 @@
   "name": "simplesolarsystemsandbox",
   "version": "1.0.0",
   "description": "",
-  "main": "./bundle.js",
+  "main": "./src/index.js",
   "scripts": {
     "build": "webpack --config ./bundler/webpack.prod.js",
-    "start": "webpack --watch --mode=development"
+    "start": "webpack --watch --mode=development",
+    "dev": "webpack serve --config ./bundler/webpack.dev.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
     "@babel/core": "^7.13.16",
     "@babel/preset-env": "^7.13.15",
     "babel-loader": "^8.2.2",
+    "express": "^4.17.1",
     "three": "^0.128.0",
     "webpack": "^5.35.1",
     "webpack-cli": "^4.6.0",

@@ -1,19 +1,41 @@
 import * as THREE from 'three';
 
+console.log('webpack is working')
+
 const canvas = document.querySelector('canvas.webgl');
 
 const scene = new THREE.Scene();
 
+const bgTexture = new THREE.TextureLoader();
+bgTexture.load("src/assets/stars_milky_way.jpg", function(bgTexture) {
+  scene.background = bgTexture;
+});
+// const bgMesh = new THREE.Mesh(
+//   new THREE.PlaneGeometry(100, 100, 0),
+//   new THREE.MeshBasicMaterial({map: bgTexture})
+// );
+
+// bgMesh.material.depthTest = false;
+// bgMesh.material.depthWrite = false;
+
+// const bgScene = new THREE.Scene();
+// var bgCamera = new THREE.Camera();
+// bgScene.add(bgCamera);
+// bgScene.add(bgMesh);
+
+
 const sphereGeometry = new THREE.SphereBufferGeometry(.5, 64, 64);
+const sunTexture = new THREE.TextureLoader().load("src/assets/sun.jpg")
+const material = new THREE.MeshBasicMaterial({map: sunTexture});
+// material.metalness = 0.3;
+// material.roughness = 0.7
+// material.color = new THREE.Color(0x00ff00)
 
-const material = new THREE.MeshBasicMaterial()
-material.color = new THREE.Color(0xff0000)
-
-const sphere = new THREE.Mesh(geometry,material)
-scene.add(sphere)
+const sun = new THREE.Mesh(sphereGeometry, material)
+scene.add(sun)
 
 
-const pointLight = new THREE.PointLight(0xffffff, 0.1)
+const pointLight = new THREE.PointLight(0xffffff, 0.51)
 pointLight.position.x = 2
 pointLight.position.y = 3
 pointLight.position.z = 4
@@ -26,7 +48,8 @@ const sizes = {
 }
 
 const renderer = new THREE.WebGLRenderer({
-  canvas: canvas
+  canvas: canvas,
+  // alpha: true
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -48,18 +71,21 @@ window.addEventListener('resize', () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
+const clock = new THREE.Clock()
+
 const tick = () =>
 {
 
     const elapsedTime = clock.getElapsedTime()
 
     // Update objects
-    sphere.rotation.y = .5 * elapsedTime
+    sun.rotation.y = .5 * elapsedTime
 
     // Update Orbital Controls
     // controls.update()
 
     // Render
+    
     renderer.render(scene, camera)
 
     // Call tick again on the next frame
