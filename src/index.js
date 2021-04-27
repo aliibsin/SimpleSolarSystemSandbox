@@ -1,5 +1,9 @@
 import * as THREE from 'three';
-import sun from './planets/sun';
+import Sun from './planets/sun';
+import {
+  mercury, venus, earth, mars,
+  jupiter, saturn, uranus, neptune
+} from './planets/planets';
 
 console.log('webpack is working')
 
@@ -13,19 +17,52 @@ bgTexture.load("src/assets/stars_milky_way.jpg", function(bgTexture) {
 });
 
 
-// const sphereGeometry = new THREE.SphereBufferGeometry(.5, 100, 100);
-// const sunTexture = new THREE.TextureLoader().load("src/assets/sun.jpg")
-// const material = new THREE.MeshBasicMaterial({map: sunTexture});
+scene.add(Sun);
 
-// const sun = new THREE.Mesh(sphereGeometry, material)
-scene.add(sun)
+let scale = 1;
+
+mercury.position.set(700, 0, 0);
+mercury.scale.set(scale, scale, scale)
+scene.add(mercury);
 
 
-const pointLight = new THREE.PointLight(0xffffff, 0.51)
+venus.position.set(900, 0, 0);
+venus.scale.set(scale, scale, scale);
+scene.add(venus);
+
+
+earth.position.set(1200, 0, 0);
+earth.scale.set(scale, scale, scale);
+scene.add(earth);
+
+
+mars.position.set(1500, 0, 0);
+mars.scale.set(scale, scale, scale);
+scene.add(mars);
+
+
+jupiter.position.set(2000, 0, 0);
+jupiter.scale.set(scale, scale, scale);
+scene.add(jupiter);
+
+
+saturn.position.set(2600, 0, 0);
+saturn.scale.set(scale, scale, scale);
+scene.add(saturn);
+
+
+uranus.position.set(3100, 0, 0);
+uranus.scale.set(scale, scale, scale);
+scene.add(uranus);
+
+
+neptune.position.set(3600, 0, 0);
+neptune.scale.set(scale, scale, scale);
+scene.add(neptune);
+
+
+const pointLight = new THREE.PointLight(0xffffff, 0.2)
 pointLight.position.set(2, 3, 4);
-// pointLight.position.x = 2
-// pointLight.position.y = 3
-// pointLight.position.z = 4
 scene.add(pointLight)
 
 
@@ -34,18 +71,17 @@ const sizes = {
   height: window.innerHeight
 }
 
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 10000)
+camera.position.set(0, 2000, 4000);
+camera.rotateX(-.5);
+scene.add(camera)
+
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
   alpha: true
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 0
-camera.position.y = 0
-camera.position.z = 2
-scene.add(camera)
 
 window.addEventListener('resize', () => {
   sizes.width = window.innerWidth;
@@ -60,25 +96,25 @@ window.addEventListener('resize', () => {
 
 const clock = new THREE.Clock()
 
-const tick = () =>
+const animate = () =>
 {
+  const elapsedTime = clock.getElapsedTime()
 
-    const elapsedTime = clock.getElapsedTime()
+  // Update objects
+  Sun.rotation.y = .1 * elapsedTime;
+  earth.rotation.y = .1 * elapsedTime;
+  // Sun.rotation.z = .1 * elapsedTime
+  // Sun.rotation.x = .1 * elapsedTime
 
-    // Update objects
-    sun.rotation.y = .1 * elapsedTime
-    // sun.rotation.z = .1 * elapsedTime
-    // sun.rotation.x = .1 * elapsedTime
+  // Update Orbital Controls
+  // controls.update()
 
-    // Update Orbital Controls
-    // controls.update()
+  // Render
+  
+  renderer.render(scene, camera)
 
-    // Render
-    
-    renderer.render(scene, camera)
-
-    // Call tick again on the next frame
-    window.requestAnimationFrame(tick)
+  // Call animate again on the next frame
+  window.requestAnimationFrame(animate)
 }
 
-tick()
+animate()
