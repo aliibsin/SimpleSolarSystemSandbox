@@ -80,7 +80,7 @@ const sizes = {
 }
 
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 10000)
-camera.position.set(1200, 100, 200);
+camera.position.set(0, 1500, 3000);
 camera.rotateX(-.5);
 scene.add(camera)
 
@@ -109,10 +109,28 @@ const animate = () =>
   const elapsedTime = clock.getElapsedTime()
 
   // Update objects
-  Sun.rotation.y = 1 * elapsedTime;
-  earth.rotation.y = .1 * elapsedTime;
-  // Sun.rotation.z = .1 * elapsedTime
-  // Sun.rotation.x = .1 * elapsedTime
+
+  Sun.rotateY(0.0006);
+  mercury.rotateY(.0003);
+  venus.rotateY(.00015);
+  earth.rotateY(.017);
+  mars.rotateY(.017);
+  jupiter.rotateY(.042);
+  saturn.rotateY(.04);
+  uranus.rotateY(.025);
+  neptune.rotateY(.026);
+  // Sun.rotation.y = 0.034 * elapsedTime;
+  // mercury.rotation.y = 0.017 * elapsedTime;
+  // venus.rotation.y = 0.009 * elapsedTime;
+  // earth.rotation.y = 1 * elapsedTime;
+  // mars.rotation.y = 1 * elapsedTime;
+  // jupiter.rotation.y = 2.38 * elapsedTime;
+  // saturn.rotation.y = 2.27 * elapsedTime;
+
+  
+  // uranus.rotation.y = 1.41 * elapsedTime;
+  // neptune.rotation.y = 1.49 * elapsedTime;
+
 
   // Update Orbital Controls
   // controls.update()
