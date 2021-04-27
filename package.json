@@ -1,0 +1,29 @@
+{
+  "name": "simplesolarsystemsandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./bundle.js",
+  "scripts": {
+    "build": "webpack --config ./bundler/webpack.prod.js",
+    "start": "webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aliibsin/SimpleSolarSystemSandbox.git"
+  },
+  "author": "ali ibsin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aliibsin/SimpleSolarSystemSandbox/issues"
+  },
+  "homepage": "https://github.com/aliibsin/SimpleSolarSystemSandbox#readme",
+  "dependencies": {
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "babel-loader": "^8.2.2",
+    "three": "^0.128.0",
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
