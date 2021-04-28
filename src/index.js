@@ -24,48 +24,73 @@ let scale = 3;
 mercury.position.set(700, 0, 0);
 mercury.scale.set(scale, scale, scale)
 mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
+let rMercury = 700;
+let thetaMercury = 0;
+let dThetaMercury = 2 * Math.PI / 1000 ;
 scene.add(mercury);
+
 
 
 venus.position.set(900, 0, 0);
 venus.scale.set(scale, scale, scale);
 venus.rotation.set(0, 0, -Math.PI * 3 / 180);
+let rVenus = 900;
+let thetaVenus = 0;
+let dThetaVenus = 2 * Math.PI / 1000 ;
 scene.add(venus);
 
 
 earth.position.set(1200, 0, 0);
 earth.scale.set(scale, scale, scale);
 earth.rotation.set(0, 0, -Math.PI * 23.5 / 180);
+let rEarth = 1200;
+let thetaEarth = 0;
+let dThetaEarth = 2 * Math.PI / 1000 ;
 scene.add(earth);
 
 
 mars.position.set(1500, 0, 0);
 mars.scale.set(scale, scale, scale);
 mars.rotation.set(0, 0, -Math.PI * 25.2 / 180);
+let rMars = 1500;
+let thetaMars = 0;
+let dThetaMars = 2 * Math.PI / 1000 ;
 scene.add(mars);
 
 
 jupiter.position.set(2000, 0, 0);
 jupiter.scale.set(scale, scale, scale);
 jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
+let rJupiter = 2000;
+let thetaJupiter = 0;
+let dThetaJupiter = 2 * Math.PI / 1000 ;
 scene.add(jupiter);
 
 
 saturn.position.set(2600, 0, 0);
 saturn.scale.set(scale, scale, scale);
 saturn.rotation.set(0, 0, -Math.PI * 27 / 180);
+let rSaturn = 2600;
+let thetaSaturn = 0;
+let dThetaSaturn = 2 * Math.PI / 1000 ;
 scene.add(saturn);
 
 
 uranus.position.set(3100, 0, 0);
 uranus.scale.set(scale, scale, scale);
 uranus.rotation.set(0, 0, -Math.PI * 98 / 180);
+let rUranus = 3100;
+let thetaUranus = 0;
+let dThetaUranus = 2 * Math.PI / 1000 ;
 scene.add(uranus);
 
 
 neptune.position.set(3600, 0, 0);
 neptune.scale.set(scale, scale, scale);
 neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
+let rNeptune = 3600;
+let thetaNeptune = 0;
+let dThetaNeptune = 2 * Math.PI / 1000 ;
 scene.add(neptune);
 
 
@@ -104,12 +129,17 @@ window.addEventListener('resize', () => {
 
 const clock = new THREE.Clock()
 
+// let r = 2000;
+// let theta = 0;
+// let dTheta = 2 * Math.PI / 1000 ;
+
 const animate = () =>
 {
   const elapsedTime = clock.getElapsedTime()
 
   // Update objects
 
+  // Body rotations
   Sun.rotateY(0.0006);
   mercury.rotateY(.0003);
   venus.rotateY(.00015);
@@ -119,18 +149,39 @@ const animate = () =>
   saturn.rotateY(.04);
   uranus.rotateY(.025);
   neptune.rotateY(.026);
-  // Sun.rotation.y = 0.034 * elapsedTime;
-  // mercury.rotation.y = 0.017 * elapsedTime;
-  // venus.rotation.y = 0.009 * elapsedTime;
-  // earth.rotation.y = 1 * elapsedTime;
-  // mars.rotation.y = 1 * elapsedTime;
-  // jupiter.rotation.y = 2.38 * elapsedTime;
-  // saturn.rotation.y = 2.27 * elapsedTime;
 
-  
-  // uranus.rotation.y = 1.41 * elapsedTime;
-  // neptune.rotation.y = 1.49 * elapsedTime;
+  // Body orbits
+  thetaMercury -= dThetaMercury;
+  mercury.position.x = rMercury * Math.cos(thetaMercury);
+  mercury.position.z = rMercury * Math.sin(thetaMercury);
 
+  thetaVenus -= dThetaVenus;
+  venus.position.x = rVenus * Math.cos(thetaVenus);
+  venus.position.z = rVenus * Math.sin(thetaVenus);
+
+  thetaEarth -= dThetaEarth;
+  earth.position.x = rEarth * Math.cos(thetaEarth);
+  earth.position.z = rEarth * Math.sin(thetaEarth);
+
+  thetaMars -= dThetaMars;
+  mars.position.x = rMars * Math.cos(thetaMars);
+  mars.position.z = rMars * Math.sin(thetaMars);
+
+  thetaJupiter -= dThetaJupiter;
+  jupiter.position.x = rJupiter * Math.cos(thetaJupiter);
+  jupiter.position.z = rJupiter * Math.sin(thetaJupiter);
+
+  thetaSaturn -= dThetaSaturn;
+  saturn.position.x = rSaturn * Math.cos(thetaSaturn);
+  saturn.position.z = rSaturn * Math.sin(thetaSaturn);
+
+  thetaUranus -= dThetaUranus;
+  uranus.position.x = rUranus * Math.cos(thetaUranus);
+  uranus.position.z = rUranus * Math.sin(thetaUranus);
+
+  thetaNeptune -= dThetaNeptune;
+  neptune.position.x = rNeptune * Math.cos(thetaNeptune);
+  neptune.position.z = rNeptune * Math.sin(thetaNeptune);
 
   // Update Orbital Controls
   // controls.update()
