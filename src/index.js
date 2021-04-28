@@ -24,15 +24,13 @@ scene.add(Sun);
 let scale = 20;
 let timeScale = 60;
 
-// let rMercury = 700;
+
 let rMercury = 716;
 mercury.position.set(rMercury, 0, 0);
 mercury.scale.set(scale*2, scale*2, scale*2)
 mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
 let thetaMercury = 0;
 let dThetaMercury = 2 * Math.PI / (88 * timeScale) ;
-
-// const mercuryPathGeometry = new THREE.TorusGeometry(rMercury, 3, 200, 200);
 const mercuryPathGeometry = new THREE.RingGeometry(rMercury-10, rMercury+10, 100, 100);
 const mercuryPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const mercuryPath = new THREE.Mesh(mercuryPathGeometry, mercuryPathMaterial);
@@ -41,15 +39,13 @@ scene.add(mercuryPath);
 scene.add(mercury);
 
 
-// let rVenus = 900;
+
 let rVenus = 1101;
 venus.position.set(rVenus, 0, 0);
 venus.scale.set(scale, scale, scale);
 venus.rotation.set(0, 0, -Math.PI * 3 / 180);
-let thetaVenus = 0;
+let thetaVenus = 2 * Math.PI / (225 * timeScale);
 let dThetaVenus = 2 * Math.PI / (225 * timeScale) ;
-
-// const venusPathGeometry = new THREE.TorusGeometry(rVenus, 3, 100, 100);
 const venusPathGeometry = new THREE.RingGeometry(rVenus-10, rVenus+10, 100, 100);
 const venusPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const venusPath = new THREE.Mesh(venusPathGeometry, venusPathMaterial);
@@ -58,14 +54,12 @@ scene.add(venusPath);
 scene.add(venus);
 
 
-// let rEarth = 1200;
 let rEarth = 1366;
 earth.position.set(rEarth, 0, 0);
 earth.scale.set(scale, scale, scale);
 earth.rotation.set(0, 0, -Math.PI * 23.5 / 180);
 let thetaEarth = 0;
 let dThetaEarth = 2 * Math.PI / (365 * timeScale) ;
-// const earthPathGeometry = new THREE.TorusGeometry(rEarth, 3, 100, 100);
 const earthPathGeometry = new THREE.RingGeometry(rEarth-10, rEarth+10, 100, 100);
 const earthPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const earthPath = new THREE.Mesh(earthPathGeometry, earthPathMaterial);
@@ -74,15 +68,12 @@ scene.add(earthPath);
 scene.add(earth);
 
 
-// let rMars = 1500;
 let rMars = 1962.2;
 mars.position.set(rMars, 0, 0);
 mars.scale.set(scale, scale, scale);
 mars.rotation.set(0, 0, -Math.PI * 25.2 / 180);
 let thetaMars = 0;
 let dThetaMars = 2 * Math.PI / (687 * timeScale) ;
-
-// const marsPathGeometry = new THREE.TorusGeometry(rMars, 3, 100, 100);
 const marsPathGeometry = new THREE.RingGeometry(rMars-10, rMars+10, 100, 100);
 const marsPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const marsPath = new THREE.Mesh(marsPathGeometry, marsPathMaterial);
@@ -91,15 +82,12 @@ scene.add(marsPath);
 scene.add(mars);
 
 
-// let rJupiter = 2000;
 let rJupiter = 5268;
 jupiter.position.set(rJupiter, 0, 0);
 jupiter.scale.set(scale, scale, scale);
 jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaJupiter = 0;
 let dThetaJupiter = 2 * Math.PI / (4380 * timeScale) ;
-
-// const jupiterPathGeometry = new THREE.TorusGeometry(rJupiter, 3, 100, 100);
 const jupiterPathGeometry = new THREE.RingGeometry(rJupiter-20, rJupiter+20, 100, 100);
 const jupiterPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const jupiterPath = new THREE.Mesh(jupiterPathGeometry, jupiterPathMaterial);
@@ -109,8 +97,6 @@ scene.add(jupiter);
 
 
 
-
-// let rSaturn = 2600;
 let rSaturn = 9338;
 saturn.position.set(rSaturn, 0, 0);
 saturnRing.position.set(rSaturn, 0, 0);
@@ -122,7 +108,6 @@ let thetaSaturn = 0;
 let thetaSaturnRing = 0;
 let dThetaSaturn = 2 * Math.PI / (10585 * timeScale) ;
 let dThetaSaturnRing = 2 * Math.PI / (10585 * timeScale) ;
-// const saturnPathGeometry = new THREE.TorusGeometry(rSaturn, 3, 100, 100);
 const saturnPathGeometry = new THREE.RingGeometry(rSaturn-20, rSaturn+20, 100, 100);
 const saturnPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const saturnPath = new THREE.Mesh(saturnPathGeometry, saturnPathMaterial);
@@ -133,15 +118,13 @@ scene.add(saturn);
 
 
 
-// let rUranus = 3100;
+
 let rUranus = 18270;
 uranus.position.set(rUranus, 0, 0);
 uranus.scale.set(scale, scale, scale);
 uranus.rotation.set(0, 0, -Math.PI * 98 / 180);
 let thetaUranus = 0;
 let dThetaUranus = 2 * Math.PI / (30660 * timeScale) ;
-
-// const uranusPathGeometry = new THREE.TorusGeometry(rUranus, 3, 100, 100);
 const uranusPathGeometry = new THREE.RingGeometry(rUranus-20, rUranus+20, 100, 100);
 const uranusPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const uranusPath = new THREE.Mesh(uranusPathGeometry, uranusPathMaterial);
@@ -150,14 +133,12 @@ scene.add(uranusPath);
 scene.add(uranus);
 
 
-// let rNeptune = 3600;
 let rNeptune = 29840;
 neptune.position.set(rNeptune, 0, 0);
 neptune.scale.set(scale, scale, scale);
 neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
 let thetaNeptune = 0;
 let dThetaNeptune = 2 * Math.PI / (60225 * timeScale) ;
-// const neptunePathGeometry = new THREE.TorusGeometry(rNeptune, 3, 100, 100);
 const neptunePathGeometry = new THREE.RingGeometry(rNeptune-20, rNeptune+20, 100, 100);
 const neptunePathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const neptunePath = new THREE.Mesh(neptunePathGeometry, neptunePathMaterial);
@@ -166,8 +147,7 @@ scene.add(neptunePath);
 scene.add(neptune);
 
 
-const pointLight = new THREE.PointLight(0xffffff, 0.2)
-pointLight.position.set(2, 3, 4);
+const pointLight = new THREE.PointLight(0xffffff, 1, 0, 2)
 scene.add(pointLight)
 
 
@@ -176,11 +156,13 @@ const sizes = {
   height: window.innerHeight
 }
 
+//starting camera position
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 500000)
 camera.position.set(0, 2000,  3000);
 camera.rotateX(-0.785398);
 scene.add(camera)
 
+//create renderer
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
   alpha: true
@@ -188,6 +170,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
+// resize window adjusting
 window.addEventListener('resize', () => {
   sizes.width = window.innerWidth;
   sizes.height = window.innerHeight;
