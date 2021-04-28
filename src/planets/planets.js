@@ -47,6 +47,23 @@ const saturnMaterial = new THREE.MeshBasicMaterial({map: saturnTexture});
 
 export const saturn = new THREE.Mesh(saturnGeometry, saturnMaterial);
 
+const ringTexture = new THREE.TextureLoader().load("src/assets/saturn_rings.png");
+const ringGeometry = new THREE.RingBufferGeometry(41.6, 111.8, 100);
+var pos = ringGeometry.attributes.position;
+var v3 = new THREE.Vector3();
+for (let i = 0; i < pos.count; i++){
+  v3.fromBufferAttribute(pos, i);
+  ringGeometry.attributes.uv.setXY(i, v3.length() < 76.8 ? 0 : 1, 1);
+}
+
+const ringMaterial = new THREE.MeshBasicMaterial({
+  map: ringTexture,
+  color: 0xffffff,
+  side: THREE.DoubleSide,
+  transparent: true
+});
+export const saturnRing = new THREE.Mesh(ringGeometry, ringMaterial);
+
 
 //uranus
 const uranusGeometry = new THREE.SphereBufferGeometry(15.8, 100, 100);
@@ -62,3 +79,5 @@ const neptuneTexture = new THREE.TextureLoader().load("src/assets/neptune.jpg");
 const neptuneMaterial = new THREE.MeshBasicMaterial({map: neptuneTexture});
 
 export const neptune = new THREE.Mesh(neptuneGeometry, neptuneMaterial);
+
+
