@@ -181,7 +181,10 @@ window.addEventListener('resize', () => {
 
   renderer.setSize(sizes.width, sizes.height)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
+});
+
+var controls = new OrbitControls( camera, renderer.domElement);
+controls.update();
 
 
 const clock = new THREE.Clock()
@@ -191,6 +194,7 @@ const animate = () =>
   const elapsedTime = clock.getElapsedTime()
 
   // Update objects
+  controls.update();
 
   // Body rotations
   Sun.rotateY(0.0006);
