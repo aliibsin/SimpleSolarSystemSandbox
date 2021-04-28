@@ -31,8 +31,9 @@ mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
 let thetaMercury = 0;
 let dThetaMercury = 2 * Math.PI / 88 ;
 
-const mercuryPathGeometry = new THREE.TorusGeometry(rMercury, 3, 200, 200);
-const mercuryPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF})
+// const mercuryPathGeometry = new THREE.TorusGeometry(rMercury, 3, 200, 200);
+const mercuryPathGeometry = new THREE.RingGeometry(rMercury-10, rMercury+10, 200, 200);
+const mercuryPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const mercuryPath = new THREE.Mesh(mercuryPathGeometry, mercuryPathMaterial);
 mercuryPath.rotation.set(1.5708, 0, 0);
 scene.add(mercuryPath);
@@ -46,8 +47,10 @@ venus.scale.set(scale, scale, scale);
 venus.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaVenus = 0;
 let dThetaVenus = 2 * Math.PI / 225 ;
-const venusPathGeometry = new THREE.TorusGeometry(rVenus, 3, 100, 100);
-const venusPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF})
+
+// const venusPathGeometry = new THREE.TorusGeometry(rVenus, 3, 100, 100);
+const venusPathGeometry = new THREE.RingGeometry(rVenus-10, rVenus+10, 200, 200);
+const venusPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const venusPath = new THREE.Mesh(venusPathGeometry, venusPathMaterial);
 venusPath.rotation.set(1.5708, 0, 0);
 scene.add(venusPath);
@@ -61,8 +64,9 @@ earth.scale.set(scale, scale, scale);
 earth.rotation.set(0, 0, -Math.PI * 23.5 / 180);
 let thetaEarth = 0;
 let dThetaEarth = 2 * Math.PI / 365 ;
-const earthPathGeometry = new THREE.TorusGeometry(rEarth, 3, 100, 100);
-const earthPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF})
+// const earthPathGeometry = new THREE.TorusGeometry(rEarth, 3, 100, 100);
+const earthPathGeometry = new THREE.RingGeometry(rEarth-10, rEarth+10, 200, 200);
+const earthPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const earthPath = new THREE.Mesh(earthPathGeometry, earthPathMaterial);
 earthPath.rotation.set(1.5708, 0, 0);
 scene.add(earthPath);
@@ -77,8 +81,9 @@ mars.rotation.set(0, 0, -Math.PI * 25.2 / 180);
 let thetaMars = 0;
 let dThetaMars = 2 * Math.PI / 687 ;
 
-const marsPathGeometry = new THREE.TorusGeometry(rMars, 3, 100, 100);
-const marsPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF})
+// const marsPathGeometry = new THREE.TorusGeometry(rMars, 3, 100, 100);
+const marsPathGeometry = new THREE.RingGeometry(rMars-10, rMars+10, 200, 200);
+const marsPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const marsPath = new THREE.Mesh(marsPathGeometry, marsPathMaterial);
 marsPath.rotation.set(1.5708, 0, 0);
 scene.add(marsPath);
@@ -93,8 +98,9 @@ jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaJupiter = 0;
 let dThetaJupiter = 2 * Math.PI / 4380 ;
 
-const jupiterPathGeometry = new THREE.TorusGeometry(rJupiter, 3, 100, 100);
-const jupiterPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF})
+// const jupiterPathGeometry = new THREE.TorusGeometry(rJupiter, 3, 100, 100);
+const jupiterPathGeometry = new THREE.RingGeometry(rJupiter-20, rJupiter+20, 200, 200);
+const jupiterPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const jupiterPath = new THREE.Mesh(jupiterPathGeometry, jupiterPathMaterial);
 jupiterPath.rotation.set(1.5708, 0, 0);
 scene.add(jupiterPath);
@@ -115,8 +121,9 @@ let thetaSaturn = 0;
 let thetaSaturnRing = 0;
 let dThetaSaturn = 2 * Math.PI / 10585 ;
 let dThetaSaturnRing = 2 * Math.PI / 10585 ;
-const saturnPathGeometry = new THREE.TorusGeometry(rSaturn, 3, 100, 100);
-const saturnPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF})
+// const saturnPathGeometry = new THREE.TorusGeometry(rSaturn, 3, 100, 100);
+const saturnPathGeometry = new THREE.RingGeometry(rSaturn-20, rSaturn+20, 200, 200);
+const saturnPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const saturnPath = new THREE.Mesh(saturnPathGeometry, saturnPathMaterial);
 saturnPath.rotation.set(1.5708, 0, 0);
 scene.add(saturnRing);
@@ -133,8 +140,9 @@ uranus.rotation.set(0, 0, -Math.PI * 98 / 180);
 let thetaUranus = 0;
 let dThetaUranus = 2 * Math.PI / 30660 ;
 
-const uranusPathGeometry = new THREE.TorusGeometry(rUranus, 3, 100, 100);
-const uranusPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF})
+// const uranusPathGeometry = new THREE.TorusGeometry(rUranus, 3, 100, 100);
+const uranusPathGeometry = new THREE.RingGeometry(rUranus-20, rUranus+20, 200, 200);
+const uranusPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const uranusPath = new THREE.Mesh(uranusPathGeometry, uranusPathMaterial);
 uranusPath.rotation.set(1.5708, 0, 0);
 scene.add(uranusPath);
@@ -148,8 +156,9 @@ neptune.scale.set(scale, scale, scale);
 neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
 let thetaNeptune = 0;
 let dThetaNeptune = 2 * Math.PI / 60225 ;
-const neptunePathGeometry = new THREE.TorusGeometry(rNeptune, 3, 100, 100);
-const neptunePathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF})
+// const neptunePathGeometry = new THREE.TorusGeometry(rNeptune, 3, 100, 100);
+const neptunePathGeometry = new THREE.RingGeometry(rNeptune-20, rNeptune+20, 200, 200);
+const neptunePathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const neptunePath = new THREE.Mesh(neptunePathGeometry, neptunePathMaterial);
 neptunePath.rotation.set(1.5708, 0, 0);
 scene.add(neptunePath);
