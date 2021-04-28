@@ -21,76 +21,75 @@ scene.add(Sun);
 
 let scale = 3;
 
-mercury.position.set(700, 0, 0);
+let rMercury = 700;
+mercury.position.set(rMercury, 0, 0);
 mercury.scale.set(scale, scale, scale)
 mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
-let rMercury = 700;
 let thetaMercury = 0;
-let dThetaMercury = 2 * Math.PI / 1000 ;
+let dThetaMercury = 2 * Math.PI / 88 ;
 scene.add(mercury);
 
 
-
-venus.position.set(900, 0, 0);
+let rVenus = 900;
+venus.position.set(rVenus, 0, 0);
 venus.scale.set(scale, scale, scale);
 venus.rotation.set(0, 0, -Math.PI * 3 / 180);
-let rVenus = 900;
 let thetaVenus = 0;
-let dThetaVenus = 2 * Math.PI / 1000 ;
+let dThetaVenus = 2 * Math.PI / 225 ;
 scene.add(venus);
 
 
-earth.position.set(1200, 0, 0);
+let rEarth = 1200;
+earth.position.set(rEarth, 0, 0);
 earth.scale.set(scale, scale, scale);
 earth.rotation.set(0, 0, -Math.PI * 23.5 / 180);
-let rEarth = 1200;
 let thetaEarth = 0;
-let dThetaEarth = 2 * Math.PI / 1000 ;
+let dThetaEarth = 2 * Math.PI / 365 ;
 scene.add(earth);
 
 
-mars.position.set(1500, 0, 0);
+let rMars = 1500;
+mars.position.set(rMars, 0, 0);
 mars.scale.set(scale, scale, scale);
 mars.rotation.set(0, 0, -Math.PI * 25.2 / 180);
-let rMars = 1500;
 let thetaMars = 0;
-let dThetaMars = 2 * Math.PI / 1000 ;
+let dThetaMars = 2 * Math.PI / 687 ;
 scene.add(mars);
 
 
-jupiter.position.set(2000, 0, 0);
+let rJupiter = 2000;
+jupiter.position.set(rJupiter, 0, 0);
 jupiter.scale.set(scale, scale, scale);
 jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
-let rJupiter = 2000;
 let thetaJupiter = 0;
-let dThetaJupiter = 2 * Math.PI / 1000 ;
+let dThetaJupiter = 2 * Math.PI / 4380 ;
 scene.add(jupiter);
 
 
-saturn.position.set(2600, 0, 0);
+let rSaturn = 2600;
+saturn.position.set(rSaturn, 0, 0);
 saturn.scale.set(scale, scale, scale);
 saturn.rotation.set(0, 0, -Math.PI * 27 / 180);
-let rSaturn = 2600;
 let thetaSaturn = 0;
-let dThetaSaturn = 2 * Math.PI / 1000 ;
+let dThetaSaturn = 2 * Math.PI / 10585 ;
 scene.add(saturn);
 
 
-uranus.position.set(3100, 0, 0);
+let rUranus = 3100;
+uranus.position.set(rUranus, 0, 0);
 uranus.scale.set(scale, scale, scale);
 uranus.rotation.set(0, 0, -Math.PI * 98 / 180);
-let rUranus = 3100;
 let thetaUranus = 0;
-let dThetaUranus = 2 * Math.PI / 1000 ;
+let dThetaUranus = 2 * Math.PI / 30660 ;
 scene.add(uranus);
 
 
-neptune.position.set(3600, 0, 0);
+let rNeptune = 3600;
+neptune.position.set(rNeptune, 0, 0);
 neptune.scale.set(scale, scale, scale);
 neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
-let rNeptune = 3600;
 let thetaNeptune = 0;
-let dThetaNeptune = 2 * Math.PI / 1000 ;
+let dThetaNeptune = 2 * Math.PI / 60225 ;
 scene.add(neptune);
 
 
@@ -127,11 +126,8 @@ window.addEventListener('resize', () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
-const clock = new THREE.Clock()
 
-// let r = 2000;
-// let theta = 0;
-// let dTheta = 2 * Math.PI / 1000 ;
+const clock = new THREE.Clock()
 
 const animate = () =>
 {
@@ -183,11 +179,9 @@ const animate = () =>
   neptune.position.x = rNeptune * Math.cos(thetaNeptune);
   neptune.position.z = rNeptune * Math.sin(thetaNeptune);
 
-  // Update Orbital Controls
-  // controls.update()
+
 
   // Render
-  
   renderer.render(scene, camera)
 
   // Call animate again on the next frame
