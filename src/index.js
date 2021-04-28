@@ -22,6 +22,7 @@ bgTexture.load("src/assets/stars_milky_way.jpg", function(bgTexture) {
 scene.add(Sun);
 
 let scale = 20;
+let timeScale = 60;
 
 // let rMercury = 700;
 let rMercury = 716;
@@ -29,7 +30,7 @@ mercury.position.set(rMercury, 0, 0);
 mercury.scale.set(scale*2, scale*2, scale*2)
 mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
 let thetaMercury = 0;
-let dThetaMercury = 2 * Math.PI / 88 ;
+let dThetaMercury = 2 * Math.PI / (88 * timeScale) ;
 
 // const mercuryPathGeometry = new THREE.TorusGeometry(rMercury, 3, 200, 200);
 const mercuryPathGeometry = new THREE.RingGeometry(rMercury-10, rMercury+10, 100, 100);
@@ -46,7 +47,7 @@ venus.position.set(rVenus, 0, 0);
 venus.scale.set(scale, scale, scale);
 venus.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaVenus = 0;
-let dThetaVenus = 2 * Math.PI / 225 ;
+let dThetaVenus = 2 * Math.PI / (225 * timeScale) ;
 
 // const venusPathGeometry = new THREE.TorusGeometry(rVenus, 3, 100, 100);
 const venusPathGeometry = new THREE.RingGeometry(rVenus-10, rVenus+10, 100, 100);
@@ -63,7 +64,7 @@ earth.position.set(rEarth, 0, 0);
 earth.scale.set(scale, scale, scale);
 earth.rotation.set(0, 0, -Math.PI * 23.5 / 180);
 let thetaEarth = 0;
-let dThetaEarth = 2 * Math.PI / 365 ;
+let dThetaEarth = 2 * Math.PI / (365 * timeScale) ;
 // const earthPathGeometry = new THREE.TorusGeometry(rEarth, 3, 100, 100);
 const earthPathGeometry = new THREE.RingGeometry(rEarth-10, rEarth+10, 100, 100);
 const earthPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
@@ -79,7 +80,7 @@ mars.position.set(rMars, 0, 0);
 mars.scale.set(scale, scale, scale);
 mars.rotation.set(0, 0, -Math.PI * 25.2 / 180);
 let thetaMars = 0;
-let dThetaMars = 2 * Math.PI / 687 ;
+let dThetaMars = 2 * Math.PI / (687 * timeScale) ;
 
 // const marsPathGeometry = new THREE.TorusGeometry(rMars, 3, 100, 100);
 const marsPathGeometry = new THREE.RingGeometry(rMars-10, rMars+10, 100, 100);
@@ -96,7 +97,7 @@ jupiter.position.set(rJupiter, 0, 0);
 jupiter.scale.set(scale, scale, scale);
 jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaJupiter = 0;
-let dThetaJupiter = 2 * Math.PI / 4380 ;
+let dThetaJupiter = 2 * Math.PI / (4380 * timeScale) ;
 
 // const jupiterPathGeometry = new THREE.TorusGeometry(rJupiter, 3, 100, 100);
 const jupiterPathGeometry = new THREE.RingGeometry(rJupiter-20, rJupiter+20, 100, 100);
@@ -119,8 +120,8 @@ saturn.rotation.set(0, 0, -Math.PI * 27 / 180);
 saturnRing.rotation.set( 1.5708, -Math.PI * 27 / 180, 0);
 let thetaSaturn = 0;
 let thetaSaturnRing = 0;
-let dThetaSaturn = 2 * Math.PI / 10585 ;
-let dThetaSaturnRing = 2 * Math.PI / 10585 ;
+let dThetaSaturn = 2 * Math.PI / (10585 * timeScale) ;
+let dThetaSaturnRing = 2 * Math.PI / (10585 * timeScale) ;
 // const saturnPathGeometry = new THREE.TorusGeometry(rSaturn, 3, 100, 100);
 const saturnPathGeometry = new THREE.RingGeometry(rSaturn-20, rSaturn+20, 100, 100);
 const saturnPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
@@ -138,7 +139,7 @@ uranus.position.set(rUranus, 0, 0);
 uranus.scale.set(scale, scale, scale);
 uranus.rotation.set(0, 0, -Math.PI * 98 / 180);
 let thetaUranus = 0;
-let dThetaUranus = 2 * Math.PI / 30660 ;
+let dThetaUranus = 2 * Math.PI / (30660 * timeScale) ;
 
 // const uranusPathGeometry = new THREE.TorusGeometry(rUranus, 3, 100, 100);
 const uranusPathGeometry = new THREE.RingGeometry(rUranus-20, rUranus+20, 100, 100);
@@ -155,7 +156,7 @@ neptune.position.set(rNeptune, 0, 0);
 neptune.scale.set(scale, scale, scale);
 neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
 let thetaNeptune = 0;
-let dThetaNeptune = 2 * Math.PI / 60225 ;
+let dThetaNeptune = 2 * Math.PI / (60225 * timeScale) ;
 // const neptunePathGeometry = new THREE.TorusGeometry(rNeptune, 3, 100, 100);
 const neptunePathGeometry = new THREE.RingGeometry(rNeptune-20, rNeptune+20, 100, 100);
 const neptunePathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
@@ -212,16 +213,16 @@ const animate = () =>
   controls.update();
 
   // Body rotations
-  Sun.rotateY(0.017);
-  mercury.rotateY(.08);
-  venus.rotateY(.00015);
-  earth.rotateY(0.50472);
-  mars.rotateY(.017);
-  jupiter.rotateY(.042);
-  saturn.rotateY(.04);
-  saturnRing.rotateZ(.04);
-  uranus.rotateY(.025);
-  neptune.rotateY(.026);
+  Sun.rotateY(2 * Math.PI / (25 * timeScale));
+  mercury.rotateY(2 * Math.PI / (58.7 * timeScale));
+  venus.rotateY(2 * Math.PI / (118.75 * timeScale));
+  earth.rotateY(2 * Math.PI / (1 * timeScale));
+  mars.rotateY(2 * Math.PI / (1 * timeScale));
+  jupiter.rotateY(2 * Math.PI / (0.42 * timeScale));
+  saturn.rotateY(2 * Math.PI / (0.45 * timeScale));
+  saturnRing.rotateZ(2 * Math.PI / (0.45 * timeScale));
+  uranus.rotateY(2 * Math.PI / (0.72 * timeScale));
+  neptune.rotateY(2 * Math.PI / (0.67 * timeScale));
 
   // Body orbits
   thetaMercury -= dThetaMercury;
