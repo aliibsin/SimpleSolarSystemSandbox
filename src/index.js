@@ -19,14 +19,20 @@ bgTexture.load("src/assets/stars_milky_way.jpg", function(bgTexture) {
 
 scene.add(Sun);
 
-let scale = 3;
+let scale = 5;
 
 let rMercury = 700;
 mercury.position.set(rMercury, 0, 0);
-mercury.scale.set(scale, scale, scale)
+mercury.scale.set(scale*3, scale*3, scale*3)
 mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
 let thetaMercury = 0;
 let dThetaMercury = 2 * Math.PI / 88 ;
+
+const mercuryPathGeometry = new THREE.TorusGeometry(rMercury, 3, 100, 100);
+const mercuryPathMaterial = new THREE.MeshBasicMaterial({color: 0xffff00})
+const mercuryPath = new THREE.Mesh(mercuryPathGeometry, mercuryPathMaterial);
+mercuryPath.rotation.set(1.5708, 0, 0);
+scene.add(mercuryPath);
 scene.add(mercury);
 
 
@@ -36,6 +42,11 @@ venus.scale.set(scale, scale, scale);
 venus.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaVenus = 0;
 let dThetaVenus = 2 * Math.PI / 225 ;
+const venusPathGeometry = new THREE.TorusGeometry(rVenus, 3, 100, 100);
+const venusPathMaterial = new THREE.MeshBasicMaterial({color: 0xffff00})
+const venusPath = new THREE.Mesh(venusPathGeometry, venusPathMaterial);
+venusPath.rotation.set(1.5708, 0, 0);
+scene.add(venusPath);
 scene.add(venus);
 
 
@@ -45,6 +56,11 @@ earth.scale.set(scale, scale, scale);
 earth.rotation.set(0, 0, -Math.PI * 23.5 / 180);
 let thetaEarth = 0;
 let dThetaEarth = 2 * Math.PI / 365 ;
+const earthPathGeometry = new THREE.TorusGeometry(rEarth, 3, 100, 100);
+const earthPathMaterial = new THREE.MeshBasicMaterial({color: 0xffff00})
+const earthPath = new THREE.Mesh(earthPathGeometry, earthPathMaterial);
+earthPath.rotation.set(1.5708, 0, 0);
+scene.add(earthPath);
 scene.add(earth);
 
 
@@ -54,6 +70,12 @@ mars.scale.set(scale, scale, scale);
 mars.rotation.set(0, 0, -Math.PI * 25.2 / 180);
 let thetaMars = 0;
 let dThetaMars = 2 * Math.PI / 687 ;
+
+const marsPathGeometry = new THREE.TorusGeometry(rMars, 3, 100, 100);
+const marsPathMaterial = new THREE.MeshBasicMaterial({color: 0xffff00})
+const marsPath = new THREE.Mesh(marsPathGeometry, marsPathMaterial);
+marsPath.rotation.set(1.5708, 0, 0);
+scene.add(marsPath);
 scene.add(mars);
 
 
@@ -63,7 +85,15 @@ jupiter.scale.set(scale, scale, scale);
 jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaJupiter = 0;
 let dThetaJupiter = 2 * Math.PI / 4380 ;
+
+const jupiterPathGeometry = new THREE.TorusGeometry(rJupiter, 3, 100, 100);
+const jupiterPathMaterial = new THREE.MeshBasicMaterial({color: 0xffff00})
+const jupiterPath = new THREE.Mesh(jupiterPathGeometry, jupiterPathMaterial);
+jupiterPath.rotation.set(1.5708, 0, 0);
+scene.add(jupiterPath);
 scene.add(jupiter);
+
+
 
 
 let rSaturn = 2600;
@@ -72,6 +102,11 @@ saturn.scale.set(scale, scale, scale);
 saturn.rotation.set(0, 0, -Math.PI * 27 / 180);
 let thetaSaturn = 0;
 let dThetaSaturn = 2 * Math.PI / 10585 ;
+const saturnPathGeometry = new THREE.TorusGeometry(rSaturn, 3, 100, 100);
+const saturnPathMaterial = new THREE.MeshBasicMaterial({color: 0xffff00})
+const saturnPath = new THREE.Mesh(saturnPathGeometry, saturnPathMaterial);
+saturnPath.rotation.set(1.5708, 0, 0);
+scene.add(saturnPath);
 scene.add(saturn);
 
 
@@ -81,6 +116,12 @@ uranus.scale.set(scale, scale, scale);
 uranus.rotation.set(0, 0, -Math.PI * 98 / 180);
 let thetaUranus = 0;
 let dThetaUranus = 2 * Math.PI / 30660 ;
+
+const uranusPathGeometry = new THREE.TorusGeometry(rUranus, 3, 100, 100);
+const uranusPathMaterial = new THREE.MeshBasicMaterial({color: 0xffff00})
+const uranusPath = new THREE.Mesh(uranusPathGeometry, uranusPathMaterial);
+uranusPath.rotation.set(1.5708, 0, 0);
+scene.add(uranusPath);
 scene.add(uranus);
 
 
@@ -90,6 +131,11 @@ neptune.scale.set(scale, scale, scale);
 neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
 let thetaNeptune = 0;
 let dThetaNeptune = 2 * Math.PI / 60225 ;
+const neptunePathGeometry = new THREE.TorusGeometry(rNeptune, 3, 100, 100);
+const neptunePathMaterial = new THREE.MeshBasicMaterial({color: 0xffff00})
+const neptunePath = new THREE.Mesh(neptunePathGeometry, neptunePathMaterial);
+neptunePath.rotation.set(1.5708, 0, 0);
+scene.add(neptunePath);
 scene.add(neptune);
 
 
@@ -104,8 +150,8 @@ const sizes = {
 }
 
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 10000)
-camera.position.set(0, 1500, 3000);
-camera.rotateX(-.5);
+camera.position.set(0, 2500, 2500);
+camera.rotateX(-0.75);
 scene.add(camera)
 
 const renderer = new THREE.WebGLRenderer({
@@ -178,7 +224,6 @@ const animate = () =>
   thetaNeptune -= dThetaNeptune;
   neptune.position.x = rNeptune * Math.cos(thetaNeptune);
   neptune.position.z = rNeptune * Math.sin(thetaNeptune);
-
 
 
   // Render
