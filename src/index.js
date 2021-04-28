@@ -168,9 +168,7 @@ const sizes = {
 
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 500000)
 camera.position.set(0, 2000, 4000);
-// camera.position.set(0, 20, rMars + 10);
 camera.rotateX(-0.75);
-// camera.rotateY(-0.75);
 scene.add(camera)
 
 const renderer = new THREE.WebGLRenderer({
@@ -212,6 +210,7 @@ const animate = () =>
   mars.rotateY(.017);
   jupiter.rotateY(.042);
   saturn.rotateY(.04);
+  saturnRing.rotateZ(.04);
   uranus.rotateY(.025);
   neptune.rotateY(.026);
 
