@@ -21,16 +21,17 @@ bgTexture.load("src/assets/stars_milky_way.jpg", function(bgTexture) {
 
 scene.add(Sun);
 
-let scale = 5;
+let scale = 20;
 
-let rMercury = 700;
+// let rMercury = 700;
+let rMercury = 716;
 mercury.position.set(rMercury, 0, 0);
-mercury.scale.set(scale*3, scale*3, scale*3)
+mercury.scale.set(scale*2, scale*2, scale*2)
 mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
 let thetaMercury = 0;
 let dThetaMercury = 2 * Math.PI / 88 ;
 
-const mercuryPathGeometry = new THREE.TorusGeometry(rMercury, 3, 100, 100);
+const mercuryPathGeometry = new THREE.TorusGeometry(rMercury, 3, 200, 200);
 const mercuryPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF})
 const mercuryPath = new THREE.Mesh(mercuryPathGeometry, mercuryPathMaterial);
 mercuryPath.rotation.set(1.5708, 0, 0);
@@ -38,7 +39,8 @@ scene.add(mercuryPath);
 scene.add(mercury);
 
 
-let rVenus = 900;
+// let rVenus = 900;
+let rVenus = 1101;
 venus.position.set(rVenus, 0, 0);
 venus.scale.set(scale, scale, scale);
 venus.rotation.set(0, 0, -Math.PI * 3 / 180);
@@ -52,7 +54,8 @@ scene.add(venusPath);
 scene.add(venus);
 
 
-let rEarth = 1200;
+// let rEarth = 1200;
+let rEarth = 1366;
 earth.position.set(rEarth, 0, 0);
 earth.scale.set(scale, scale, scale);
 earth.rotation.set(0, 0, -Math.PI * 23.5 / 180);
@@ -66,7 +69,8 @@ scene.add(earthPath);
 scene.add(earth);
 
 
-let rMars = 1500;
+// let rMars = 1500;
+let rMars = 1962.2;
 mars.position.set(rMars, 0, 0);
 mars.scale.set(scale, scale, scale);
 mars.rotation.set(0, 0, -Math.PI * 25.2 / 180);
@@ -81,7 +85,8 @@ scene.add(marsPath);
 scene.add(mars);
 
 
-let rJupiter = 2000;
+// let rJupiter = 2000;
+let rJupiter = 5268;
 jupiter.position.set(rJupiter, 0, 0);
 jupiter.scale.set(scale, scale, scale);
 jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
@@ -98,7 +103,8 @@ scene.add(jupiter);
 
 
 
-let rSaturn = 2600;
+// let rSaturn = 2600;
+let rSaturn = 9338;
 saturn.position.set(rSaturn, 0, 0);
 saturnRing.position.set(rSaturn, 0, 0);
 saturn.scale.set(scale, scale, scale);
@@ -119,7 +125,8 @@ scene.add(saturn);
 
 
 
-let rUranus = 3100;
+// let rUranus = 3100;
+let rUranus = 18270;
 uranus.position.set(rUranus, 0, 0);
 uranus.scale.set(scale, scale, scale);
 uranus.rotation.set(0, 0, -Math.PI * 98 / 180);
@@ -134,7 +141,8 @@ scene.add(uranusPath);
 scene.add(uranus);
 
 
-let rNeptune = 3600;
+// let rNeptune = 3600;
+let rNeptune = 29840;
 neptune.position.set(rNeptune, 0, 0);
 neptune.scale.set(scale, scale, scale);
 neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
@@ -158,7 +166,7 @@ const sizes = {
   height: window.innerHeight
 }
 
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100000)
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 500000)
 camera.position.set(0, 2000, 4000);
 // camera.position.set(0, 20, rMars + 10);
 camera.rotateX(-0.75);
