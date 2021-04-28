@@ -104,7 +104,7 @@ saturnRing.position.set(rSaturn, 0, 0);
 saturn.scale.set(scale, scale, scale);
 saturnRing.scale.set(scale, scale, scale);
 saturn.rotation.set(0, 0, -Math.PI * 27 / 180);
-saturnRing.rotation.set(-Math.PI * 27 / 180, 1.5708, 0);
+saturnRing.rotation.set( 1.5708, -Math.PI * 27 / 180, 0);
 let thetaSaturn = 0;
 let thetaSaturnRing = 0;
 let dThetaSaturn = 2 * Math.PI / 10585 ;
@@ -158,7 +158,7 @@ const sizes = {
   height: window.innerHeight
 }
 
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 10000)
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100000)
 camera.position.set(0, 2000, 4000);
 // camera.position.set(0, 20, rMars + 10);
 camera.rotateX(-0.75);
