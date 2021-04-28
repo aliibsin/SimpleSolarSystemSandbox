@@ -5,8 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "build": "webpack --config ./bundler/webpack.prod.js",
-    "start": "webpack --watch --mode=development",
-    "dev": "webpack serve --config ./bundler/webpack.dev.js"
+    "start": "webpack --watch --mode=development"
   },
   "repository": {
     "type": "git",
@@ -25,7 +24,6 @@
     "express": "^4.17.1",
     "three": "^0.128.0",
     "webpack": "^5.35.1",
-    "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-cli": "^4.6.0"
   }
 }
