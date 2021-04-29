@@ -26,8 +26,5 @@
     "three": "^0.128.0",
     "webpack": "^5.35.1",
     "webpack-cli": "^4.6.0"
-  },
-  "devDependencies": {
-    "source-map-loader": "^1.0.0"
   }
 }

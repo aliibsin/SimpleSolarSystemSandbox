@@ -14,8 +14,6 @@ const canvas = document.querySelector('canvas.webgl');
 
 const scene = new THREE.Scene();
 
-
-
 const bgTexture = new THREE.TextureLoader();
 bgTexture.load("src/assets/stars_milky_way.jpg", function(bgTexture) {
   scene.background = bgTexture;
@@ -158,10 +156,9 @@ const pointLight = new THREE.PointLight(0xffffff, 1, 0, 2)
 scene.add(pointLight)
 
 
-const gui = new dat.GUI()
+// const gui = new dat.GUI()
 // gui.add(scale, "value")
 // gui.add(test, "scale")
-
 
 const sizes = {
   width: window.innerWidth, 
@@ -171,7 +168,7 @@ const sizes = {
 //starting camera position
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 500000)
 camera.position.set(0, 2000,  3000);
-camera.rotateX(-0.785398);
+camera.rotateX(-0.785398 );
 scene.add(camera)
 
 //create renderer
