@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import * as dat from 'dat.gui';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import Sun from './planets/sun';
 import {
   mercury, venus, earth, mars,
@@ -7,11 +8,13 @@ import {
   saturnRing
 } from './planets/planets';
 
-console.log('webpack is working')
+console.log('webpack is working');
 
 const canvas = document.querySelector('canvas.webgl');
 
 const scene = new THREE.Scene();
+
+
 
 const bgTexture = new THREE.TextureLoader();
 bgTexture.load("src/assets/stars_milky_way.jpg", function(bgTexture) {
@@ -23,6 +26,10 @@ scene.add(Sun);
 
 let scale = 20;
 let timeScale = 60;
+
+let test = {
+  scale: 4
+}
 
 
 let rMercury = 716;
@@ -149,6 +156,11 @@ scene.add(neptune);
 
 const pointLight = new THREE.PointLight(0xffffff, 1, 0, 2)
 scene.add(pointLight)
+
+
+const gui = new dat.GUI()
+// gui.add(scale, "value")
+// gui.add(test, "scale")
 
 
 const sizes = {
