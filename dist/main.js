@@ -53628,17 +53628,16 @@ bgTexture.load("src/assets/stars_milky_way.jpg", function(bgTexture) {
 
 scene.add(_planets_sun__WEBPACK_IMPORTED_MODULE_1__.default);
 
-let scale = 20;
-let timeScale = 60;
-
-let test = {
-  scale: 4
+let userValues = {
+  scale: 10,
+  timeScale: 60
 }
 
+let scale = userValues.scale;
+let timeScale = userValues.timeScale;
 
 let rMercury = 716;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.position.set(rMercury, 0, 0);
-_planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.scale.set(scale*2, scale*2, scale*2)
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
 let thetaMercury = 0;
 let dThetaMercury = 2 * Math.PI / (88 * timeScale) ;
@@ -53650,10 +53649,8 @@ scene.add(mercuryPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury);
 
 
-
 let rVenus = 1101;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.position.set(rVenus, 0, 0);
-_planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.scale.set(scale, scale, scale);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaVenus = 2 * Math.PI / (225 * timeScale);
 let dThetaVenus = 2 * Math.PI / (225 * timeScale) ;
@@ -53667,7 +53664,6 @@ scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus);
 
 let rEarth = 1366;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.position.set(rEarth, 0, 0);
-_planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.scale.set(scale, scale, scale);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.rotation.set(0, 0, -Math.PI * 23.5 / 180);
 let thetaEarth = 0;
 let dThetaEarth = 2 * Math.PI / (365 * timeScale) ;
@@ -53681,7 +53677,6 @@ scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth);
 
 let rMars = 1962.2;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.position.set(rMars, 0, 0);
-_planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.scale.set(scale, scale, scale);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.rotation.set(0, 0, -Math.PI * 25.2 / 180);
 let thetaMars = 0;
 let dThetaMars = 2 * Math.PI / (687 * timeScale) ;
@@ -53695,7 +53690,6 @@ scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars);
 
 let rJupiter = 5268;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.position.set(rJupiter, 0, 0);
-_planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.scale.set(scale, scale, scale);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaJupiter = 0;
 let dThetaJupiter = 2 * Math.PI / (4380 * timeScale) ;
@@ -53711,8 +53705,6 @@ scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter);
 let rSaturn = 9338;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturn.position.set(rSaturn, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturnRing.position.set(rSaturn, 0, 0);
-_planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturn.scale.set(scale, scale, scale);
-_planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturnRing.scale.set(scale, scale, scale);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturn.rotation.set(0, 0, -Math.PI * 27 / 180);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturnRing.rotation.set( 1.5708, -Math.PI * 27 / 180, 0);
 let thetaSaturn = 0;
@@ -53732,7 +53724,6 @@ scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturn);
 
 let rUranus = 18270;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.position.set(rUranus, 0, 0);
-_planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.scale.set(scale, scale, scale);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.rotation.set(0, 0, -Math.PI * 98 / 180);
 let thetaUranus = 0;
 let dThetaUranus = 2 * Math.PI / (30660 * timeScale) ;
@@ -53746,7 +53737,6 @@ scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus);
 
 let rNeptune = 29840;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.position.set(rNeptune, 0, 0);
-_planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.scale.set(scale, scale, scale);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
 let thetaNeptune = 0;
 let dThetaNeptune = 2 * Math.PI / (60225 * timeScale) ;
@@ -53762,9 +53752,9 @@ const pointLight = new three__WEBPACK_IMPORTED_MODULE_3__.PointLight(0xffffff, 1
 scene.add(pointLight)
 
 
-// const gui = new dat.GUI()
+const gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__.GUI()
 // gui.add(scale, "value")
-// gui.add(test, "scale")
+gui.add(userValues, "scale", 1, 20)
 
 const sizes = {
   width: window.innerWidth, 
@@ -53806,6 +53796,8 @@ const clock = new three__WEBPACK_IMPORTED_MODULE_3__.Clock()
 const animate = () =>
 {
   const elapsedTime = clock.getElapsedTime()
+
+  
 
   // Update objects
   controls.update();
@@ -53858,6 +53850,19 @@ const animate = () =>
   thetaNeptune -= dThetaNeptune;
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.position.x = rNeptune * Math.cos(thetaNeptune);
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.position.z = rNeptune * Math.sin(thetaNeptune);
+
+
+  // user set scales
+
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.scale.set(userValues.scale, userValues.scale, userValues.scale);
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.scale.set(userValues.scale, userValues.scale, userValues.scale);
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.scale.set(userValues.scale, userValues.scale, userValues.scale);
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.scale.set(userValues.scale, userValues.scale, userValues.scale);
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.scale.set(userValues.scale, userValues.scale, userValues.scale);
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturn.scale.set(userValues.scale, userValues.scale, userValues.scale);
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturnRing.scale.set(userValues.scale, userValues.scale, userValues.scale);
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.scale.set(userValues.scale, userValues.scale, userValues.scale);
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.scale.set(userValues.scale, userValues.scale, userValues.scale);
 
 
   // Render
