@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import * as dat from 'dat.gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import * as dat from 'dat.gui';
 import Sun from './planets/sun';
 import {
   mercury, venus, earth, mars,
@@ -27,8 +27,8 @@ let userValues = {
   timeScale: 1
 } 
 
-let timeScale = userValues.timeScale;
 
+// planets
 let rMercury = 716;
 mercury.position.set(rMercury, 0, 0);
 mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
@@ -94,7 +94,6 @@ scene.add(jupiterPath);
 scene.add(jupiter);
 
 
-
 let rSaturn = 9338;
 saturn.position.set(rSaturn, 0, 0);
 saturnRing.position.set(rSaturn, 0, 0);
@@ -111,8 +110,6 @@ saturnPath.rotation.set(1.5708, 0, 0);
 scene.add(saturnRing);
 scene.add(saturnPath);
 scene.add(saturn);
-
-
 
 
 let rUranus = 18270;
@@ -141,14 +138,21 @@ scene.add(neptunePath);
 scene.add(neptune);
 
 
+// sun light
 const pointLight = new THREE.PointLight(0xffffff, 1, 0, 2)
 scene.add(pointLight)
 
+// gui for scaling
+const scaleGUI = new dat.GUI({ autoPlace: false, width: 300 });
+const scaleGUIFolder = scaleGUI.addFolder('Toggle Scale Controls');
+scaleGUIFolder.add(userValues, "scale", 1, 20).name("Planet Size Scale");
+scaleGUIFolder.add(userValues, "timeScale", 1, 20).name("Time Scale");
 
-const gui = new dat.GUI()
-gui.add(userValues, "scale", 1, 20).name("Planet Size Scale")
-gui.add(userValues, "timeScale", 1, 20).name("Time Scale")
+let scaleGUIContainer = document.getElementById("scale-gui");
+scaleGUIContainer.appendChild(scaleGUI.domElement)
 
+
+// default window sizes
 const sizes = {
   width: window.innerWidth, 
   height: window.innerHeight
@@ -189,8 +193,6 @@ const clock = new THREE.Clock()
 const animate = () =>
 {
   const elapsedTime = clock.getElapsedTime()
-
-  
 
   // Update objects
   controls.update();

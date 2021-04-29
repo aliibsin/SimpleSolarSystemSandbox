@@ -53604,8 +53604,8 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-/* harmony import */ var dat_gui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dat.gui */ "./node_modules/dat.gui/build/dat.gui.module.js");
 /* harmony import */ var three_examples_jsm_controls_OrbitControls_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/examples/jsm/controls/OrbitControls.js */ "./node_modules/three/examples/jsm/controls/OrbitControls.js");
+/* harmony import */ var dat_gui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dat.gui */ "./node_modules/dat.gui/build/dat.gui.module.js");
 /* harmony import */ var _planets_sun__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./planets/sun */ "./src/planets/sun.js");
 /* harmony import */ var _planets_planets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./planets/planets */ "./src/planets/planets.js");
 
@@ -53633,8 +53633,8 @@ let userValues = {
   timeScale: 1
 } 
 
-let timeScale = userValues.timeScale;
 
+// planets
 let rMercury = 716;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.position.set(rMercury, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
@@ -53700,7 +53700,6 @@ scene.add(jupiterPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter);
 
 
-
 let rSaturn = 9338;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturn.position.set(rSaturn, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturnRing.position.set(rSaturn, 0, 0);
@@ -53717,8 +53716,6 @@ saturnPath.rotation.set(1.5708, 0, 0);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturnRing);
 scene.add(saturnPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturn);
-
-
 
 
 let rUranus = 18270;
@@ -53747,14 +53744,21 @@ scene.add(neptunePath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune);
 
 
+// sun light
 const pointLight = new three__WEBPACK_IMPORTED_MODULE_3__.PointLight(0xffffff, 1, 0, 2)
 scene.add(pointLight)
 
+// gui for scaling
+const scaleGUI = new dat_gui__WEBPACK_IMPORTED_MODULE_0__.GUI({ autoPlace: false, width: 300 });
+const scaleGUIFolder = scaleGUI.addFolder('Toggle Scale Controls');
+scaleGUIFolder.add(userValues, "scale", 1, 20).name("Planet Size Scale");
+scaleGUIFolder.add(userValues, "timeScale", 1, 20).name("Time Scale");
 
-const gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__.GUI()
-gui.add(userValues, "scale", 1, 20).name("Planet Size Scale")
-gui.add(userValues, "timeScale", 1, 20).name("Time Scale")
+let scaleGUIContainer = document.getElementById("scale-gui");
+scaleGUIContainer.appendChild(scaleGUI.domElement)
 
+
+// default window sizes
 const sizes = {
   width: window.innerWidth, 
   height: window.innerHeight
@@ -53795,8 +53799,6 @@ const clock = new three__WEBPACK_IMPORTED_MODULE_3__.Clock()
 const animate = () =>
 {
   const elapsedTime = clock.getElapsedTime()
-
-  
 
   // Update objects
   controls.update();
