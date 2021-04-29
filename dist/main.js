@@ -53488,7 +53488,7 @@ for (let i = 0; i < pos.count; i++){
   ringGeometry.attributes.uv.setXY(i, v3.length() < 76.8 ? 0 : 1, 1);
 }
 
-const ringMaterial = new three__WEBPACK_IMPORTED_MODULE_0__.MeshStandardMaterial({
+const ringMaterial = new three__WEBPACK_IMPORTED_MODULE_0__.MeshBasicMaterial({
   map: ringTexture,
   color: 0xffffff,
   side: three__WEBPACK_IMPORTED_MODULE_0__.DoubleSide,
@@ -53630,17 +53630,16 @@ scene.add(_planets_sun__WEBPACK_IMPORTED_MODULE_1__.default);
 
 let userValues = {
   scale: 10,
-  timeScale: 60
-}
+  timeScale: 1
+} 
 
-let scale = userValues.scale;
 let timeScale = userValues.timeScale;
 
 let rMercury = 716;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.position.set(rMercury, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
 let thetaMercury = 0;
-let dThetaMercury = 2 * Math.PI / (88 * timeScale) ;
+let dThetaMercury = 2 * Math.PI * (10 * userValues.timeScale) / (88 * 60) ;
 const mercuryPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rMercury-10, rMercury+10, 100, 100);
 const mercuryPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const mercuryPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(mercuryPathGeometry, mercuryPathMaterial);
@@ -53652,8 +53651,8 @@ scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury);
 let rVenus = 1101;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.position.set(rVenus, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.rotation.set(0, 0, -Math.PI * 3 / 180);
-let thetaVenus = 2 * Math.PI / (225 * timeScale);
-let dThetaVenus = 2 * Math.PI / (225 * timeScale) ;
+let thetaVenus = 0;
+let dThetaVenus = 2 * Math.PI * (10 * userValues.timeScale) / (225 * 60) ;
 const venusPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rVenus-10, rVenus+10, 100, 100);
 const venusPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const venusPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(venusPathGeometry, venusPathMaterial);
@@ -53666,7 +53665,7 @@ let rEarth = 1366;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.position.set(rEarth, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.rotation.set(0, 0, -Math.PI * 23.5 / 180);
 let thetaEarth = 0;
-let dThetaEarth = 2 * Math.PI / (365 * timeScale) ;
+let dThetaEarth = 2 * Math.PI * (10 * userValues.timeScale) / (365 * 60) ;
 const earthPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rEarth-10, rEarth+10, 100, 100);
 const earthPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const earthPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(earthPathGeometry, earthPathMaterial);
@@ -53679,7 +53678,7 @@ let rMars = 1962.2;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.position.set(rMars, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.rotation.set(0, 0, -Math.PI * 25.2 / 180);
 let thetaMars = 0;
-let dThetaMars = 2 * Math.PI / (687 * timeScale) ;
+let dThetaMars = 2 * Math.PI * (10 * userValues.timeScale) / (687 * 60) ;
 const marsPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rMars-10, rMars+10, 100, 100);
 const marsPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const marsPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(marsPathGeometry, marsPathMaterial);
@@ -53692,7 +53691,7 @@ let rJupiter = 5268;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.position.set(rJupiter, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaJupiter = 0;
-let dThetaJupiter = 2 * Math.PI / (4380 * timeScale) ;
+let dThetaJupiter = 2 * Math.PI * (10 * userValues.timeScale) / (4380 * 60) ;
 const jupiterPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rJupiter-20, rJupiter+20, 100, 100);
 const jupiterPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const jupiterPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(jupiterPathGeometry, jupiterPathMaterial);
@@ -53709,8 +53708,8 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturn.rotation.set(0, 0, -Math.PI
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturnRing.rotation.set( 1.5708, -Math.PI * 27 / 180, 0);
 let thetaSaturn = 0;
 let thetaSaturnRing = 0;
-let dThetaSaturn = 2 * Math.PI / (10585 * timeScale) ;
-let dThetaSaturnRing = 2 * Math.PI / (10585 * timeScale) ;
+let dThetaSaturn = 2 * Math.PI * (10 * userValues.timeScale) / (10585 * 60) ;
+let dThetaSaturnRing = 2 * Math.PI * (10 * userValues.timeScale) / (10585 * 60) ;
 const saturnPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rSaturn-20, rSaturn+20, 100, 100);
 const saturnPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const saturnPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(saturnPathGeometry, saturnPathMaterial);
@@ -53726,7 +53725,7 @@ let rUranus = 18270;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.position.set(rUranus, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.rotation.set(0, 0, -Math.PI * 98 / 180);
 let thetaUranus = 0;
-let dThetaUranus = 2 * Math.PI / (30660 * timeScale) ;
+let dThetaUranus = 2 * Math.PI * (10 * userValues.timeScale) / (30660 * 60) ;
 const uranusPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rUranus-20, rUranus+20, 100, 100);
 const uranusPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const uranusPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(uranusPathGeometry, uranusPathMaterial);
@@ -53739,7 +53738,7 @@ let rNeptune = 29840;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.position.set(rNeptune, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
 let thetaNeptune = 0;
-let dThetaNeptune = 2 * Math.PI / (60225 * timeScale) ;
+let dThetaNeptune = 2 * Math.PI * (10 * userValues.timeScale) / (60225 * 60) ;
 const neptunePathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rNeptune-20, rNeptune+20, 100, 100);
 const neptunePathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const neptunePath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(neptunePathGeometry, neptunePathMaterial);
@@ -53753,8 +53752,8 @@ scene.add(pointLight)
 
 
 const gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__.GUI()
-// gui.add(scale, "value")
-gui.add(userValues, "scale", 1, 20)
+gui.add(userValues, "scale", 1, 20).name("Planet Size Scale")
+gui.add(userValues, "timeScale", 1, 20).name("Time Scale")
 
 const sizes = {
   width: window.innerWidth, 
@@ -53803,50 +53802,60 @@ const animate = () =>
   controls.update();
 
   // Body rotations
-  _planets_sun__WEBPACK_IMPORTED_MODULE_1__.default.rotateY(2 * Math.PI / (25 * timeScale));
-  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.rotateY(2 * Math.PI / (58.7 * timeScale));
-  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.rotateY(2 * Math.PI / (118.75 * timeScale));
-  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.rotateY(2 * Math.PI / (1 * timeScale));
-  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.rotateY(2 * Math.PI / (1 * timeScale));
-  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.rotateY(2 * Math.PI / (0.42 * timeScale));
-  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturn.rotateY(2 * Math.PI / (0.45 * timeScale));
-  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturnRing.rotateZ(2 * Math.PI / (0.45 * timeScale));
-  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.rotateY(2 * Math.PI / (0.72 * timeScale));
-  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.rotateY(2 * Math.PI / (0.67 * timeScale));
+  _planets_sun__WEBPACK_IMPORTED_MODULE_1__.default.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (25 * 60));
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (58.7 * 60));
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (118.75 * 60));
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (1 * 60));
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (1 * 60));
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (0.42 * 60));
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturn.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (0.45 * 60));
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturnRing.rotateZ(2 * Math.PI * (10 * userValues.timeScale) / (0.45 * 60));
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (0.72 * 60));
+  _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (0.67 * 60));
 
   // Body orbits
+
+  dThetaMercury = 2 * Math.PI * (10 * userValues.timeScale) / (88 * 60) ;
   thetaMercury -= dThetaMercury;
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.position.x = rMercury * Math.cos(thetaMercury);
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.position.z = rMercury * Math.sin(thetaMercury);
 
+  dThetaVenus = 2 * Math.PI * (10 * userValues.timeScale) / (225 * 60) ;
   thetaVenus -= dThetaVenus;
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.position.x = rVenus * Math.cos(thetaVenus);
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.position.z = rVenus * Math.sin(thetaVenus);
 
+  dThetaEarth = 2 * Math.PI * (10 * userValues.timeScale) / (365 * 60) ;
   thetaEarth -= dThetaEarth;
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.position.x = rEarth * Math.cos(thetaEarth);
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.position.z = rEarth * Math.sin(thetaEarth);
 
+  dThetaMars = 2 * Math.PI * (10 * userValues.timeScale) / (687 * 60) ;
   thetaMars -= dThetaMars;
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.position.x = rMars * Math.cos(thetaMars);
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.position.z = rMars * Math.sin(thetaMars);
 
+  dThetaJupiter = 2 * Math.PI * (10 * userValues.timeScale) / (4380 * 60) ;
   thetaJupiter -= dThetaJupiter;
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.position.x = rJupiter * Math.cos(thetaJupiter);
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.position.z = rJupiter * Math.sin(thetaJupiter);
 
+  dThetaSaturn = 2 * Math.PI * (10 * userValues.timeScale) / (10585 * 60) ;
   thetaSaturn -= dThetaSaturn;
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturn.position.x = rSaturn * Math.cos(thetaSaturn);
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturn.position.z = rSaturn * Math.sin(thetaSaturn);
-
+  
+  dThetaSaturnRing = 2 * Math.PI * (10 * userValues.timeScale) / (10585 * 60) ;
   thetaSaturnRing -= dThetaSaturnRing;
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturnRing.position.x = rSaturn * Math.cos(thetaSaturnRing);
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturnRing.position.z = rSaturn * Math.sin(thetaSaturnRing);
 
+  dThetaUranus = 2 * Math.PI * (10 * userValues.timeScale) / (30660 * 60) ;
   thetaUranus -= dThetaUranus;
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.position.x = rUranus * Math.cos(thetaUranus);
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.position.z = rUranus * Math.sin(thetaUranus);
 
+  dThetaNeptune = 2 * Math.PI * (10 * userValues.timeScale) / (60225 * 60) ;
   thetaNeptune -= dThetaNeptune;
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.position.x = rNeptune * Math.cos(thetaNeptune);
   _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.position.z = rNeptune * Math.sin(thetaNeptune);

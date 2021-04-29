@@ -56,7 +56,7 @@ for (let i = 0; i < pos.count; i++){
   ringGeometry.attributes.uv.setXY(i, v3.length() < 76.8 ? 0 : 1, 1);
 }
 
-const ringMaterial = new THREE.MeshStandardMaterial({
+const ringMaterial = new THREE.MeshBasicMaterial({
   map: ringTexture,
   color: 0xffffff,
   side: THREE.DoubleSide,

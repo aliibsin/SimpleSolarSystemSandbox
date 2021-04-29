@@ -24,17 +24,16 @@ scene.add(Sun);
 
 let userValues = {
   scale: 10,
-  timeScale: 60
-}
+  timeScale: 1
+} 
 
-let scale = userValues.scale;
 let timeScale = userValues.timeScale;
 
 let rMercury = 716;
 mercury.position.set(rMercury, 0, 0);
 mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
 let thetaMercury = 0;
-let dThetaMercury = 2 * Math.PI / (88 * timeScale) ;
+let dThetaMercury = 2 * Math.PI * (10 * userValues.timeScale) / (88 * 60) ;
 const mercuryPathGeometry = new THREE.RingGeometry(rMercury-10, rMercury+10, 100, 100);
 const mercuryPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const mercuryPath = new THREE.Mesh(mercuryPathGeometry, mercuryPathMaterial);
@@ -46,8 +45,8 @@ scene.add(mercury);
 let rVenus = 1101;
 venus.position.set(rVenus, 0, 0);
 venus.rotation.set(0, 0, -Math.PI * 3 / 180);
-let thetaVenus = 2 * Math.PI / (225 * timeScale);
-let dThetaVenus = 2 * Math.PI / (225 * timeScale) ;
+let thetaVenus = 0;
+let dThetaVenus = 2 * Math.PI * (10 * userValues.timeScale) / (225 * 60) ;
 const venusPathGeometry = new THREE.RingGeometry(rVenus-10, rVenus+10, 100, 100);
 const venusPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const venusPath = new THREE.Mesh(venusPathGeometry, venusPathMaterial);
@@ -60,7 +59,7 @@ let rEarth = 1366;
 earth.position.set(rEarth, 0, 0);
 earth.rotation.set(0, 0, -Math.PI * 23.5 / 180);
 let thetaEarth = 0;
-let dThetaEarth = 2 * Math.PI / (365 * timeScale) ;
+let dThetaEarth = 2 * Math.PI * (10 * userValues.timeScale) / (365 * 60) ;
 const earthPathGeometry = new THREE.RingGeometry(rEarth-10, rEarth+10, 100, 100);
 const earthPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const earthPath = new THREE.Mesh(earthPathGeometry, earthPathMaterial);
@@ -73,7 +72,7 @@ let rMars = 1962.2;
 mars.position.set(rMars, 0, 0);
 mars.rotation.set(0, 0, -Math.PI * 25.2 / 180);
 let thetaMars = 0;
-let dThetaMars = 2 * Math.PI / (687 * timeScale) ;
+let dThetaMars = 2 * Math.PI * (10 * userValues.timeScale) / (687 * 60) ;
 const marsPathGeometry = new THREE.RingGeometry(rMars-10, rMars+10, 100, 100);
 const marsPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const marsPath = new THREE.Mesh(marsPathGeometry, marsPathMaterial);
@@ -86,7 +85,7 @@ let rJupiter = 5268;
 jupiter.position.set(rJupiter, 0, 0);
 jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaJupiter = 0;
-let dThetaJupiter = 2 * Math.PI / (4380 * timeScale) ;
+let dThetaJupiter = 2 * Math.PI * (10 * userValues.timeScale) / (4380 * 60) ;
 const jupiterPathGeometry = new THREE.RingGeometry(rJupiter-20, rJupiter+20, 100, 100);
 const jupiterPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const jupiterPath = new THREE.Mesh(jupiterPathGeometry, jupiterPathMaterial);
@@ -103,8 +102,8 @@ saturn.rotation.set(0, 0, -Math.PI * 27 / 180);
 saturnRing.rotation.set( 1.5708, -Math.PI * 27 / 180, 0);
 let thetaSaturn = 0;
 let thetaSaturnRing = 0;
-let dThetaSaturn = 2 * Math.PI / (10585 * timeScale) ;
-let dThetaSaturnRing = 2 * Math.PI / (10585 * timeScale) ;
+let dThetaSaturn = 2 * Math.PI * (10 * userValues.timeScale) / (10585 * 60) ;
+let dThetaSaturnRing = 2 * Math.PI * (10 * userValues.timeScale) / (10585 * 60) ;
 const saturnPathGeometry = new THREE.RingGeometry(rSaturn-20, rSaturn+20, 100, 100);
 const saturnPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const saturnPath = new THREE.Mesh(saturnPathGeometry, saturnPathMaterial);
@@ -120,7 +119,7 @@ let rUranus = 18270;
 uranus.position.set(rUranus, 0, 0);
 uranus.rotation.set(0, 0, -Math.PI * 98 / 180);
 let thetaUranus = 0;
-let dThetaUranus = 2 * Math.PI / (30660 * timeScale) ;
+let dThetaUranus = 2 * Math.PI * (10 * userValues.timeScale) / (30660 * 60) ;
 const uranusPathGeometry = new THREE.RingGeometry(rUranus-20, rUranus+20, 100, 100);
 const uranusPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const uranusPath = new THREE.Mesh(uranusPathGeometry, uranusPathMaterial);
@@ -133,7 +132,7 @@ let rNeptune = 29840;
 neptune.position.set(rNeptune, 0, 0);
 neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
 let thetaNeptune = 0;
-let dThetaNeptune = 2 * Math.PI / (60225 * timeScale) ;
+let dThetaNeptune = 2 * Math.PI * (10 * userValues.timeScale) / (60225 * 60) ;
 const neptunePathGeometry = new THREE.RingGeometry(rNeptune-20, rNeptune+20, 100, 100);
 const neptunePathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
 const neptunePath = new THREE.Mesh(neptunePathGeometry, neptunePathMaterial);
@@ -147,8 +146,8 @@ scene.add(pointLight)
 
 
 const gui = new dat.GUI()
-// gui.add(scale, "value")
-gui.add(userValues, "scale", 1, 20)
+gui.add(userValues, "scale", 1, 20).name("Planet Size Scale")
+gui.add(userValues, "timeScale", 1, 20).name("Time Scale")
 
 const sizes = {
   width: window.innerWidth, 
@@ -197,50 +196,60 @@ const animate = () =>
   controls.update();
 
   // Body rotations
-  Sun.rotateY(2 * Math.PI / (25 * timeScale));
-  mercury.rotateY(2 * Math.PI / (58.7 * timeScale));
-  venus.rotateY(2 * Math.PI / (118.75 * timeScale));
-  earth.rotateY(2 * Math.PI / (1 * timeScale));
-  mars.rotateY(2 * Math.PI / (1 * timeScale));
-  jupiter.rotateY(2 * Math.PI / (0.42 * timeScale));
-  saturn.rotateY(2 * Math.PI / (0.45 * timeScale));
-  saturnRing.rotateZ(2 * Math.PI / (0.45 * timeScale));
-  uranus.rotateY(2 * Math.PI / (0.72 * timeScale));
-  neptune.rotateY(2 * Math.PI / (0.67 * timeScale));
+  Sun.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (25 * 60));
+  mercury.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (58.7 * 60));
+  venus.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (118.75 * 60));
+  earth.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (1 * 60));
+  mars.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (1 * 60));
+  jupiter.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (0.42 * 60));
+  saturn.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (0.45 * 60));
+  saturnRing.rotateZ(2 * Math.PI * (10 * userValues.timeScale) / (0.45 * 60));
+  uranus.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (0.72 * 60));
+  neptune.rotateY(2 * Math.PI * (10 * userValues.timeScale) / (0.67 * 60));
 
   // Body orbits
+
+  dThetaMercury = 2 * Math.PI * (10 * userValues.timeScale) / (88 * 60) ;
   thetaMercury -= dThetaMercury;
   mercury.position.x = rMercury * Math.cos(thetaMercury);
   mercury.position.z = rMercury * Math.sin(thetaMercury);
 
+  dThetaVenus = 2 * Math.PI * (10 * userValues.timeScale) / (225 * 60) ;
   thetaVenus -= dThetaVenus;
   venus.position.x = rVenus * Math.cos(thetaVenus);
   venus.position.z = rVenus * Math.sin(thetaVenus);
 
+  dThetaEarth = 2 * Math.PI * (10 * userValues.timeScale) / (365 * 60) ;
   thetaEarth -= dThetaEarth;
   earth.position.x = rEarth * Math.cos(thetaEarth);
   earth.position.z = rEarth * Math.sin(thetaEarth);
 
+  dThetaMars = 2 * Math.PI * (10 * userValues.timeScale) / (687 * 60) ;
   thetaMars -= dThetaMars;
   mars.position.x = rMars * Math.cos(thetaMars);
   mars.position.z = rMars * Math.sin(thetaMars);
 
+  dThetaJupiter = 2 * Math.PI * (10 * userValues.timeScale) / (4380 * 60) ;
   thetaJupiter -= dThetaJupiter;
   jupiter.position.x = rJupiter * Math.cos(thetaJupiter);
   jupiter.position.z = rJupiter * Math.sin(thetaJupiter);
 
+  dThetaSaturn = 2 * Math.PI * (10 * userValues.timeScale) / (10585 * 60) ;
   thetaSaturn -= dThetaSaturn;
   saturn.position.x = rSaturn * Math.cos(thetaSaturn);
   saturn.position.z = rSaturn * Math.sin(thetaSaturn);
-
+  
+  dThetaSaturnRing = 2 * Math.PI * (10 * userValues.timeScale) / (10585 * 60) ;
   thetaSaturnRing -= dThetaSaturnRing;
   saturnRing.position.x = rSaturn * Math.cos(thetaSaturnRing);
   saturnRing.position.z = rSaturn * Math.sin(thetaSaturnRing);
 
+  dThetaUranus = 2 * Math.PI * (10 * userValues.timeScale) / (30660 * 60) ;
   thetaUranus -= dThetaUranus;
   uranus.position.x = rUranus * Math.cos(thetaUranus);
   uranus.position.z = rUranus * Math.sin(thetaUranus);
 
+  dThetaNeptune = 2 * Math.PI * (10 * userValues.timeScale) / (60225 * 60) ;
   thetaNeptune -= dThetaNeptune;
   neptune.position.x = rNeptune * Math.cos(thetaNeptune);
   neptune.position.z = rNeptune * Math.sin(thetaNeptune);
