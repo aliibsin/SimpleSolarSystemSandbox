@@ -82,7 +82,7 @@ body {
   
 }
 
-.about-button, .music-button {
+.about-button, .music-button, .music-button-off {
   margin: 3px;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
@@ -90,7 +90,7 @@ body {
   border: none;
 }
 
-.about-button:hover, .music-button:hover {
+.about-button:hover, .music-button:hover, .music-button-off:hover {
   color: aquamarine;
   transition: 250ms ease;
 }

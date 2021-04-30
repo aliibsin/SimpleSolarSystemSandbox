@@ -8,8 +8,8 @@ import {
   saturnRing
 } from './planets/planets';
 
-var introModal = document.getElementById("intro-box-modal");
-var introButton = document.getElementById("about-button");
+let introModal = document.getElementById("intro-box-modal");
+let introButton = document.getElementById("about-button");
 
 introButton.onclick = () => {
   introModal.style.display = "block";
@@ -21,11 +21,16 @@ window.onclick = (e) => {
   }
 }
 
-var playMusic = document.getElementById("music-button");
-var musicPlayer = document.getElementById("music");
+let playMusic = document.getElementById("music-button");
+let pauseMusic = document.getElementById("music-button-off");
+let musicPlayer = document.getElementById("music");
 
 playMusic.onclick = () => {
   musicPlayer.play();
+}
+
+pauseMusic.onclick = () => {
+  musicPlayer.pause();
 }
 
 const canvas = document.querySelector('canvas.webgl');
