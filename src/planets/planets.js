@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 
+//planet textures from https://www.solarsystemscope.com/textures/
+
 //mercury
 const mercuryGeometry = new THREE.SphereBufferGeometry(1.5, 128, 128);
 const mercuryTexture = new THREE.TextureLoader().load("src/assets/mercury.jpg");

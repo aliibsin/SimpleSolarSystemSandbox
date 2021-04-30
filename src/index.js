@@ -21,6 +21,13 @@ window.onclick = (e) => {
   }
 }
 
+var playMusic = document.getElementById("music-button");
+var musicPlayer = document.getElementById("music");
+
+playMusic.onclick = () => {
+  musicPlayer.play();
+}
+
 const canvas = document.querySelector('canvas.webgl');
 
 const scene = new THREE.Scene();

@@ -82,14 +82,16 @@ body {
   
 }
 
-.about-button {
+.about-button, .music-button {
   margin: 3px;
-  background-color: rgba(42, 40, 54, 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   cursor: pointer;
   border: none;
 }
 
-.about-button:hover {
+.about-button:hover, .music-button:hover {
   color: aquamarine;
+  transition: 250ms ease;
 }
+

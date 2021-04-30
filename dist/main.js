@@ -53432,6 +53432,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
 
 
+//planet textures from https://www.solarsystemscope.com/textures/
+
 //mercury
 const mercuryGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(1.5, 128, 128);
 const mercuryTexture = new three__WEBPACK_IMPORTED_MODULE_0__.TextureLoader().load("src/assets/mercury.jpg");
@@ -53625,6 +53627,13 @@ window.onclick = (e) => {
   if (e.target === introModal) {
     introModal.style.display = "none";
   }
+}
+
+var playMusic = document.getElementById("music-button");
+var musicPlayer = document.getElementById("music");
+
+playMusic.onclick = () => {
+  musicPlayer.play();
 }
 
 const canvas = document.querySelector('canvas.webgl');
