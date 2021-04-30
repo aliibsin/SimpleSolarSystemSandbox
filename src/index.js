@@ -208,10 +208,12 @@ let pathFxs = {
   neptunePath: neptunePathToggle,
 }
 
-const pathGUI = new dat.GUI({ autoPlace: false});
-pathGUI.add(pathFxs, "showAll").name("Show all orbits");
-pathGUI.add(pathFxs, "hideAll").name("Hide all orbits");
-const planetFolder = pathGUI.addFolder("Planets");
+
+
+// user controls
+const userGUI = new dat.GUI({ autoPlace: false, width: 300 });
+
+const planetFolder = userGUI.addFolder("Planets");
 planetFolder.add(pathFxs, "mercuryPath").name("Mercury");
 planetFolder.add(pathFxs, "venusPath").name("Venus");
 planetFolder.add(pathFxs, "earthPath").name("Earth");
@@ -221,18 +223,16 @@ planetFolder.add(pathFxs, "saturnPath").name("Saturn");
 planetFolder.add(pathFxs, "uranusPath").name("Uranus");
 planetFolder.add(pathFxs, "neptunePath").name("Neptune");
 
-// let pathGUIContainer = document.getElementById("planet-gui")
-// pathGUIContainer.appendChild(pathGUI.domElement);
+const orbitFolder = userGUI.addFolder("Toggle Orbits")
+orbitFolder.add(pathFxs, "showAll").name("Show all");
+orbitFolder.add(pathFxs, "hideAll").name("Hide all");
 
+const userGUIFolder = userGUI.addFolder('Toggle Scale Controls');
+userGUIFolder.add(userValues, "scale", 1, 20).name("Planet Size Scale");
+userGUIFolder.add(userValues, "timeScale", 1, 20).name("Time Scale");
 
-// gui for scaling
-const scaleGUI = new dat.GUI({ autoPlace: false, width: 300 });
-const scaleGUIFolder = scaleGUI.addFolder('Toggle Scale Controls');
-scaleGUIFolder.add(userValues, "scale", 1, 20).name("Planet Size Scale");
-scaleGUIFolder.add(userValues, "timeScale", 1, 20).name("Time Scale");
-
-let scaleGUIContainer = document.getElementById("scale-gui");
-scaleGUIContainer.appendChild(scaleGUI.domElement)
+let userGUIContainer = document.getElementById("scale-gui");
+userGUIContainer.appendChild(userGUI.domElement)
 
 
 // sun light
