@@ -10,6 +10,19 @@ import {
 
 console.log('webpack is working');
 
+var introModal = document.getElementById("intro-box-modal");
+var introButton = document.getElementById("about-button");
+
+introButton.onclick = () => {
+  introModal.style.display = "block";
+}
+
+window.onclick = (e) => {
+  if (e.target === introModal) {
+    introModal.style.display = "none";
+  }
+}
+
 const canvas = document.querySelector('canvas.webgl');
 
 const scene = new THREE.Scene();
@@ -40,6 +53,8 @@ const mercuryPath = new THREE.Mesh(mercuryPathGeometry, mercuryPathMaterial);
 mercuryPath.rotation.set(1.5708, 0, 0);
 scene.add(mercuryPath);
 scene.add(mercury);
+
+console.log(mercury.position)
 
 
 let rVenus = 1101;

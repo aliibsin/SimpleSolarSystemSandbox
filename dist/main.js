@@ -53433,7 +53433,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 //mercury
-const mercuryGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(1.5, 100, 100);
+const mercuryGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(1.5, 128, 128);
 const mercuryTexture = new three__WEBPACK_IMPORTED_MODULE_0__.TextureLoader().load("src/assets/mercury.jpg");
 const mercuryMaterial = new three__WEBPACK_IMPORTED_MODULE_0__.MeshStandardMaterial({map: mercuryTexture});
 
@@ -53441,7 +53441,7 @@ const mercury = new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(mercuryGeometry, mer
 
 
 //venus
-const venusGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(3.8, 100, 100);
+const venusGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(3.8, 128, 128);
 const venusTexture = new three__WEBPACK_IMPORTED_MODULE_0__.TextureLoader().load("src/assets/venus.jpg");
 const venusMaterial = new three__WEBPACK_IMPORTED_MODULE_0__.MeshStandardMaterial({map: venusTexture});
 
@@ -53449,7 +53449,7 @@ const venus = new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(venusGeometry, venusMa
 
 
 //earth
-const earthGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(6.4, 100, 100);
+const earthGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(6.4, 128, 128);
 const earthTexture = new three__WEBPACK_IMPORTED_MODULE_0__.TextureLoader().load("src/assets/earth.jpg");
 const earthMaterial = new three__WEBPACK_IMPORTED_MODULE_0__.MeshStandardMaterial({map: earthTexture});
 
@@ -53457,7 +53457,7 @@ const earth = new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(earthGeometry, earthMa
 
 
 //mars
-const marsGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(2.1, 100, 100);
+const marsGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(2.1, 128, 128);
 const marsTexture = new three__WEBPACK_IMPORTED_MODULE_0__.TextureLoader().load("src/assets/mars.jpg");
 const marsMaterial = new three__WEBPACK_IMPORTED_MODULE_0__.MeshStandardMaterial({map: marsTexture});
 
@@ -53465,7 +53465,7 @@ const mars = new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(marsGeometry, marsMater
 
 
 //jupiter
-const jupiterGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(43.4, 100, 100);
+const jupiterGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(43.4, 128, 128);
 const jupiterTexture = new three__WEBPACK_IMPORTED_MODULE_0__.TextureLoader().load("src/assets/jupiter.jpg");
 const jupiterMaterial = new three__WEBPACK_IMPORTED_MODULE_0__.MeshStandardMaterial({map: jupiterTexture});
 
@@ -53473,14 +53473,14 @@ const jupiter = new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(jupiterGeometry, jup
 
 
 //saturn
-const saturnGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(36.2, 100, 100);
+const saturnGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(36.2, 128, 128);
 const saturnTexture = new three__WEBPACK_IMPORTED_MODULE_0__.TextureLoader().load("src/assets/saturn.jpg");
 const saturnMaterial = new three__WEBPACK_IMPORTED_MODULE_0__.MeshStandardMaterial({map: saturnTexture});
 
 const saturn = new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(saturnGeometry, saturnMaterial);
 
 const ringTexture = new three__WEBPACK_IMPORTED_MODULE_0__.TextureLoader().load("src/assets/saturn_rings.png");
-const ringGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.RingBufferGeometry(41.6, 111.8, 100);
+const ringGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.RingBufferGeometry(41.6, 111.8, 128);
 var pos = ringGeometry.attributes.position;
 var v3 = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3();
 for (let i = 0; i < pos.count; i++){
@@ -53498,7 +53498,7 @@ const saturnRing = new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(ringGeometry, rin
 
 
 //uranus
-const uranusGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(15.8, 100, 100);
+const uranusGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(15.8, 128, 128);
 const uranusTexture = new three__WEBPACK_IMPORTED_MODULE_0__.TextureLoader().load("src/assets/uranus.jpg");
 const uranusMaterial = new three__WEBPACK_IMPORTED_MODULE_0__.MeshStandardMaterial({map: uranusTexture});
 
@@ -53506,7 +53506,7 @@ const uranus = new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(uranusGeometry, uranu
 
 
 //neptune
-const neptuneGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(15.3, 100, 100);
+const neptuneGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(15.3, 128, 128);
 const neptuneTexture = new three__WEBPACK_IMPORTED_MODULE_0__.TextureLoader().load("src/assets/neptune.jpg");
 const neptuneMaterial = new three__WEBPACK_IMPORTED_MODULE_0__.MeshStandardMaterial({map: neptuneTexture});
 
@@ -53616,6 +53616,19 @@ __webpack_require__.r(__webpack_exports__);
 
 console.log('webpack is working');
 
+var introModal = document.getElementById("intro-box-modal");
+var introButton = document.getElementById("about-button");
+
+introButton.onclick = () => {
+  introModal.style.display = "block";
+}
+
+window.onclick = (e) => {
+  if (e.target === introModal) {
+    introModal.style.display = "none";
+  }
+}
+
 const canvas = document.querySelector('canvas.webgl');
 
 const scene = new three__WEBPACK_IMPORTED_MODULE_3__.Scene();
@@ -53646,6 +53659,8 @@ const mercuryPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(mercuryPathGeome
 mercuryPath.rotation.set(1.5708, 0, 0);
 scene.add(mercuryPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury);
+
+console.log(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.position)
 
 
 let rVenus = 1101;
