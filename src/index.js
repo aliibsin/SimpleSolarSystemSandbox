@@ -137,6 +137,30 @@ neptunePath.rotation.set(1.5708, 0, 0);
 scene.add(neptunePath);
 scene.add(neptune);
 
+// Orbit path visibility
+function allPathInvisible() {
+  mercuryPath.visible = false;
+  venusPath.visible = false;
+  earthPath.visible = false;
+  marsPath.visible = false;
+  jupiterPath.visible = false;
+  saturnPath.visible = false;
+  uranusPath.visible = false;
+  neptunePath.visible = false;
+};
+
+function allPathVisible() {
+  mercuryPath.visible = true;
+  venusPath.visible = true;
+  earthPath.visible = true;
+  marsPath.visible = true;
+  jupiterPath.visible = true;
+  saturnPath.visible = true;
+  uranusPath.visible = true;
+  neptunePath.visible = true;
+};
+
+allPathInvisible();
 
 // sun light
 const pointLight = new THREE.PointLight(0xffffff, 1, 0, 2)
@@ -193,6 +217,8 @@ const clock = new THREE.Clock()
 const animate = () =>
 {
   const elapsedTime = clock.getElapsedTime()
+
+
 
   // Update objects
   controls.update();
