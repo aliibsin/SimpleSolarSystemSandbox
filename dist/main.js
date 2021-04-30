@@ -53614,8 +53614,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-console.log('webpack is working');
-
 var introModal = document.getElementById("intro-box-modal");
 var introButton = document.getElementById("about-button");
 
@@ -53653,14 +53651,12 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.position.set(rMercury, 0, 
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
 let thetaMercury = 0;
 let dThetaMercury = 2 * Math.PI * (10 * userValues.timeScale) / (88 * 60) ;
-const mercuryPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rMercury-10, rMercury+10, 100, 100);
+const mercuryPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rMercury-5, rMercury+5, 128, 128);
 const mercuryPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const mercuryPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(mercuryPathGeometry, mercuryPathMaterial);
 mercuryPath.rotation.set(1.5708, 0, 0);
 scene.add(mercuryPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury);
-
-console.log(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.position)
 
 
 let rVenus = 1101;
@@ -53668,7 +53664,7 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.position.set(rVenus, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaVenus = 0;
 let dThetaVenus = 2 * Math.PI * (10 * userValues.timeScale) / (225 * 60) ;
-const venusPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rVenus-10, rVenus+10, 100, 100);
+const venusPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rVenus-5, rVenus+5, 128, 128);
 const venusPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const venusPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(venusPathGeometry, venusPathMaterial);
 venusPath.rotation.set(1.5708, 0, 0);
@@ -53681,7 +53677,7 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.position.set(rEarth, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.rotation.set(0, 0, -Math.PI * 23.5 / 180);
 let thetaEarth = 0;
 let dThetaEarth = 2 * Math.PI * (10 * userValues.timeScale) / (365 * 60) ;
-const earthPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rEarth-10, rEarth+10, 100, 100);
+const earthPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rEarth-5, rEarth+5, 128, 128);
 const earthPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const earthPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(earthPathGeometry, earthPathMaterial);
 earthPath.rotation.set(1.5708, 0, 0);
@@ -53694,7 +53690,7 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.position.set(rMars, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.rotation.set(0, 0, -Math.PI * 25.2 / 180);
 let thetaMars = 0;
 let dThetaMars = 2 * Math.PI * (10 * userValues.timeScale) / (687 * 60) ;
-const marsPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rMars-10, rMars+10, 100, 100);
+const marsPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rMars-5, rMars+5, 128, 128);
 const marsPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const marsPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(marsPathGeometry, marsPathMaterial);
 marsPath.rotation.set(1.5708, 0, 0);
@@ -53707,7 +53703,7 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.position.set(rJupiter, 0, 
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaJupiter = 0;
 let dThetaJupiter = 2 * Math.PI * (10 * userValues.timeScale) / (4380 * 60) ;
-const jupiterPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rJupiter-20, rJupiter+20, 100, 100);
+const jupiterPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rJupiter-5, rJupiter+5, 128, 128);
 const jupiterPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const jupiterPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(jupiterPathGeometry, jupiterPathMaterial);
 jupiterPath.rotation.set(1.5708, 0, 0);
@@ -53724,7 +53720,7 @@ let thetaSaturn = 0;
 let thetaSaturnRing = 0;
 let dThetaSaturn = 2 * Math.PI * (10 * userValues.timeScale) / (10585 * 60) ;
 let dThetaSaturnRing = 2 * Math.PI * (10 * userValues.timeScale) / (10585 * 60) ;
-const saturnPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rSaturn-20, rSaturn+20, 100, 100);
+const saturnPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rSaturn-5, rSaturn+5, 128, 128);
 const saturnPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const saturnPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(saturnPathGeometry, saturnPathMaterial);
 saturnPath.rotation.set(1.5708, 0, 0);
@@ -53738,7 +53734,7 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.position.set(rUranus, 0, 0)
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.rotation.set(0, 0, -Math.PI * 98 / 180);
 let thetaUranus = 0;
 let dThetaUranus = 2 * Math.PI * (10 * userValues.timeScale) / (30660 * 60) ;
-const uranusPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rUranus-20, rUranus+20, 100, 100);
+const uranusPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rUranus-5, rUranus+5, 128, 128);
 const uranusPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const uranusPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(uranusPathGeometry, uranusPathMaterial);
 uranusPath.rotation.set(1.5708, 0, 0);
@@ -53751,7 +53747,7 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.position.set(rNeptune, 0, 
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
 let thetaNeptune = 0;
 let dThetaNeptune = 2 * Math.PI * (10 * userValues.timeScale) / (60225 * 60) ;
-const neptunePathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rNeptune-20, rNeptune+20, 100, 100);
+const neptunePathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rNeptune-5, rNeptune+5, 128, 128);
 const neptunePathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
 const neptunePath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(neptunePathGeometry, neptunePathMaterial);
 neptunePath.rotation.set(1.5708, 0, 0);
