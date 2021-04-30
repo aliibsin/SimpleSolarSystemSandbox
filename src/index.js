@@ -160,11 +160,70 @@ function allPathVisible() {
   neptunePath.visible = true;
 };
 
+function mercuryPathToggle() {
+ mercuryPath.visible = !mercuryPath.visible
+}
+
+function venusPathToggle() {
+  venusPath.visible = !venusPath.visible
+}
+
+function earthPathToggle() {
+  earthPath.visible = !earthPath.visible
+}
+
+function marsPathToggle() {
+  marsPath.visible = !marsPath.visible
+}
+
+function jupiterPathToggle() {
+  jupiterPath.visible = !jupiterPath.visible
+}
+
+function saturnPathToggle() {
+ saturnPath.visible = !saturnPath.visible
+}
+
+function uranusPathToggle() {
+  uranusPath.visible = !uranusPath.visible
+}
+
+function neptunePathToggle() {
+  neptunePath.visible = !neptunePath.visible
+}
+
+ 
 allPathInvisible();
 
-// sun light
-const pointLight = new THREE.PointLight(0xffffff, 1, 0, 2)
-scene.add(pointLight)
+let pathFxs = {
+  showAll: allPathVisible,
+  hideAll: allPathInvisible,
+  mercuryPath: mercuryPathToggle,
+  venusPath: venusPathToggle,
+  earthPath: earthPathToggle,
+  marsPath: marsPathToggle,
+  jupiterPath: jupiterPathToggle,
+  saturnPath: saturnPathToggle,
+  uranusPath: uranusPathToggle,
+  neptunePath: neptunePathToggle,
+}
+
+const pathGUI = new dat.GUI({ autoPlace: false});
+pathGUI.add(pathFxs, "showAll").name("Show all orbits");
+pathGUI.add(pathFxs, "hideAll").name("Hide all orbits");
+const planetFolder = pathGUI.addFolder("Planets");
+planetFolder.add(pathFxs, "mercuryPath").name("Mercury");
+planetFolder.add(pathFxs, "venusPath").name("Venus");
+planetFolder.add(pathFxs, "earthPath").name("Earth");
+planetFolder.add(pathFxs, "marsPath").name("Mars");
+planetFolder.add(pathFxs, "jupiterPath").name("Jupiter");
+planetFolder.add(pathFxs, "saturnPath").name("Saturn");
+planetFolder.add(pathFxs, "uranusPath").name("Uranus");
+planetFolder.add(pathFxs, "neptunePath").name("Neptune");
+
+// let pathGUIContainer = document.getElementById("planet-gui")
+// pathGUIContainer.appendChild(pathGUI.domElement);
+
 
 // gui for scaling
 const scaleGUI = new dat.GUI({ autoPlace: false, width: 300 });
@@ -174,6 +233,11 @@ scaleGUIFolder.add(userValues, "timeScale", 1, 20).name("Time Scale");
 
 let scaleGUIContainer = document.getElementById("scale-gui");
 scaleGUIContainer.appendChild(scaleGUI.domElement)
+
+
+// sun light
+const pointLight = new THREE.PointLight(0xffffff, 1, 0, 2)
+scene.add(pointLight)
 
 
 // default window sizes
