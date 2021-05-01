@@ -22,16 +22,20 @@ window.onclick = (e) => {
 }
 
 let playMusic = document.getElementById("music-button");
-let pauseMusic = document.getElementById("music-button-off");
+// let pauseMusic = document.getElementById("music-button-off");
 let musicPlayer = document.getElementById("music");
 
+musicPlayer.volume = 0.1;
+
 playMusic.onclick = () => {
-  musicPlayer.play();
+  musicPlayer.paused ? musicPlayer.play() : musicPlayer.pause();
 }
 
-pauseMusic.onclick = () => {
-  musicPlayer.pause();
-}
+// pauseMusic.onclick = () => {
+//   musicPlayer.pause();
+// }
+
+
 
 const canvas = document.querySelector('canvas.webgl');
 

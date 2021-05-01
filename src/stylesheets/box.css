@@ -95,3 +95,7 @@ body {
   transition: 250ms ease;
 }
 
+.fas .fa-volume-up {
+  color: white;
+  font-size: 20px;
+}
