@@ -82,7 +82,7 @@ body {
   
 }
 
-.about-button, .music-button, .music-button-off {
+.about-button, .music-button {
   margin: 3px;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
@@ -90,12 +90,11 @@ body {
   border: none;
 }
 
-.about-button:hover, .music-button:hover, .music-button-off:hover {
+.about-button:hover, .music-button:hover {
   color: aquamarine;
   transition: 250ms ease;
 }
 
-.fas .fa-volume-up {
-  color: white;
-  font-size: 20px;
+.music-on {
+  color: aquamarine;
 }
