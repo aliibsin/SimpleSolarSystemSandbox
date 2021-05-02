@@ -53911,7 +53911,7 @@ scene.add(camera)
 //create renderer
 const renderer = new three__WEBPACK_IMPORTED_MODULE_3__.WebGLRenderer({
   canvas: canvas,
-  antialias: true,
+  // antialias: true, //uses a lot of resources
   alpha: true
 })
 renderer.setSize(sizes.width, sizes.height)
