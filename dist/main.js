@@ -53669,9 +53669,11 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.position.set(rMercury, 0, 
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury.rotation.set(0, 0, -Math.PI * 2 / 180);
 let thetaMercury = 0;
 let dThetaMercury = 2 * Math.PI * (10 * userValues.timeScale) / (88 * 60) ;
-const mercuryPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rMercury-5, rMercury+5, 128, 128);
-const mercuryPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
-const mercuryPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(mercuryPathGeometry, mercuryPathMaterial);
+const mercuryPathCurve = new three__WEBPACK_IMPORTED_MODULE_3__.EllipseCurve(0, 0, rMercury, rMercury, 0, 2 * Math.PI, false, 0)
+const mercuryPathPoints = mercuryPathCurve.getPoints(128);
+const mercuryPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.BufferGeometry().setFromPoints(mercuryPathPoints);
+const mercuryPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.LineBasicMaterial({color: 0xFFFFFF});
+const mercuryPath = new three__WEBPACK_IMPORTED_MODULE_3__.Line(mercuryPathGeometry, mercuryPathMaterial);
 mercuryPath.rotation.set(1.5708, 0, 0);
 scene.add(mercuryPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.mercury);
@@ -53682,9 +53684,11 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.position.set(rVenus, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaVenus = 0;
 let dThetaVenus = 2 * Math.PI * (10 * userValues.timeScale) / (225 * 60) ;
-const venusPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rVenus-5, rVenus+5, 128, 128);
-const venusPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
-const venusPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(venusPathGeometry, venusPathMaterial);
+const venusPathCurve = new three__WEBPACK_IMPORTED_MODULE_3__.EllipseCurve(0, 0, rVenus, rVenus, 0, 2 * Math.PI, false, 0)
+const venusPathPoints = venusPathCurve.getPoints(128);
+const venusPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.BufferGeometry().setFromPoints(venusPathPoints);
+const venusPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.LineBasicMaterial({color: 0xFFFFFF});
+const venusPath = new three__WEBPACK_IMPORTED_MODULE_3__.Line(venusPathGeometry, venusPathMaterial);
 venusPath.rotation.set(1.5708, 0, 0);
 scene.add(venusPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.venus);
@@ -53695,9 +53699,11 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.position.set(rEarth, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth.rotation.set(0, 0, -Math.PI * 23.5 / 180);
 let thetaEarth = 0;
 let dThetaEarth = 2 * Math.PI * (10 * userValues.timeScale) / (365 * 60) ;
-const earthPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rEarth-5, rEarth+5, 128, 128);
-const earthPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
-const earthPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(earthPathGeometry, earthPathMaterial);
+const earthPathCurve = new three__WEBPACK_IMPORTED_MODULE_3__.EllipseCurve(0, 0, rEarth, rEarth, 0, 2 * Math.PI, false, 0)
+const earthPathPoints = earthPathCurve.getPoints(128);
+const earthPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.BufferGeometry().setFromPoints(earthPathPoints);
+const earthPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.LineBasicMaterial({color: 0xFFFFFF});
+const earthPath = new three__WEBPACK_IMPORTED_MODULE_3__.Line(earthPathGeometry, earthPathMaterial);
 earthPath.rotation.set(1.5708, 0, 0);
 scene.add(earthPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.earth);
@@ -53708,9 +53714,12 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.position.set(rMars, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars.rotation.set(0, 0, -Math.PI * 25.2 / 180);
 let thetaMars = 0;
 let dThetaMars = 2 * Math.PI * (10 * userValues.timeScale) / (687 * 60) ;
-const marsPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rMars-5, rMars+5, 128, 128);
-const marsPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
-const marsPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(marsPathGeometry, marsPathMaterial);
+const marsPathCurve = new three__WEBPACK_IMPORTED_MODULE_3__.EllipseCurve(0, 0, rMars, rMars, 0, 2 * Math.PI, false, 0)
+const marsPathPoints = marsPathCurve.getPoints(128);
+const marsPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.BufferGeometry().setFromPoints(marsPathPoints);
+const marsPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.LineBasicMaterial({color: 0xFFFFFF});
+const marsPath = new three__WEBPACK_IMPORTED_MODULE_3__.Line(marsPathGeometry, marsPathMaterial);
+
 marsPath.rotation.set(1.5708, 0, 0);
 scene.add(marsPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.mars);
@@ -53721,17 +53730,12 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.position.set(rJupiter, 0, 
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaJupiter = 0;
 let dThetaJupiter = 2 * Math.PI * (10 * userValues.timeScale) / (4380 * 60) ;
-// const jupiterPathGeometry = new THREE.RingGeometry(rJupiter-5, rJupiter+5, 128, 128);
-// const jupiterPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
-// const jupiterPath = new THREE.Mesh(jupiterPathGeometry, jupiterPathMaterial);
-
-
-
 const jupiterPathCurve = new three__WEBPACK_IMPORTED_MODULE_3__.EllipseCurve(0, 0, rJupiter, rJupiter, 0, 2 * Math.PI, false, 0)
 const jupiterPathPoints = jupiterPathCurve.getPoints(128);
 const jupiterPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.BufferGeometry().setFromPoints(jupiterPathPoints);
 const jupiterPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.LineBasicMaterial({color: 0xFFFFFF});
 const jupiterPath = new three__WEBPACK_IMPORTED_MODULE_3__.Line(jupiterPathGeometry, jupiterPathMaterial);
+
 jupiterPath.rotation.set(1.5708, 0, 0);
 scene.add(jupiterPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter);
@@ -53746,9 +53750,12 @@ let thetaSaturn = 0;
 let thetaSaturnRing = 0;
 let dThetaSaturn = 2 * Math.PI * (10 * userValues.timeScale) / (10585 * 60) ;
 let dThetaSaturnRing = 2 * Math.PI * (10 * userValues.timeScale) / (10585 * 60) ;
-const saturnPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rSaturn-5, rSaturn+5, 128, 128);
-const saturnPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
-const saturnPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(saturnPathGeometry, saturnPathMaterial);
+const saturnPathCurve = new three__WEBPACK_IMPORTED_MODULE_3__.EllipseCurve(0, 0, rSaturn, rSaturn, 0, 2 * Math.PI, false, 0)
+const saturnPathPoints = saturnPathCurve.getPoints(128);
+const saturnPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.BufferGeometry().setFromPoints(saturnPathPoints);
+const saturnPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.LineBasicMaterial({color: 0xFFFFFF});
+const saturnPath = new three__WEBPACK_IMPORTED_MODULE_3__.Line(saturnPathGeometry, saturnPathMaterial);
+
 saturnPath.rotation.set(1.5708, 0, 0);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.saturnRing);
 scene.add(saturnPath);
@@ -53760,9 +53767,12 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.position.set(rUranus, 0, 0)
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus.rotation.set(0, 0, -Math.PI * 98 / 180);
 let thetaUranus = 0;
 let dThetaUranus = 2 * Math.PI * (10 * userValues.timeScale) / (30660 * 60) ;
-const uranusPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rUranus-5, rUranus+5, 128, 128);
-const uranusPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
-const uranusPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(uranusPathGeometry, uranusPathMaterial);
+const uranusPathCurve = new three__WEBPACK_IMPORTED_MODULE_3__.EllipseCurve(0, 0, rUranus, rUranus, 0, 2 * Math.PI, false, 0)
+const uranusPathPoints = uranusPathCurve.getPoints(128);
+const uranusPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.BufferGeometry().setFromPoints(uranusPathPoints);
+const uranusPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.LineBasicMaterial({color: 0xFFFFFF});
+const uranusPath = new three__WEBPACK_IMPORTED_MODULE_3__.Line(uranusPathGeometry, uranusPathMaterial);
+
 uranusPath.rotation.set(1.5708, 0, 0);
 scene.add(uranusPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus);
@@ -53773,9 +53783,12 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.position.set(rNeptune, 0, 
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
 let thetaNeptune = 0;
 let dThetaNeptune = 2 * Math.PI * (10 * userValues.timeScale) / (60225 * 60) ;
-const neptunePathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rNeptune-5, rNeptune+5, 128, 128);
-const neptunePathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
-const neptunePath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(neptunePathGeometry, neptunePathMaterial);
+const neptunePathCurve = new three__WEBPACK_IMPORTED_MODULE_3__.EllipseCurve(0, 0, rNeptune, rNeptune, 0, 2 * Math.PI, false, 0)
+const neptunePathPoints = neptunePathCurve.getPoints(128);
+const neptunePathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.BufferGeometry().setFromPoints(neptunePathPoints);
+const neptunePathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.LineBasicMaterial({color: 0xFFFFFF});
+const neptunePath = new three__WEBPACK_IMPORTED_MODULE_3__.Line(neptunePathGeometry, neptunePathMaterial);
+
 neptunePath.rotation.set(1.5708, 0, 0);
 scene.add(neptunePath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune);
