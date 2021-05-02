@@ -53721,9 +53721,17 @@ _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.position.set(rJupiter, 0, 
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter.rotation.set(0, 0, -Math.PI * 3 / 180);
 let thetaJupiter = 0;
 let dThetaJupiter = 2 * Math.PI * (10 * userValues.timeScale) / (4380 * 60) ;
-const jupiterPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.RingGeometry(rJupiter-5, rJupiter+5, 128, 128);
-const jupiterPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshBasicMaterial({color: 0xFFFFFF, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide})
-const jupiterPath = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(jupiterPathGeometry, jupiterPathMaterial);
+// const jupiterPathGeometry = new THREE.RingGeometry(rJupiter-5, rJupiter+5, 128, 128);
+// const jupiterPathMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide})
+// const jupiterPath = new THREE.Mesh(jupiterPathGeometry, jupiterPathMaterial);
+
+
+
+const jupiterPathCurve = new three__WEBPACK_IMPORTED_MODULE_3__.EllipseCurve(0, 0, rJupiter, rJupiter, 0, 2 * Math.PI, false, 0)
+const jupiterPathPoints = jupiterPathCurve.getPoints(128);
+const jupiterPathGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.BufferGeometry().setFromPoints(jupiterPathPoints);
+const jupiterPathMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.LineBasicMaterial({color: 0xFFFFFF});
+const jupiterPath = new three__WEBPACK_IMPORTED_MODULE_3__.Line(jupiterPathGeometry, jupiterPathMaterial);
 jupiterPath.rotation.set(1.5708, 0, 0);
 scene.add(jupiterPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.jupiter);
@@ -53890,10 +53898,12 @@ scene.add(camera)
 //create renderer
 const renderer = new three__WEBPACK_IMPORTED_MODULE_3__.WebGLRenderer({
   canvas: canvas,
+  antialias: true,
   alpha: true
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+// renderer.setPixelRatio(window.devicePixelRatio);
 
 // resize window adjusting
 window.addEventListener('resize', () => {
