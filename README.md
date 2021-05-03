@@ -1,6 +1,9 @@
 # SimpleSolarSystemSandbox
 
-
+<div align="center">
+   <img src=src/assets/SSSS.png >
+</div>
+<br/>
 
 Simple Solar Solar System Sandbox is an 3D representation of our solar system where users can adjust planet size and time scales.
 
