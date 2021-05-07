@@ -5,7 +5,7 @@
 </div>
 <br/>
 
-Simple Solar Solar System Sandbox is an 3D representation of our solar system where users can adjust planet size and time scales.
+Simple Solar System Sandbox is an 3D representation of our solar system where users can adjust planet size and time scales.
 
 ## Usage
 Tihs sandbox requires a browser that supports WebGL.
