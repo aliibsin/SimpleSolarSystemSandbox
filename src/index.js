@@ -169,7 +169,6 @@ uranusPath.rotation.set(1.5708, 0, 0);
 scene.add(uranusPath);
 scene.add(uranus);
 
-
 let rNeptune = 29840;
 neptune.position.set(rNeptune, 0, 0);
 neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
@@ -240,7 +239,6 @@ function neptunePathToggle() {
   neptunePath.visible = !neptunePath.visible
 }
 
- 
 allPathInvisible();
 
 let pathFxs = {
@@ -293,7 +291,6 @@ userGUIContainer.appendChild(userGUI.domElement)
 // sun light
 const pointLight = new THREE.PointLight(0xffffff, 1, 0, 2)
 scene.add(pointLight)
-
 
 // default window sizes
 const sizes = {
