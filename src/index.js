@@ -265,7 +265,6 @@ let timeStop = {
 };
 
 // user controls
-
 const userGUI = new dat.GUI({ autoPlace: false, width: 300 });
 
 const orbitFolder = userGUI.addFolder("Toggle Orbital Paths")
