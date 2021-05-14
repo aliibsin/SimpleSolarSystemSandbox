@@ -66,14 +66,12 @@ const ringMaterial = new THREE.MeshBasicMaterial({
 });
 export const saturnRing = new THREE.Mesh(ringGeometry, ringMaterial);
 
-
 //uranus
 const uranusGeometry = new THREE.SphereBufferGeometry(15.8, 128, 128);
 const uranusTexture = new THREE.TextureLoader().load("src/assets/uranus.jpg");
 const uranusMaterial = new THREE.MeshStandardMaterial({map: uranusTexture});
 
 export const uranus = new THREE.Mesh(uranusGeometry, uranusMaterial);
-
 
 //neptune
 const neptuneGeometry = new THREE.SphereBufferGeometry(15.3, 128, 128);
