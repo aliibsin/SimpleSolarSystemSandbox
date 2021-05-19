@@ -33,4 +33,13 @@ Use controls on bottom right to change time scale, planet size scale, and orbit 
 <br/>
 
 ## Technologies
-This app uses native JavaScript, three.js, HTML, and CSS.
+This app uses
+
+ * JavaScript
+ * three.js
+ * HTML and CSS
+
+## Future Considerations
+
+ * Adjustable orbit radius
+ * Ship mode
