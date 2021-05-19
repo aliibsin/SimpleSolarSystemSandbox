@@ -98,3 +98,11 @@ body {
 .music-on {
   color: aquamarine;
 }
+
+li.title {
+  font-size: 18px;
+}
+
+span.property-name {
+  font-size: 14px;
+}

@@ -53498,14 +53498,12 @@ const ringMaterial = new three__WEBPACK_IMPORTED_MODULE_0__.MeshBasicMaterial({
 });
 const saturnRing = new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(ringGeometry, ringMaterial);
 
-
 //uranus
 const uranusGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(15.8, 128, 128);
 const uranusTexture = new three__WEBPACK_IMPORTED_MODULE_0__.TextureLoader().load("src/assets/uranus.jpg");
 const uranusMaterial = new three__WEBPACK_IMPORTED_MODULE_0__.MeshStandardMaterial({map: uranusTexture});
 
 const uranus = new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(uranusGeometry, uranusMaterial);
-
 
 //neptune
 const neptuneGeometry = new three__WEBPACK_IMPORTED_MODULE_0__.SphereBufferGeometry(15.3, 128, 128);
@@ -53777,7 +53775,6 @@ uranusPath.rotation.set(1.5708, 0, 0);
 scene.add(uranusPath);
 scene.add(_planets_planets__WEBPACK_IMPORTED_MODULE_2__.uranus);
 
-
 let rNeptune = 29840;
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.position.set(rNeptune, 0, 0);
 _planets_planets__WEBPACK_IMPORTED_MODULE_2__.neptune.rotation.set(0, 0, -Math.PI * 28.5 / 180);
@@ -53848,7 +53845,6 @@ function neptunePathToggle() {
   neptunePath.visible = !neptunePath.visible
 }
 
- 
 allPathInvisible();
 
 let pathFxs = {
@@ -53875,10 +53871,7 @@ let timeStop = {
 };
 
 // user controls
-
-
-
-const userGUI = new dat_gui__WEBPACK_IMPORTED_MODULE_0__.GUI({ autoPlace: false, width: 300 });
+const userGUI = new dat_gui__WEBPACK_IMPORTED_MODULE_0__.GUI({ autoPlace: false, width: 350 });
 
 const orbitFolder = userGUI.addFolder("Toggle Orbital Paths")
 orbitFolder.add(pathFxs, "showAll").name("Show all");
@@ -53900,11 +53893,9 @@ userGUIFolder.add(userValues, "scale", 1, 20).name("Planet Size Scale");
 let userGUIContainer = document.getElementById("scale-gui");
 userGUIContainer.appendChild(userGUI.domElement)
 
-
 // sun light
 const pointLight = new three__WEBPACK_IMPORTED_MODULE_3__.PointLight(0xffffff, 1, 0, 2)
 scene.add(pointLight)
-
 
 // default window sizes
 const sizes = {
