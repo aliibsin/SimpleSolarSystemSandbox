@@ -1,38 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./src/stylesheets/reset.css" >
-  <link rel="stylesheet" href="./src/stylesheets/box.css" >
-  <title>Simple Solar System Sandbox</title>
-  <link rel="shortcut icon" type="image/jpg" href="src/assets/earth-icon.png"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/assets/earth-icon.png" />
+    <link rel="stylesheet" href="./src/stylesheets/reset.css" >
+    <link rel="stylesheet" href="./src/stylesheets/box.css" >
 
-  <meta property="og:title" content="Simple Solar System Sandbox" />
-  <meta property="og:image" content="./src/assets/opening.png" />
-  <meta
-    property="og:description"
-    content="Simple Solar System Sandbox is an 3D representation of our solar system where users can adjust planet size and time scales."
-  />
-  <meta 
-    property="og:url"
-    content="https://aliibsin.github.io/SimpleSolarSystemSandbox/"
-  />
-
+    <title>Simple Solar System Sandbox</title>
+    <style>
+        body { margin: 0; }
+    </style>
 </head>
 <body>
+  <script type="module" src="/index.js"></script>
+
   <div id="about-bg">
     <button class="about-button" id="about-button">About</button>
     <button class="music-button" id="music-button">Toggle Audio</button>
-    
   </div>
   
   <audio loop id="music">
-    <source src="src/assets/meditative-space.mp3">
+    <source src="assets/meditative-space.mp3">
   </audio>
   <div class="intro-box-modal" id="intro-box-modal">
     <div class="intro-box">
@@ -45,7 +37,7 @@
         planet scale, time scale, and orbit visibility through the controls at the bottom right. 
       </p>
       <p class="begin">
-        Please click anywhere outside this box to begin.
+        Click anywhere outside this box to begin.
       </p>
       <div>
         <a href="https://github.com/aliibsin/SimpleSolarSystemSandbox" target="_blank">
@@ -59,7 +51,5 @@
     </div>
   </div>
   <div id="scale-gui"></div>
-  <canvas class="webgl" id="ssss"></canvas>
-  <script type="application/javascript" src="./dist/main.js"></script>
-</body > 
+</body>
 </html>
