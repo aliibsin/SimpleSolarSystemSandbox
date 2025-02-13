@@ -5,7 +5,7 @@ const CAMERA_MIN = 0.1;
 const setupCamera = (renderer, cameraMax) => {
   const aspect_ratio = window.innerWidth / window.innerHeight;
   const camera = new THREE.PerspectiveCamera(75, aspect_ratio, CAMERA_MIN, cameraMax);
-  camera.position.set(0, 1000,  3000);
+  camera.position.set(0, 1000, 3000);
   // camera.rotateX(-0.785398);
   
   // resize window adjusting
