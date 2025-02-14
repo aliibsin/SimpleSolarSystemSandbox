@@ -7,7 +7,8 @@ import setupIntro from './src/util/introControl.js';
 import setupMusic from './src/util/musicControl.js';
 import setupStats from './src/util/stats.js';
 import backgroundMesh from './src/util/background.js';
-import { setupSphereBodies, moveSphereBodies } from './src/planets/setupPlanets.js';
+import { setupSun, setupPlanets, rotateSun, rotatePlanets } from './src/planets/setupBodies.js';
+import setupOrbitPaths from './src/planets/setupOrbitPaths.js';
 // import * as dat from 'dat.gui';
 
 const GLOBAL_SIZE_SCALE = 1000; // 1:1,000 global scale in km
@@ -27,11 +28,18 @@ setupMusic();
 
 scene.add(backgroundMesh(GLOBAL_BOUNDS));
 
-const sphereBodies = setupSphereBodies(GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE);
-sphereBodies.forEach((sphereBody) => scene.add(sphereBody));
+const sun = setupSun(GLOBAL_SIZE_SCALE);
+const planets = setupPlanets(10, SOLAR_SYSTEM_SIZE_SCALE);
+
+scene.add(sun);
+planets.forEach((sphereBody) => scene.add(sphereBody));
+
+const orbitPaths = setupOrbitPaths(SOLAR_SYSTEM_SIZE_SCALE);
+orbitPaths.forEach((orbitPath) => scene.add(orbitPath));
 
 let userScales = {
-  time: 3
+  time: 10,
+  size: 1
 }
 
 const fpsInterval = 1000 / TARGET_MAX_FPS;
@@ -47,7 +55,8 @@ function animate() {
     stats.begin();
     controls.update();
 
-    moveSphereBodies(sphereBodies, TARGET_MAX_FPS, userScales.time);
+    rotateSun(sun, TARGET_MAX_FPS, userScales.time);
+    rotatePlanets(planets, TARGET_MAX_FPS, userScales.time);
 
     renderer.render(scene, camera);
     stats.end();
@@ -55,5 +64,3 @@ function animate() {
 }
 
 renderer.setAnimationLoop(animate);
-
-
