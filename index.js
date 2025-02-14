@@ -7,8 +7,8 @@ import setupIntro from './src/util/introControl.js';
 import setupMusic from './src/util/musicControl.js';
 import setupStats from './src/util/stats.js';
 import backgroundMesh from './src/util/background.js';
-import { setupSun, setupPlanets, rotateSun, rotatePlanets } from './src/planets/setupBodies.js';
-import setupOrbitPaths from './src/planets/setupOrbitPaths.js';
+import { setupSun, setupPlanets } from './src/planets/setupBodies.js';
+import { rotateSun, rotatePlanet, orbitPlanet } from './src/planets/moveBodies.js';
 // import * as dat from 'dat.gui';
 
 const GLOBAL_SIZE_SCALE = 1000; // 1:1,000 global scale in km
@@ -16,6 +16,11 @@ const SOLAR_SYSTEM_SIZE_SCALE = 10_000; // 1:10,000 solar system scale in km
 const BOUNDS = 300_000_000_000; // Oort cloud starts ~299,195,741,382 km from the sun
 const GLOBAL_BOUNDS = BOUNDS / SOLAR_SYSTEM_SIZE_SCALE;
 const TARGET_MAX_FPS = 60;
+
+let userScales = {
+  time: 50,
+  size: 100
+}
 
 const renderer = setupRenderer();
 const camera = setupCamera(renderer, GLOBAL_BOUNDS);
@@ -29,34 +34,32 @@ setupMusic();
 scene.add(backgroundMesh(GLOBAL_BOUNDS));
 
 const sun = setupSun(GLOBAL_SIZE_SCALE);
-const planets = setupPlanets(10, SOLAR_SYSTEM_SIZE_SCALE);
+const planets = setupPlanets(GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userScales.size);
 
 scene.add(sun);
-planets.forEach((sphereBody) => scene.add(sphereBody));
-
-const orbitPaths = setupOrbitPaths(SOLAR_SYSTEM_SIZE_SCALE);
-orbitPaths.forEach((orbitPath) => scene.add(orbitPath));
-
-let userScales = {
-  time: 10,
-  size: 1
-}
+Object.values(planets).forEach((planet) => {
+  scene.add(planet.planetBody);
+  scene.add(planet.orbitPath);
+});
 
 const fpsInterval = 1000 / TARGET_MAX_FPS;
-let then = Date.now();
+let then = 0;
 
-function animate() {
-  const now = Date.now();
-  const elapsed = now - then;
+function animate(time) {
+  const elapsed = time - then;
 
   if (elapsed > fpsInterval) {
-    then = now - (elapsed % fpsInterval);
+    then = time - (elapsed % fpsInterval);
 
     stats.begin();
     controls.update();
 
     rotateSun(sun, TARGET_MAX_FPS, userScales.time);
-    rotatePlanets(planets, TARGET_MAX_FPS, userScales.time);
+
+    Object.values(planets).forEach((planet) => {
+      rotatePlanet(planet.planetBody, TARGET_MAX_FPS, userScales.time);
+      orbitPlanet(planet.planetBody, TARGET_MAX_FPS, userScales.time, SOLAR_SYSTEM_SIZE_SCALE);
+    });
 
     renderer.render(scene, camera);
     stats.end();

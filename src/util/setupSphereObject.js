@@ -13,7 +13,9 @@ const setupSphereObject = (sphereRadius, textureName, side = undefined) => {
   };
 
   const material = new THREE.MeshBasicMaterial(materialOptions);
-  return new THREE.Mesh(sphereGeometry, material);
+  const body = new THREE.Mesh(sphereGeometry, material);
+  body.name = textureName;
+  return body;
 };
 
 export default setupSphereObject;
