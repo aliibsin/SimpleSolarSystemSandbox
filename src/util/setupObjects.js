@@ -8,6 +8,7 @@ const ORBIT_SEGMENTS = 128;
 export const setupSphereObject = (sphereRadius, textureName, side = THREE.FrontSide) => {
   const sphereGeometry = new THREE.SphereGeometry(sphereRadius, SPHERE_WIDTH_DIVISIONS, SPHERE_HEIGHT_DIVISIONS);
   const texture = new THREE.TextureLoader().load(`assets/${textureName}.jpg`);
+  texture.colorSpace = THREE.SRGBColorSpace;
 
   const materialOptions = { map: texture };
   if (side) {

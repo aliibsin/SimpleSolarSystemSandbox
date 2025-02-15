@@ -8,6 +8,7 @@ export const setupSun = (sizeScale) => {
   const { radius } = sunProperties;
   const sphereGeometry = new THREE.SphereGeometry(radius / sizeScale, 128, 128);
   const texture = new THREE.TextureLoader().load('assets/sun.jpg');
+  texture.colorSpace = THREE.SRGBColorSpace;
 
   const material = new THREE.MeshBasicMaterial({ map: texture });
   const body = new THREE.Mesh(sphereGeometry, material);
