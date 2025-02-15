@@ -18,7 +18,7 @@ const GLOBAL_BOUNDS = BOUNDS / SOLAR_SYSTEM_SIZE_SCALE;
 const TARGET_MAX_FPS = 60;
 
 let userScales = {
-  time: 1,
+  time: 5,
   size: 100
 }
 
@@ -43,8 +43,13 @@ Object.values(planets).forEach((planet) => {
 
   if (planet.ringBody) {
     scene.add(planet.ringBody);
-  }
+  };
 });
+
+const pointLight = new THREE.PointLight(0xffffff, 0.9, 0, 0);
+pointLight.position.set(0, 0, 0);
+pointLight.castShadow = true;
+scene.add(pointLight);
 
 const fpsInterval = 1000 / TARGET_MAX_FPS;
 let then = 0;

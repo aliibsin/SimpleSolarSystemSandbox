@@ -1,11 +1,11 @@
 import * as THREE from 'three';
 
-const SPHERE_WIDTH_DIVISIONS = 32;
-const SPHERE_HEIGHT_DIVISIONS = 16;
+const SPHERE_WIDTH_DIVISIONS = 128;
+const SPHERE_HEIGHT_DIVISIONS = 128;
 const RING_THETA_SEGMENTS = 128;
 const ORBIT_SEGMENTS = 128;
 
-export const setupSphereObject = (sphereRadius, textureName, side = undefined) => {
+export const setupSphereObject = (sphereRadius, textureName, side = THREE.FrontSide) => {
   const sphereGeometry = new THREE.SphereGeometry(sphereRadius, SPHERE_WIDTH_DIVISIONS, SPHERE_HEIGHT_DIVISIONS);
   const texture = new THREE.TextureLoader().load(`assets/${textureName}.jpg`);
 
@@ -14,7 +14,7 @@ export const setupSphereObject = (sphereRadius, textureName, side = undefined) =
     materialOptions.side = side;
   };
 
-  const material = new THREE.MeshBasicMaterial(materialOptions);
+  const material = new THREE.MeshStandardMaterial(materialOptions);
   const body = new THREE.Mesh(sphereGeometry, material);
   body.name = textureName;
   return body;
@@ -33,7 +33,7 @@ export const setupRingObject = (innerRadius, outerRadius, textureName) => {
   }
   
   const ringTexture = new THREE.TextureLoader().load(`assets/${textureName}.png`);
-  const material = new THREE.MeshBasicMaterial({ map: ringTexture, side: THREE.DoubleSide, transparent: true });
+  const material = new THREE.MeshStandardMaterial({ map: ringTexture, side: THREE.DoubleSide, transparent: true, opacity: 0.8, depthWrite: false });
   const ring = new THREE.Mesh(ringGeometry, material);
   ring.name = textureName;
 

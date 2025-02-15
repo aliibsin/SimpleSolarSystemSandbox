@@ -1,10 +1,17 @@
+import * as THREE from 'three';
 import { setupSphereObject, setupRingObject, setupOrbitPathObject } from '../util/setupObjects.js';
 import { sunProperties, planetProperties, ringProperties } from './bodies.js';;
 
-//planet textures from https://www.solarsystemscope.com/textures/
+// Planet textures from https://www.solarsystemscope.com/textures/
 
 export const setupSun = (sizeScale) => {
-  return positionSphereBody('sun', sunProperties, sizeScale, 1, 1);
+  const { radius } = sunProperties;
+  const sphereGeometry = new THREE.SphereGeometry(radius / sizeScale, 128, 128);
+  const texture = new THREE.TextureLoader().load('assets/sun.jpg');
+
+  const material = new THREE.MeshBasicMaterial({ map: texture });
+  const body = new THREE.Mesh(sphereGeometry, material);
+  return body;
 };
 
 export const setupPlanets = (sizeScale, solarSystemScale, userPlanetScale) => {
@@ -13,12 +20,17 @@ export const setupPlanets = (sizeScale, solarSystemScale, userPlanetScale) => {
   Object.entries(planetProperties).map(([name, properties]) => {
     const sphereBody = positionSphereBody(name, properties, sizeScale, userPlanetScale, solarSystemScale);
     const orbitPath = setupOrbitPathObject(properties, solarSystemScale);
+    sphereBody.castShadow = true;
+    sphereBody.receiveShadow = true;
     sphereBody.userData = { angle: 0 };
 
     objects[name] = { sphereBody, orbitPath };
 
     if (name in ringProperties) {
-      objects[name]['ringBody'] = positionRingBody(name, ringProperties[name], sizeScale, userPlanetScale, solarSystemScale);
+      const ringBody = positionRingBody(name, ringProperties[name], sizeScale, userPlanetScale, solarSystemScale);
+      ringBody.castShadow = true;
+      ringBody.receiveShadow = true;
+      objects[name]['ringBody'] = ringBody;
     }
   });
 
