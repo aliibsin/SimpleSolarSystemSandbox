@@ -17,19 +17,24 @@ const rotateSphereBodies = (body, targetFps, timeScale, properties) => {
   body.rotateY(radiansPerFrame * rotationDirection * timeScale);
 };
 
-export const orbitPlanet = (planet, targetFps, timeScale, solarSystemScale) => {
-  const { semiMajorAxis, semiMinorAxis, orbitHours, orbitInclination } = planetProperties[planet.name];
+export const orbitBody = (system, targetFps, timeScale, solarSystemScale) => {
+  const { planetBody, ringBody } = system;
+  const { semiMajorAxis, semiMinorAxis, orbitHours, orbitInclination } = planetProperties[planetBody.name];
 
   const radiansPerFrame = (2 * Math.PI) / ((orbitHours / timeScale) * targetFps);
   
-  planet.userData.angle += radiansPerFrame * timeScale;
+  planetBody.userData.angle += radiansPerFrame * timeScale;
 
-  const x = (semiMinorAxis / solarSystemScale) * Math.sin(planet.userData.angle);
-  const z = (semiMajorAxis / solarSystemScale) * Math.cos(planet.userData.angle);
+  const x = (semiMinorAxis / solarSystemScale) * Math.sin(planetBody.userData.angle);
+  const z = (semiMajorAxis / solarSystemScale) * Math.cos(planetBody.userData.angle);
 
   const y = x * Math.sin(orbitInclination * Math.PI / 180);
   const xInclined = x * Math.cos(orbitInclination * Math.PI / 180);
   const zInclined = z * Math.cos(orbitInclination * Math.PI / 180);
 
-  planet.position.set(xInclined, -y, zInclined);
+  planetBody.position.set(xInclined, -y, zInclined);
+
+  if (ringBody) {
+    ringBody.position.set(xInclined, -y, zInclined);
+  }
 }

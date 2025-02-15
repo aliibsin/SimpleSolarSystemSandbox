@@ -8,7 +8,7 @@ import setupMusic from './src/util/musicControl.js';
 import setupStats from './src/util/stats.js';
 import backgroundMesh from './src/util/background.js';
 import { setupSun, setupPlanets } from './src/planets/setupBodies.js';
-import { rotateSun, rotatePlanet, orbitPlanet } from './src/planets/moveBodies.js';
+import { rotateSun, rotatePlanet, orbitBody } from './src/planets/moveBodies.js';
 // import * as dat from 'dat.gui';
 
 const GLOBAL_SIZE_SCALE = 1000; // 1:1,000 global scale in km
@@ -18,7 +18,7 @@ const GLOBAL_BOUNDS = BOUNDS / SOLAR_SYSTEM_SIZE_SCALE;
 const TARGET_MAX_FPS = 60;
 
 let userScales = {
-  time: 50,
+  time: 10,
   size: 100
 }
 
@@ -40,6 +40,10 @@ scene.add(sun);
 Object.values(planets).forEach((planet) => {
   scene.add(planet.planetBody);
   scene.add(planet.orbitPath);
+
+  if (planet.ringBody) {
+    scene.add(planet.ringBody);
+  }
 });
 
 const fpsInterval = 1000 / TARGET_MAX_FPS;
@@ -58,7 +62,7 @@ function animate(time) {
 
     Object.values(planets).forEach((planet) => {
       rotatePlanet(planet.planetBody, TARGET_MAX_FPS, userScales.time);
-      orbitPlanet(planet.planetBody, TARGET_MAX_FPS, userScales.time, SOLAR_SYSTEM_SIZE_SCALE);
+      orbitBody(planet, TARGET_MAX_FPS, userScales.time, SOLAR_SYSTEM_SIZE_SCALE);
     });
 
     renderer.render(scene, camera);
