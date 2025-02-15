@@ -116,6 +116,7 @@ export const ringProperties = {
   saturn: {
     innerRadius: 66_900,
     outerRadius: 136_780,
-    initialPosition: 1_432_041_000
+    initialPosition: 1_432_041_000,
+    inclination: 26.73
   }
 };

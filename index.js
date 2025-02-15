@@ -18,7 +18,7 @@ const GLOBAL_BOUNDS = BOUNDS / SOLAR_SYSTEM_SIZE_SCALE;
 const TARGET_MAX_FPS = 60;
 
 let userScales = {
-  time: 10,
+  time: 1,
   size: 100
 }
 
@@ -38,7 +38,7 @@ const planets = setupPlanets(GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userSca
 
 scene.add(sun);
 Object.values(planets).forEach((planet) => {
-  scene.add(planet.planetBody);
+  scene.add(planet.sphereBody);
   scene.add(planet.orbitPath);
 
   if (planet.ringBody) {
@@ -61,7 +61,7 @@ function animate(time) {
     rotateSun(sun, TARGET_MAX_FPS, userScales.time);
 
     Object.values(planets).forEach((planet) => {
-      rotatePlanet(planet.planetBody, TARGET_MAX_FPS, userScales.time);
+      rotatePlanet(planet, TARGET_MAX_FPS, userScales.time);
       orbitBody(planet, TARGET_MAX_FPS, userScales.time, SOLAR_SYSTEM_SIZE_SCALE);
     });
 
