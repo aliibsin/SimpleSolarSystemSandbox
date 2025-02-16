@@ -10,7 +10,7 @@ export const setupSun = (sizeScale) => {
   const texture = new THREE.TextureLoader().load('assets/sun.jpg');
   texture.colorSpace = THREE.SRGBColorSpace;
 
-  const material = new THREE.MeshBasicMaterial({ map: texture });
+  const material = new THREE.MeshBasicMaterial({ map: texture, toneMapped: false });
   const body = new THREE.Mesh(sphereGeometry, material);
   return body;
 };
@@ -42,7 +42,7 @@ const positionSphereBody = (name, properties, sizeScale, userPlanetScale, solarS
   const { radius, semiMajorAxis, equatorInclination } = properties;
   const sphereBody = setupSphereObject((radius / sizeScale) * userPlanetScale, name);
   sphereBody.position.set(0, 0, semiMajorAxis / solarSystemScale);
-  sphereBody.rotateX(equatorInclination * Math.PI / 180);
+  sphereBody.rotateX(-equatorInclination * Math.PI / 180);
 
   return sphereBody;
 };
@@ -57,6 +57,6 @@ const positionRingBody = (name, properties, sizeScale, userPlanetScale, solarSys
 
   ringBody.position.set(0, 0, initialPosition / solarSystemScale);
   ringBody.rotateX(Math.PI / 2);
-  ringBody.rotateX(inclination * Math.PI / 180);
+  ringBody.rotateX(-inclination * Math.PI / 180);
   return ringBody;
 };

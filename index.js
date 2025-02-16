@@ -1,5 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 import setupRenderer from './src/util/renderer.js';
 import setupCamera from './src/util/cameraControl.js';
@@ -46,13 +50,25 @@ Object.values(planets).forEach((planet) => {
   };
 });
 
-const pointLight = new THREE.PointLight(0xffffff, 0.9, 0, 0);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.02);
+scene.add( ambientLight );
+
+const pointLight = new THREE.PointLight(0xffffff, 0.9, 0, 0.03);
 pointLight.position.set(0, 0, 0);
 pointLight.castShadow = true;
 scene.add(pointLight);
 
 const fpsInterval = 1000 / TARGET_MAX_FPS;
 let then = 0;
+
+const renderScene = new RenderPass( scene, camera );
+const bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), .8, 1, .5);
+const outputPass = new OutputPass();
+
+const composer = new EffectComposer( renderer );
+composer.addPass( renderScene );
+composer.addPass( bloomPass );
+composer.addPass( outputPass );
 
 function animate(time) {
   const elapsed = time - then;
@@ -70,7 +86,7 @@ function animate(time) {
       orbitBody(planet, TARGET_MAX_FPS, userScales.time, SOLAR_SYSTEM_SIZE_SCALE);
     });
 
-    renderer.render(scene, camera);
+    composer.render();
     stats.end();
   }
 }

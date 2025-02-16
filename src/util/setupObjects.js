@@ -52,7 +52,7 @@ export const setupOrbitPathObject = (properties, solarSystemScale) => {
   geometry.rotateX(Math.PI / 2);
   geometry.rotateZ(-orbitInclination * Math.PI / 180);
 
-  const material = new THREE.LineBasicMaterial({ color: 0xffffff });
+  const material = new THREE.LineBasicMaterial({ transparent: true, opacity: 0.1, color: 0xffffff });
   const ellipse = new THREE.Line(geometry, material);
 
   return ellipse;
