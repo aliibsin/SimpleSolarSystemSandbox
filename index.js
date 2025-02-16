@@ -1,21 +1,18 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
-import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 import { ViewportGizmo } from "three-viewport-gizmo";
 
 import setupRenderer from './src/util/renderer.js';
 import setupCamera from './src/util/cameraControl.js';
+import setupBloomComposer from './src/util/postProcessing.js';
 import setupIntro from './src/util/introControl.js';
 import setupMusic from './src/util/musicControl.js';
 import setupStats from './src/util/stats.js';
+import setupGui from './src/util/gui.js';
 import backgroundMesh from './src/util/background.js';
+import { addAmbientLight, addSunLight } from './src/util/lights.js';
 import { setupSun, setupPlanets } from './src/planets/setupBodies.js';
 import { rotateSun, rotatePlanet, orbitBody } from './src/planets/moveBodies.js';
-import humanize from './src/util/humanizeString.js';
 
 const GLOBAL_SIZE_SCALE = 1_000; // 1:1,000 global scale in km
 const SOLAR_SYSTEM_SIZE_SCALE = 10_000; // 1:10,000 solar system scale in km
@@ -25,6 +22,7 @@ const TARGET_MAX_FPS = 60;
 
 let userState = {
   intro: true,
+  timePause: false,
   time: 1,
   size: 5
 }
@@ -35,7 +33,6 @@ const controls = new OrbitControls(camera, renderer.domElement);
 const gizmo = new ViewportGizmo(camera, renderer, { placement: 'bottom-right' });
 const stats = setupStats();
 const scene = new THREE.Scene();
-const gui = new GUI();
 
 setupIntro(userState);
 setupMusic();
@@ -44,82 +41,26 @@ gizmo.attachControls(controls);
 scene.add(backgroundMesh(GLOBAL_BOUNDS));
 
 const sun = setupSun(GLOBAL_SIZE_SCALE);
-const planets = setupPlanets(GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
-
 scene.add(sun);
 
-const orbitPaths = gui.addFolder('Toggle Orbit Paths').close();
-
-const showAllPaths = () => {
-  Object.values(planets).forEach((planet) => {
-    planet.orbitPath.visible = true;
-  });
-}
-
-const hideAllPaths = () => {
-  Object.values(planets).forEach((planet) => {
-    planet.orbitPath.visible = false;
-  });
-}
-
-const togglePaths = {
-  showAll: showAllPaths,
-  hideAll: hideAllPaths
-}
-
-const togglePath = (planet) => {
-  planet.orbitPath.visible = !planet.orbitPath.visible;
-}
-
+const planets = setupPlanets(GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
 Object.values(planets).forEach((planet) => {
   scene.add(planet.sphereBody);
   scene.add(planet.orbitPath);
-
-  togglePaths[planet.sphereBody.name] = () => togglePath(planet);
-  orbitPaths.add(togglePaths, planet.sphereBody.name).name(humanize(planet.sphereBody.name));
 
   if (planet.ringBody) {
     scene.add(planet.ringBody);
   };
 });
 
-orbitPaths.add(togglePaths, 'showAll').name('Show All');
-orbitPaths.add(togglePaths, 'hideAll').name('Hide All');
+setupGui(planets, userState);
+addAmbientLight(scene);
+addSunLight(scene);
 
-let timePause = false;
-
-const toggleTime = () => {
-  timePause = !timePause;
-};
-
-let timeStop = {
-  toggle: toggleTime
-};
-
-const scaleFolder = gui.addFolder('Scale Controls').close();
-scaleFolder.add(timeStop, "toggle").name("Pause/Resume Time");
-scaleFolder.add(userState, "time", 1, 50, 1).name("Time Scale");
-scaleFolder.add(userState, "size", 1, 100, 1).name("Planet Size Scale");
-
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.02);
-scene.add( ambientLight );
-
-const pointLight = new THREE.PointLight(0xffffff, 0.9, 0, 0.03);
-pointLight.position.set(0, 0, 0);
-pointLight.castShadow = true;
-scene.add(pointLight);
+const bloomComposer = setupBloomComposer(renderer, scene, camera);
 
 const fpsInterval = 1000 / TARGET_MAX_FPS;
 let then = 0;
-
-const renderScene = new RenderPass( scene, camera );
-const bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), .8, 1, .5);
-const outputPass = new OutputPass();
-
-const composer = new EffectComposer( renderer );
-composer.addPass( renderScene );
-composer.addPass( bloomPass );
-composer.addPass( outputPass );
 
 // resize window adjusting
 window.addEventListener('resize', () => {
@@ -146,7 +87,7 @@ function animate(time) {
     stats.begin();
     controls.update();
 
-    if (!timePause) {
+    if (!userState.timePause) {
       rotateSun(sun, TARGET_MAX_FPS, userState.time);
 
       Object.values(planets).forEach((planet) => {
@@ -169,7 +110,7 @@ function animate(time) {
       camera.position.copy(objectPosition).add(cameraOffset);
     }
 
-    composer.render();
+    bloomComposer.render();
     gizmo.render();
     stats.end();
   }

@@ -2,21 +2,13 @@
 
 export const sunProperties = {
   radius: 695_700,
-  rotationSeconds: 2_192_832,
   rotationHours: 609.1,
-  rotationDirection: 1,
-  orbitHours: 0,
-  eccentricity: 0,
-  semiMajorAxis: 0,
-  semiMinorAxis: 0,
-  orbitInclination: 0,
-  equatorInclination: 0
+  rotationDirection: 1
 }
 
 export const planetProperties = {
   mercury: {
     radius: 2_440,
-    rotationSeconds: 5_067_360,
     rotationHours: 1407.6,
     rotationDirection: 1,
     orbitHours: 2_111.26,
@@ -28,7 +20,6 @@ export const planetProperties = {
   },
   venus: {
     radius: 6_052,
-    rotationSeconds: 20_997_360,
     rotationHours: 5832.6,
     rotationDirection: -1,
     orbitHours: 5_392.82,
@@ -40,7 +31,6 @@ export const planetProperties = {
   },
   earth: {
     radius: 6_371,
-    rotationSeconds: 86_164,
     rotationHours: 23.9345,
     rotationDirection: 1,
     orbitHours: 8_766.14,
@@ -52,7 +42,6 @@ export const planetProperties = {
   },
   mars: {
     radius: 3_390,
-    rotationSeconds: 88_642,
     rotationHours: 24.6229,
     rotationDirection: 1,
     orbitHours: 16_487.52,
@@ -64,7 +53,6 @@ export const planetProperties = {
   },
   jupiter: {
     radius: 69_911,
-    rotationSeconds: 35_730,
     rotationHours: 9.925,
     rotationDirection: 1,
     orbitHours: 103_982.14,
@@ -76,7 +64,6 @@ export const planetProperties = {
   },
   saturn: {
     radius: 58_232,
-    rotationSeconds: 38_362,
     rotationHours: 10.6561,
     rotationDirection: 1,
     orbitHours: 258_136.78,
@@ -88,7 +75,6 @@ export const planetProperties = {
   },
   uranus: {
     radius: 25_362,
-    rotationSeconds: 62_064,
     rotationHours: 17.2401,
     rotationDirection: 1,
     orbitHours: 736_449.60,
@@ -100,7 +86,6 @@ export const planetProperties = {
   },
   neptune: {
     radius: 24_622,
-    rotationSeconds: 57_996,
     rotationHours: 16.11,
     rotationDirection: 1,
     orbitHours: 1_444_536.43,
