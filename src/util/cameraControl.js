@@ -8,18 +8,6 @@ const setupCamera = (renderer, cameraMax) => {
   // camera.position.set(1000, 1000, 161204.1);
   camera.position.set(0, 1000, -5000);
   // camera.rotateX(-0.785398);
-  
-  // resize window adjusting
-  window.addEventListener('resize', () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-  
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-  
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio);
-  });
 
   return camera;
 }

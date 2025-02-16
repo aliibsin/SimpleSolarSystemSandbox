@@ -5,6 +5,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+import { ViewportGizmo } from "three-viewport-gizmo";
 
 import setupRenderer from './src/util/renderer.js';
 import setupCamera from './src/util/cameraControl.js';
@@ -30,12 +31,14 @@ let userScales = {
 const renderer = setupRenderer();
 const camera = setupCamera(renderer, GLOBAL_BOUNDS);
 const controls = new OrbitControls(camera, renderer.domElement);
+const gizmo = new ViewportGizmo(camera, renderer, { placement: 'bottom-right' });
 const stats = setupStats();
 const scene = new THREE.Scene();
 const gui = new GUI();
 
 setupIntro();
 setupMusic();
+gizmo.attachControls(controls);
 
 scene.add(backgroundMesh(GLOBAL_BOUNDS));
 
@@ -117,6 +120,19 @@ composer.addPass( renderScene );
 composer.addPass( bloomPass );
 composer.addPass( outputPass );
 
+// resize window adjusting
+window.addEventListener('resize', () => {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  gizmo.update();
+});
+
 function animate(time) {
   const elapsed = time - then;
 
@@ -144,6 +160,7 @@ function animate(time) {
     });
 
     composer.render();
+    gizmo.render();
     stats.end();
   }
 }
