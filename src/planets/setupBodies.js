@@ -24,6 +24,7 @@ export const setupPlanets = (sizeScale, solarSystemScale, userPlanetScale) => {
     sphereBody.castShadow = true;
     sphereBody.receiveShadow = true;
     sphereBody.userData = { angle: 0 };
+    orbitPath.visible = false;
 
     objects[name] = { sphereBody, orbitPath };
 
