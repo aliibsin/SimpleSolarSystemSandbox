@@ -23,27 +23,28 @@ const BOUNDS = 300_000_000_000; // Oort cloud starts ~299,195,741,382 km from th
 const GLOBAL_BOUNDS = BOUNDS / SOLAR_SYSTEM_SIZE_SCALE;
 const TARGET_MAX_FPS = 60;
 
-let userScales = {
+let userState = {
+  intro: true,
   time: 1,
-  size: 1
+  size: 5
 }
 
 const renderer = setupRenderer();
-const camera = setupCamera(renderer, GLOBAL_BOUNDS);
+const camera = setupCamera(GLOBAL_BOUNDS);
 const controls = new OrbitControls(camera, renderer.domElement);
 const gizmo = new ViewportGizmo(camera, renderer, { placement: 'bottom-right' });
 const stats = setupStats();
 const scene = new THREE.Scene();
 const gui = new GUI();
 
-setupIntro();
+setupIntro(userState);
 setupMusic();
 gizmo.attachControls(controls);
 
 scene.add(backgroundMesh(GLOBAL_BOUNDS));
 
 const sun = setupSun(GLOBAL_SIZE_SCALE);
-const planets = setupPlanets(GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userScales.size);
+const planets = setupPlanets(GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
 
 scene.add(sun);
 
@@ -97,8 +98,8 @@ let timeStop = {
 
 const scaleFolder = gui.addFolder('Scale Controls').close();
 scaleFolder.add(timeStop, "toggle").name("Pause/Resume Time");
-scaleFolder.add(userScales, "time", 1, 50, 1).name("Time Scale");
-scaleFolder.add(userScales, "size", 1, 100, 1).name("Planet Size Scale");
+scaleFolder.add(userState, "time", 1, 50, 1).name("Time Scale");
+scaleFolder.add(userState, "size", 1, 100, 1).name("Planet Size Scale");
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.02);
 scene.add( ambientLight );
@@ -133,6 +134,9 @@ window.addEventListener('resize', () => {
   gizmo.update();
 });
 
+const earth = planets['earth'].sphereBody
+const cameraOffset = new THREE.Vector3(500.0, 0.0, 300.0);
+
 function animate(time) {
   const elapsed = time - then;
 
@@ -143,21 +147,27 @@ function animate(time) {
     controls.update();
 
     if (!timePause) {
-      rotateSun(sun, TARGET_MAX_FPS, userScales.time);
+      rotateSun(sun, TARGET_MAX_FPS, userState.time);
 
       Object.values(planets).forEach((planet) => {
-        rotatePlanet(planet, TARGET_MAX_FPS, userScales.time);
-        orbitBody(planet, TARGET_MAX_FPS, userScales.time, SOLAR_SYSTEM_SIZE_SCALE);
+        rotatePlanet(planet, TARGET_MAX_FPS, userState.time);
+        orbitBody(planet, TARGET_MAX_FPS, userState.time, SOLAR_SYSTEM_SIZE_SCALE);
       });
     }
 
     Object.values(planets).forEach((planet) => {
-      planet.sphereBody.scale.set(userScales.size, userScales.size, userScales.size);
+      planet.sphereBody.scale.set(userState.size, userState.size, userState.size);
 
       if (planet.ringBody) {
-        planet.ringBody.scale.set(userScales.size, userScales.size, userScales.size);
+        planet.ringBody.scale.set(userState.size, userState.size, userState.size);
       }
     });
+
+    if (userState.intro) {
+      const objectPosition = new THREE.Vector3();
+      earth.getWorldPosition(objectPosition);
+      camera.position.copy(objectPosition).add(cameraOffset);
+    }
 
     composer.render();
     gizmo.render();

@@ -1,5 +1,5 @@
-const setupIntro = () => {
-    const introModal = document.getElementById("intro-box-modal");
+const setupIntro = (userState) => {
+  const introModal = document.getElementById("intro-box-modal");
   const introButton = document.getElementById("about-button");
 
   introButton.onclick = () => {
@@ -7,8 +7,10 @@ const setupIntro = () => {
   };
 
   window.onclick = (e) => {
+    e.stopPropagation();
     if (e.target === introModal) {
       introModal.style.display = "none";
+      userState.intro = false;
     };
   };
 };
