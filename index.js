@@ -44,7 +44,7 @@ const planets = setupPlanets(GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userSca
 
 scene.add(sun);
 
-const orbitPaths = gui.addFolder('Toggle Orbit Paths');
+const orbitPaths = gui.addFolder('Toggle Orbit Paths').close();
 
 const showAllPaths = () => {
   Object.values(planets).forEach((planet) => {
@@ -92,7 +92,7 @@ let timeStop = {
   toggle: toggleTime
 };
 
-const scaleFolder = gui.addFolder('Scale Controls');
+const scaleFolder = gui.addFolder('Scale Controls').close();
 scaleFolder.add(timeStop, "toggle").name("Pause/Resume Time");
 scaleFolder.add(userScales, "time", 1, 50, 1).name("Time Scale");
 scaleFolder.add(userScales, "size", 1, 100, 1).name("Planet Size Scale");
@@ -137,6 +137,10 @@ function animate(time) {
 
     Object.values(planets).forEach((planet) => {
       planet.sphereBody.scale.set(userScales.size, userScales.size, userScales.size);
+
+      if (planet.ringBody) {
+        planet.ringBody.scale.set(userScales.size, userScales.size, userScales.size);
+      }
     });
 
     composer.render();

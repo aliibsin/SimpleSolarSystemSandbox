@@ -20,12 +20,16 @@ body {
   transform: translate(-50%, -50%);
   background-color: rgba(42, 40, 54, 0.6);
   width: 800px;
-  height: 320px;
+  height: auto;
   border: 5px double black;
   border-radius: 12px;
   font-family: 'Orbitron', sans-serif;
   color: white;
   cursor: default;
+}
+
+.intro-box-content {
+  margin: 4% 8%;
 }
 
 .intro-box h1 {
@@ -34,14 +38,32 @@ body {
   font-size: 30px;
 }
 
-#modal-text {
+.modal-text {
   margin-top: 4%;
   font-size: 16px;
   word-spacing: 6px;
-  margin: 4% 8%;
   line-height: 175%;
   text-align: justify;
   font-family: 'Oxygen', sans-serif;
+}
+
+.intro-box h2 {
+  font-size: 20px;
+  margin-top: 4%;
+  margin-bottom: 2%;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.scale-text {
+  font-size: 14px;
+  font-family: 'Oxygen', sans-serif;
+  margin-bottom: 4%;
+  text-align: center;
+}
+
+.scale-text div {
+  margin: 1% 0;
 }
 
 .begin {
@@ -49,19 +71,19 @@ body {
   margin: auto 0;
 }
 
-.intro-box div {
+.link-container {
   text-align: center;
   margin-top: 3.5%;
   font-size: 14px;
 }
 
-.intro-box div a {
+.link-container a {
   color: gray;
   text-decoration: none;
   cursor: pointer;
 }
 
-.intro-box div a:hover {
+.link-container a:hover {
   color: aquamarine;
   transition: 500ms ease;
 }
