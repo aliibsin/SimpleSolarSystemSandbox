@@ -1,6 +1,7 @@
 // Sidereal rotation used. All data from NASA's Planetary Fact Sheets.
 
 export const sunProperties = {
+  texture: 'sun.jpg',
   radius: 695_700,
   rotationHours: 609.1,
   rotationDirection: 1
@@ -8,6 +9,7 @@ export const sunProperties = {
 
 export const planetProperties = {
   mercury: {
+    texture: 'mercury.jpg',
     radius: 2_440,
     rotationHours: 1407.6,
     rotationDirection: 1,
@@ -19,6 +21,7 @@ export const planetProperties = {
     equatorInclination: 0.034
   },
   venus: {
+    texture: 'venus.jpg',
     radius: 6_052,
     rotationHours: 5832.6,
     rotationDirection: -1,
@@ -30,6 +33,7 @@ export const planetProperties = {
     equatorInclination: 2.64
   },
   earth: {
+    texture: 'earth.jpg',
     radius: 6_371,
     rotationHours: 23.9345,
     rotationDirection: 1,
@@ -41,6 +45,7 @@ export const planetProperties = {
     equatorInclination: 23.44
   },
   mars: {
+    texture: 'mars.jpg',
     radius: 3_390,
     rotationHours: 24.6229,
     rotationDirection: 1,
@@ -52,6 +57,7 @@ export const planetProperties = {
     equatorInclination: 25.19
   },
   jupiter: {
+    texture: 'jupiter.jpg',
     radius: 69_911,
     rotationHours: 9.925,
     rotationDirection: 1,
@@ -63,6 +69,7 @@ export const planetProperties = {
     equatorInclination: 3.13
   },
   saturn: {
+    texture: 'saturn.jpg',
     radius: 58_232,
     rotationHours: 10.6561,
     rotationDirection: 1,
@@ -71,9 +78,15 @@ export const planetProperties = {
     semiMajorAxis: 1_432_041_000,
     semiMinorAxis: 1_430_103_570,
     orbitInclination: 2.49,
-    equatorInclination: 26.73
+    equatorInclination: 26.73,
+    rings: {
+      texture: 'saturn_rings.png',
+      innerRadius: 66_900,
+      outerRadius: 136_780
+    }
   },
   uranus: {
+    texture: 'uranus.jpg',
     radius: 25_362,
     rotationHours: 17.2401,
     rotationDirection: 1,
@@ -85,6 +98,7 @@ export const planetProperties = {
     equatorInclination: 82.23
   },
   neptune: {
+    texture: 'neptune.jpg',
     radius: 24_622,
     rotationHours: 16.11,
     rotationDirection: 1,
@@ -94,14 +108,5 @@ export const planetProperties = {
     semiMinorAxis: 4_514_740_589,
     orbitInclination: 1.77,
     equatorInclination: 28.32
-  }
-};
-
-export const ringProperties = {
-  saturn: {
-    innerRadius: 66_900,
-    outerRadius: 136_780,
-    initialPosition: 1_432_041_000,
-    inclination: 26.73
   }
 };

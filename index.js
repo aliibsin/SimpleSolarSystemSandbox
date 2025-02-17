@@ -11,9 +11,8 @@ import setupStats from './src/util/stats.js';
 import setupGui from './src/util/gui.js';
 import addBackground from './src/util/background.js';
 import { addAmbientLight, addSunLight } from './src/util/lights.js';
-import { setupPlanets } from './src/planets/setupBodies.js';
-import { rotatePlanet, orbitBody } from './src/planets/moveBodies.js';
 import Sun from './src/objects/sun.js';
+import Planet from './src/objects/planet.js';
 
 const GLOBAL_SIZE_SCALE = 1_000; // 1:1,000 global scale in km
 const SOLAR_SYSTEM_SIZE_SCALE = 10_000; // 1:10,000 solar system scale in km
@@ -34,32 +33,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 const gizmo = new ViewportGizmo(camera, renderer, { placement: 'bottom-right' });
 const stats = setupStats();
 const scene = new THREE.Scene();
-
-setupIntro(userState);
-setupMusic();
 gizmo.attachControls(controls);
-
-addBackground(scene, GLOBAL_BOUNDS);
-const sun = new Sun(scene, GLOBAL_SIZE_SCALE);
-
-const planets = setupPlanets(GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
-Object.values(planets).forEach((planet) => {
-  scene.add(planet.sphereBody);
-  scene.add(planet.orbitPath);
-
-  if (planet.ringBody) {
-    scene.add(planet.ringBody);
-  };
-});
-
-setupGui(planets, userState);
-addAmbientLight(scene);
-addSunLight(scene);
-
-const bloomComposer = setupBloomComposer(renderer, scene, camera);
-
-const fpsInterval = 1000 / TARGET_MAX_FPS;
-let then = 0;
 
 // resize window adjusting
 window.addEventListener('resize', () => {
@@ -74,7 +48,26 @@ window.addEventListener('resize', () => {
   gizmo.update();
 });
 
-const earth = planets['earth'].sphereBody
+setupIntro(userState);
+setupMusic();
+addBackground(scene, GLOBAL_BOUNDS);
+addAmbientLight(scene);
+addSunLight(scene);
+
+const bloomComposer = setupBloomComposer(renderer, scene, camera);
+const sun = new Sun(scene, GLOBAL_SIZE_SCALE);
+
+let planets = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']
+planets = planets.map((planet) => {
+  return new Planet(scene, planet, GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
+});
+
+setupGui(planets, userState);
+
+const fpsInterval = 1000 / TARGET_MAX_FPS;
+let then = 0;
+
+const earth = planets[2]
 const cameraOffset = new THREE.Vector3(500.0, 0.0, 300.0);
 
 function animate(time) {
@@ -89,23 +82,19 @@ function animate(time) {
     if (!userState.timePause) {
       sun.rotate(userState.time, TARGET_MAX_FPS);
 
-      Object.values(planets).forEach((planet) => {
-        rotatePlanet(planet, TARGET_MAX_FPS, userState.time);
-        orbitBody(planet, TARGET_MAX_FPS, userState.time, SOLAR_SYSTEM_SIZE_SCALE);
+      planets.forEach((planet) => {
+        planet.rotate(userState.time, TARGET_MAX_FPS);
+        planet.orbit(userState.time, TARGET_MAX_FPS);
       });
-    }
+    };
 
-    Object.values(planets).forEach((planet) => {
-      planet.sphereBody.scale.set(userState.size, userState.size, userState.size);
-
-      if (planet.ringBody) {
-        planet.ringBody.scale.set(userState.size, userState.size, userState.size);
-      }
+    planets.forEach((planet) => {
+      planet.scale(userState.size);
     });
 
     if (userState.intro) {
       const objectPosition = new THREE.Vector3();
-      earth.getWorldPosition(objectPosition);
+      earth.body.getWorldPosition(objectPosition);
       camera.position.copy(objectPosition).add(cameraOffset);
     }
 

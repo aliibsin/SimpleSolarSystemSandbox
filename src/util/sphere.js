@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 class Sphere {
-  constructor(name, texturePath, radius, options, materialType = THREE.MeshStandardMaterial) {
+  constructor(name, texturePath, radius, options = {}, materialType = THREE.MeshStandardMaterial) {
     this.name = name;
     this.texturePath = texturePath;
     this.radius = radius;
@@ -17,17 +17,12 @@ class Sphere {
     this.body = this.#body();
   }
 
-  rotateBody (timescale, targetFps, rotationHours, rotationDirection) {
-    const radiansPerFrame = (2 * Math.PI) / ((rotationHours / timescale) * targetFps);
-    this.body.rotateY(radiansPerFrame * rotationDirection * timescale);
-  }
-
   #geometry () {
     return new THREE.SphereGeometry(this.radius, this.widthDivisions, this.heightDivisions);
   }
 
   #texture () {
-    const texture = new THREE.TextureLoader().load(this.texturePath);
+    const texture = new THREE.TextureLoader().load(`assets/${this.texturePath}`);
     texture.colorSpace = THREE.SRGBColorSpace;
 
     return texture;
@@ -38,9 +33,7 @@ class Sphere {
   }
 
   #body () {
-    const body = new THREE.Mesh(this.geometry, this.material);
-    body.name = this.name;
-    return body;
+    return new THREE.Mesh(this.geometry, this.material);
   }
 }
 

@@ -5,13 +5,17 @@ import { sunProperties } from './properties.js';
 
 class Sun extends Sphere {
   constructor(scene, globalScale) {
-    super('sun', 'assets/sun.jpg', sunProperties.radius / globalScale, { toneMapped: false }, THREE.MeshBasicMaterial);
+    super('sun', sunProperties.texture, sunProperties.radius / globalScale, { toneMapped: false }, THREE.MeshBasicMaterial);
+    this.properties = sunProperties;
     scene.add(this.body);
   }
 
+  // For simple one axis rotation calculations, radians per frame = 2pi / (rotation period * frames)
+
   rotate (timescale, targetFps) {
     const { rotationHours, rotationDirection } = sunProperties;
-    this.rotateBody(timescale, targetFps, rotationHours, rotationDirection);
+    const radiansPerFrame = (2 * Math.PI) / ((rotationHours / timescale) * targetFps);
+    this.body.rotateY(radiansPerFrame * rotationDirection * timescale);
   }
 }
 

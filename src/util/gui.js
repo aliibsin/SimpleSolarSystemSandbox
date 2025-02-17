@@ -11,9 +11,9 @@ const setupGui = (planets, userState) => {
     hideAll: () => hideAllPaths(planets)
   };
 
-  Object.values(planets).forEach((planet) => {
-    togglePaths[planet.sphereBody.name] = () => togglePath(planet);
-    orbitPaths.add(togglePaths, planet.sphereBody.name).name(humanize(planet.sphereBody.name));
+  planets.forEach((planet) => {
+    togglePaths[planet.name] = () => togglePath(planet);
+    orbitPaths.add(togglePaths, planet.name).name(humanize(planet.name));
   });
 
   orbitPaths.add(togglePaths, 'showAll').name('Show All');
@@ -33,13 +33,13 @@ const hideAllPaths = (planets) => {
 };
 
 const toggleAllPaths = (planets, visibility) => {
-  Object.values(planets).forEach((planet) => {
-    planet.orbitPath.visible = visibility;
+  planets.forEach((planet) => {
+    planet.orbitPath.body.visible = visibility;
   });
 };
 
 const togglePath = (planet) => {
-  planet.orbitPath.visible = !planet.orbitPath.visible;
+  planet.orbitPath.body.visible = !planet.orbitPath.body.visible;
 }
 
 const toggleTimePause = (userState) => {
