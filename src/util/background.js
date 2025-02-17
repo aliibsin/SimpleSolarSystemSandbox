@@ -1,8 +1,9 @@
 import * as THREE from 'three';
-import { setupSphereObject } from './setupObjects';
+import Sphere from './sphere';
 
-const backgroundMesh = (sphereRadius) => {
-  return setupSphereObject(sphereRadius, 'stars_milky_way', THREE.BackSide);
+const addBackground = (scene, boundRadius) => {
+  const background = new Sphere('background', 'assets/stars_milky_way.jpg', boundRadius, { side: THREE.BackSide });
+  scene.add(background.body);
 };
 
-export default backgroundMesh;
+export default addBackground;

@@ -9,10 +9,11 @@ import setupIntro from './src/util/introControl.js';
 import setupMusic from './src/util/musicControl.js';
 import setupStats from './src/util/stats.js';
 import setupGui from './src/util/gui.js';
-import backgroundMesh from './src/util/background.js';
+import addBackground from './src/util/background.js';
 import { addAmbientLight, addSunLight } from './src/util/lights.js';
-import { setupSun, setupPlanets } from './src/planets/setupBodies.js';
-import { rotateSun, rotatePlanet, orbitBody } from './src/planets/moveBodies.js';
+import { setupPlanets } from './src/planets/setupBodies.js';
+import { rotatePlanet, orbitBody } from './src/planets/moveBodies.js';
+import Sun from './src/objects/sun.js';
 
 const GLOBAL_SIZE_SCALE = 1_000; // 1:1,000 global scale in km
 const SOLAR_SYSTEM_SIZE_SCALE = 10_000; // 1:10,000 solar system scale in km
@@ -38,10 +39,8 @@ setupIntro(userState);
 setupMusic();
 gizmo.attachControls(controls);
 
-scene.add(backgroundMesh(GLOBAL_BOUNDS));
-
-const sun = setupSun(GLOBAL_SIZE_SCALE);
-scene.add(sun);
+addBackground(scene, GLOBAL_BOUNDS);
+const sun = new Sun(scene, GLOBAL_SIZE_SCALE);
 
 const planets = setupPlanets(GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
 Object.values(planets).forEach((planet) => {
@@ -88,7 +87,7 @@ function animate(time) {
     controls.update();
 
     if (!userState.timePause) {
-      rotateSun(sun, TARGET_MAX_FPS, userState.time);
+      sun.rotate(userState.time, TARGET_MAX_FPS);
 
       Object.values(planets).forEach((planet) => {
         rotatePlanet(planet, TARGET_MAX_FPS, userState.time);

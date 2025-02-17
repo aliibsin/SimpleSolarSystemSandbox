@@ -1,8 +1,4 @@
-import { sunProperties, planetProperties } from './bodies.js';;
-
-export const rotateSun = (sun, targetFps, timeScale) => {
-  rotateBody({ sphereBody: sun }, targetFps, timeScale, sunProperties);
-}
+import { planetProperties } from '../objects/properties.js';;
 
 export const rotatePlanet = (system, targetFps, timeScale) => {
   rotateBody(system, targetFps, timeScale, planetProperties[system.sphereBody.name]);

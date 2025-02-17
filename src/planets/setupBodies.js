@@ -1,19 +1,8 @@
 import * as THREE from 'three';
 import { setupSphereObject, setupRingObject, setupOrbitPathObject } from '../util/setupObjects.js';
-import { sunProperties, planetProperties, ringProperties } from './bodies.js';;
+import { planetProperties, ringProperties } from '../objects/properties.js';;
 
 // Planet textures from https://www.solarsystemscope.com/textures/
-
-export const setupSun = (sizeScale) => {
-  const { radius } = sunProperties;
-  const sphereGeometry = new THREE.SphereGeometry(radius / sizeScale, 128, 128);
-  const texture = new THREE.TextureLoader().load('assets/sun.jpg');
-  texture.colorSpace = THREE.SRGBColorSpace;
-
-  const material = new THREE.MeshBasicMaterial({ map: texture, toneMapped: false });
-  const body = new THREE.Mesh(sphereGeometry, material);
-  return body;
-};
 
 export const setupPlanets = (sizeScale, solarSystemScale, userPlanetScale) => {
   const objects = {};
