@@ -1,65 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./src/stylesheets/reset.css" >
-  <link rel="stylesheet" href="./src/stylesheets/box.css" >
-  <title>Simple Solar System Sandbox</title>
-  <link rel="shortcut icon" type="image/jpg" href="src/assets/earth-icon.png"/>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap" rel="stylesheet">
+      <link rel="icon" type="image/svg+xml" href="/assets/earth-icon.png" />
+      <link rel="stylesheet" href="./src/stylesheets/reset.css" >
+      <link rel="stylesheet" href="./src/stylesheets/index.css" >
 
-  <meta property="og:title" content="Simple Solar System Sandbox" />
-  <meta property="og:image" content="./src/assets/opening.png" />
-  <meta
-    property="og:description"
-    content="Simple Solar System Sandbox is an 3D representation of our solar system where users can adjust planet size and time scales."
-  />
-  <meta 
-    property="og:url"
-    content="https://aliibsin.github.io/SimpleSolarSystemSandbox/"
-  />
-
-</head>
-<body>
-  <div id="about-bg">
-    <button class="about-button" id="about-button">About</button>
-    <button class="music-button" id="music-button">Toggle Audio</button>
-    
-  </div>
-  
-  <audio loop id="music">
-    <source src="src/assets/meditative-space.mp3">
-  </audio>
-  <div class="intro-box-modal" id="intro-box-modal">
-    <div class="intro-box">
-      <h1>
-        Simple Solar System Sandbox
-      </h1>
-      <p id="modal-text">
-        This is simple sandbox of our solar system featuring the sun and the main 8 planets.
-        Click and drag the mouse to rotate. Use the mouse wheel to zoom. Control the 
-        planet scale, time scale, and orbit visibility through the controls at the bottom right. 
-      </p>
-      <p class="begin">
-        Please click anywhere outside this box to begin.
-      </p>
-      <div>
-        <a href="https://github.com/aliibsin/SimpleSolarSystemSandbox" target="_blank">
-          Github
-        </a>
-        &nbsp;|&nbsp;
-        <a href="https://www.linkedin.com/in/ali-ibsin-1b9732132" target="_blank">
-          Linkedin
-        </a>
+      <title>Simple Solar System Sandbox</title>
+      <style>
+        body { margin: 0; }
+      </style>
+  </head>
+  <body>
+    <div id="about-bg">
+      <button class="about-button" id="about-button">About</button>
+      <button class="music-button" id="music-button">Toggle Audio</button>
+    </div>
+    <audio loop id="music">
+      <source src="assets/meditative-space.mp3">
+    </audio>
+    <div class="intro-box-modal" id="intro-box-modal">
+      <div class="intro-box">
+        <div class="intro-box-content">
+          <h1>
+            Simple Solar System Sandbox
+          </h1>
+          <p class="modal-text">
+            This is simple sandbox of our solar system featuring the sun and the main 8 planets.
+            Click and drag the mouse to rotate. Use the mouse wheel to zoom. Control the 
+            planet scale, time scale, and orbit visibility through the controls at the top right.
+          </p>
+          <h2>
+            Scales (km, s)
+          </h2>
+          <div class="scale-text">
+            <div>Solar System Size: 1/10,000</div>
+            <div>Sun: 1/1,000</div>
+            <div>Planets: 1/1,000 minimum</div>
+            <div>TIme: 1/3600 minimum</div>
+          </div>
+          <p class="begin">
+            Click anywhere outside this box to begin.
+          </p>
+          <div class="link-container" >
+            <a href="https://github.com/aliibsin/SimpleSolarSystemSandbox" target="_blank">
+              Github
+            </a>
+            &nbsp;|&nbsp;
+            <a href="https://www.linkedin.com/in/ali-ibsin-1b9732132" target="_blank">
+              Linkedin
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="scale-gui"></div>
-  <canvas class="webgl" id="ssss"></canvas>
-  <script type="application/javascript" src="./dist/main.js"></script>
-</body > 
+    <script type="module" src="/index.js"></script>
+    <div id="scale-gui"></div>
+  </body>
 </html>
