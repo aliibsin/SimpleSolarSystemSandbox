@@ -16,7 +16,7 @@ Tihs sandbox requires a browser that supports WebGL.
 </div>
 <br/>
 
-Click and drag the mouse to rotate. Use the mouse wheel to zoom. 
+Click and drag your mouse or use the viewports at the bottom right to rotate. Use the mouse wheel or touch controls to zoom.
 
 <br/>
 <div align="center">
@@ -24,7 +24,7 @@ Click and drag the mouse to rotate. Use the mouse wheel to zoom.
 </div>
 <br/>
 
-Use controls on bottom right to change time scale, planet size scale, and orbit visibility. 
+Use controls on top right to change time scale, planet size scale, and orbit visibility.
 
 <br/>
 <div align="center">
@@ -39,7 +39,13 @@ This app uses
  * three.js
  * HTML and CSS
 
+## Run this sandbox locally
+ * Clone repo
+ * Run `npm install`
+ * Run `npm start`
+ * Get local url and paste it in your browser
+
 ## Future Considerations
 
- * Adjustable orbit radius
- * Ship mode
+ * Asteroid belts
+ * Factoids
