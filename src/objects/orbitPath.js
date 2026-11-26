@@ -1,46 +1,33 @@
 import * as THREE from 'three';
 
-class OrbitPath {
-  constructor(scene, semiMajorAxis, semiMinorAxis, orbitInclination, solarSystemScale) {
-    this.semiMajorAxis = semiMajorAxis / solarSystemScale;
-    this.semiMinorAxis = semiMinorAxis / solarSystemScale;
-    this.focalDistance = Math.sqrt(this.semiMajorAxis ** 2 - this.semiMinorAxis ** 2);
-    this.orbitInclination = orbitInclination;
-    this.orbitSegments = 128;
+const ORBIT_SEGMENTS = 256;
 
-    this.orientation = this.#orientation();
-    this.geometry = this.#geometry();
-    this.material = this.#material();
-    this.body = this.#body();
+class OrbitPath {
+  constructor(scene, keplerOrbit, solarSystemScale) {
+    this.keplerOrbit = keplerOrbit;
+    this.body = new THREE.Line(this.#geometry(solarSystemScale), this.#material());
+    this.body.visible = false;
+    this.body.matrixAutoUpdate = false;
 
     scene.add(this.body);
   }
 
-  positionAt (angle, target = new THREE.Vector3()) {
-    return target
-      .set(
-        this.semiMajorAxis * Math.cos(angle) - this.focalDistance,
-        this.semiMinorAxis * Math.sin(angle),
-        0
-      )
-      .applyMatrix4(this.orientation);
+  update (hours, center = null, size = 1) {
+    this.keplerOrbit.orientation(hours, this.body.matrix);
+
+    if (center) {
+      this.body.matrix.premultiply(new THREE.Matrix4().makeScale(size, size, size).setPosition(center));
+    }
+
+    this.body.matrixWorldNeedsUpdate = true;
   }
 
-  get alignedStartAngle () {
-    return -Math.acos(this.focalDistance / this.semiMajorAxis);
-  }
-
-  #orientation () {
-    const flatten = new THREE.Matrix4().makeRotationX(-Math.PI / 2);
-    const incline = new THREE.Matrix4().makeRotationZ(-this.orbitInclination * Math.PI / 180);
-    return incline.multiply(flatten);
-  }
-
-  #geometry () {
+  #geometry (solarSystemScale) {
     const points = [];
 
-    for (let i = 0; i <= this.orbitSegments; i++) {
-      points.push(this.positionAt((i / this.orbitSegments) * 2 * Math.PI));
+    for (let i = 0; i <= ORBIT_SEGMENTS; i++) {
+      const point = this.keplerOrbit.pointAtEccentricAnomaly((i / ORBIT_SEGMENTS) * 2 * Math.PI);
+      points.push(point.divideScalar(solarSystemScale));
     }
 
     return new THREE.BufferGeometry().setFromPoints(points);
@@ -48,12 +35,6 @@ class OrbitPath {
 
   #material () {
     return new THREE.LineBasicMaterial({ transparent: true, opacity: 0.1, color: 0xffffff });
-  }
-
-  #body () {
-    const body = new THREE.Line(this.geometry, this.material);
-    body.visible = false;
-    return body;
   }
 }
 

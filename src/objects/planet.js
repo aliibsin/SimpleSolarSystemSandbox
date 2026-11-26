@@ -1,9 +1,13 @@
+import * as THREE from 'three';
 import Sphere from '../util/sphere.js';
 
-import { planetProperties } from './properties.js';
+import { planetProperties, KM_PER_AU, LINE_UP_LONGITUDE } from './properties.js';
+import KeplerOrbit from './keplerOrbit.js';
 import OrbitPath from './orbitPath.js';
 import Ring from './ring.js';
 import applyRingShadows from './ringShadows.js';
+
+const Y_AXIS = new THREE.Vector3(0, 1, 0);
 
 class Planet extends Sphere {
   constructor(scene, name, globalScale, solarSystemScale, userPlanetScale) {
@@ -13,15 +17,18 @@ class Planet extends Sphere {
     this.globalScale = globalScale;
     this.solarSystemScale = solarSystemScale;
 
+    this.keplerOrbit = KeplerOrbit.fromJplElements(this.properties.elements, KM_PER_AU);
+    this.lineUpMeanAnomaly = this.keplerOrbit.meanAnomalyAtLongitude(LINE_UP_LONGITUDE);
+
     this.#setInitialOrientation();
+    this.tilt = this.body.quaternion.clone();
     scene.add(this.body);
 
     this.ring = this.#ring();
     if (this.ring) applyRingShadows(this);
-    this.orbitPath = this.#orbitPath();
+    this.orbitPath = new OrbitPath(scene, this.keplerOrbit, solarSystemScale);
+    this.orbitPath.update(0);
 
-    this.angle = this.orbitPath.alignedStartAngle;
-    this.#updatePosition();
     this.scale(userPlanetScale);
   }
 
@@ -37,11 +44,19 @@ class Planet extends Sphere {
     }
   }
 
-  orbit (timescale, deltaSeconds) {
-    const { orbitHours } = this.properties;
+  update (clock) {
+    const meanAnomaly = (clock.isDate ? this.keplerOrbit.meanAnomaly : this.lineUpMeanAnomaly)
+      + this.keplerOrbit.meanMotion * clock.hours;
 
-    this.angle += (2 * Math.PI * deltaSeconds * timescale) / orbitHours;
-    this.#updatePosition();
+    this.keplerOrbit.position(meanAnomaly, 0, this.body.position).divideScalar(this.solarSystemScale);
+
+    if (this.ring) {
+      this.ring.body.position.copy(this.body.position);
+    }
+
+    if (clock.isDate && this.properties.showsTimeOfDay) {
+      this.#faceSunForTimeOfDay(clock.hours);
+    }
   }
 
   scale (size) {
@@ -52,12 +67,15 @@ class Planet extends Sphere {
     }
   }
 
-  #updatePosition () {
-    this.orbitPath.positionAt(this.angle, this.body.position);
+  // J2000 is 12:00 UT, when the Sun is over longitude 0 (ignoring the equation of time).
+  #faceSunForTimeOfDay (hoursSinceJ2000) {
+    const universalTime = (((hoursSinceJ2000 + 12) % 24) + 24) % 24;
+    const subsolarLongitude = (12 - universalTime) * 15 * Math.PI / 180;
+    const toSun = this.body.position.clone().negate().applyQuaternion(this.tilt.clone().invert());
+    const sunAzimuth = Math.atan2(-toSun.z, toSun.x);
 
-    if (this.ring) {
-      this.ring.body.position.copy(this.body.position);
-    }
+    this.body.quaternion.copy(this.tilt)
+      .multiply(new THREE.Quaternion().setFromAxisAngle(Y_AXIS, sunAzimuth - subsolarLongitude));
   }
 
   #setInitialOrientation () {
@@ -77,16 +95,6 @@ class Planet extends Sphere {
         this.properties.equatorInclination
       );
     }
-  }
-
-  #orbitPath () {
-    return new OrbitPath(
-      this.scene,
-      this.properties.semiMajorAxis,
-      this.properties.semiMinorAxis,
-      this.properties.orbitInclination,
-      this.solarSystemScale
-    );
   }
 }
 

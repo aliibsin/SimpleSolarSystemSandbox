@@ -273,6 +273,34 @@ test.describe('Simple Solar System Sandbox', () => {
     await expect(panel).toBeHidden();
   });
 
+  test('the clock readout follows the date controls', async ({ page }) => {
+    const readout = page.locator('#clock-readout');
+    await expect(readout).toHaveText(/^\+0 y \d{2} d \d{2} h$/);
+
+    await closeIntro(page);
+    const gui = page.locator('.lil-gui');
+    await gui.getByText('Scale Controls').click();
+    await gui.getByRole('button', { name: 'Pause/Resume Time' }).click();
+    await gui.getByText('Scale Controls').click();
+    await gui.getByText('Set Date').click();
+    const dateField = gui.locator('.controller', { hasText: 'Date' }).locator('input');
+
+    await dateField.fill('1969-07-20');
+    await dateField.press('Enter');
+    await expect(readout).toContainText('20 Jul 1969');
+
+    await dateField.fill('1969-02-30');
+    await dateField.press('Enter');
+    await expect(dateField).toHaveValue('1969-07-20');
+
+    await gui.getByRole('button', { name: 'Today' }).click();
+    const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    await expect(readout).toContainText(today);
+
+    await gui.getByRole('button', { name: 'Line Up Planets' }).click();
+    await expect(readout).toHaveText(/^\+0 y 00 d \d{2} h$/);
+  });
+
   test('clicking a planet focuses it and Escape releases it', async ({ page }) => {
     await closeIntro(page);
     const panel = page.locator('#info-panel');

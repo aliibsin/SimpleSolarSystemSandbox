@@ -13,11 +13,13 @@ import setupGui from './src/util/gui.js';
 import setupInfoPanel from './src/util/infoPanel.js';
 import setupPicking from './src/util/picking.js';
 import FocusControl from './src/util/focusControl.js';
+import SimulationClock from './src/util/simulationClock.js';
 import addBackground from './src/util/background.js';
 import { addAmbientLight, addSunLight } from './src/util/lights.js';
 import Sun from './src/objects/sun.js';
 import Planet from './src/objects/planet.js';
 import Moon from './src/objects/moon.js';
+import { LINE_UP_LONGITUDE } from './src/objects/properties.js';
 import AsteroidBelt from './src/objects/asteroidBelt.js';
 
 const GLOBAL_SIZE_SCALE = 1_000; // 1:1,000 global scale in km
@@ -104,13 +106,17 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && userState.focus !== 'none') setFocus('none');
 });
 
-setupGui(bodies, asteroidBelt, userState, [...focusables.keys()], setFocus);
+const clock = new SimulationClock();
+const clockReadout = document.getElementById('clock-readout');
+
+setupGui({ planets: bodies, asteroidBelt, userState, focusNames: [...focusables.keys()], setFocus, clock });
 
 const timer = new THREE.Timer();
 timer.connect(document);
 
 // Places Venus and Mercury in front of the sun during the intro.
-const cameraOffset = new THREE.Vector3(400.0, 0.0, 300.0);
+const cameraOffset = new THREE.Vector3(350.0, 0.0, 300.0)
+  .applyAxisAngle(new THREE.Vector3(0, 1, 0), THREE.MathUtils.degToRad(LINE_UP_LONGITUDE - 270));
 
 function animate(timestamp) {
   timer.update(timestamp);
@@ -119,14 +125,17 @@ function animate(timestamp) {
   stats.begin();
 
   if (!userState.timePause) {
+    clock.advance(userState.time, delta);
     sun.rotate(userState.time, delta);
-    asteroidBelt.orbit(userState.time, delta);
-
-    bodies.forEach((body) => {
-      body.rotate(userState.time, delta);
-      body.orbit(userState.time, delta);
-    });
+    bodies.forEach((body) => body.rotate(userState.time, delta));
   };
+
+  bodies.forEach((body) => body.update(clock));
+  asteroidBelt.update(clock);
+
+  if (clockReadout.textContent !== clock.label) {
+    clockReadout.textContent = clock.label;
+  }
 
   if (userState.intro) {
     const objectPosition = new THREE.Vector3();
