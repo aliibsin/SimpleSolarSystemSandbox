@@ -8,6 +8,21 @@ export const sunProperties = {
   rotationDirection: 1
 }
 
+export const moonProperties = {
+  texture: 'moon.jpg',
+  fact: 'Always shows the same face to Earth, because it spins exactly once per orbit.',
+  orbits: 'earth',
+  radius: 1_737.4,
+  rotationHours: 655.72,
+  rotationDirection: 1,
+  orbitHours: 655.72,
+  eccentricity: 0.0549,
+  semiMajorAxis: 384_400,
+  semiMinorAxis: 383_820,
+  orbitInclination: 5.145,
+  equatorInclination: 6.68
+}
+
 export const planetProperties = {
   mercury: {
     texture: 'mercury.jpg',
