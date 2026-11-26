@@ -6,7 +6,7 @@
       <link rel="preconnect" href="https://fonts.gstatic.com">
       <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap" rel="stylesheet">
-      <link rel="icon" type="image/svg+xml" href="/assets/earth-icon.png" />
+      <link rel="icon" type="image/png" href="/assets/earth-icon.png" />
       <link rel="stylesheet" href="./src/stylesheets/reset.css" >
       <link rel="stylesheet" href="./src/stylesheets/index.css" >
 
@@ -23,14 +23,14 @@
     <audio loop preload="none" id="music">
       <source src="assets/meditative-space.mp3">
     </audio>
-    <div class="intro-box-modal" id="intro-box-modal">
+    <dialog class="intro-box-modal" id="intro-box-modal" tabindex="-1">
       <div class="intro-box">
         <div class="intro-box-content">
           <h1>
             Simple Solar System Sandbox
           </h1>
           <p class="modal-text">
-            This is simple sandbox of our solar system featuring the sun and the main 8 planets.
+            This is a simple sandbox of our solar system featuring the sun and the main 8 planets.
             Click and drag the mouse to rotate. Use the mouse wheel to zoom. Control the 
             planet scale, time scale, and orbit visibility through the controls at the top right.
           </p>
@@ -41,7 +41,7 @@
             <div>Solar System Size: 1/10,000</div>
             <div>Sun: 1/1,000</div>
             <div>Planets: 1/1,000 minimum</div>
-            <div>TIme: 1/3600 minimum</div>
+            <div>Time: 1/3600 minimum</div>
           </div>
           <div class="loading-bar" id="loading-bar">
             <div class="loading-bar-fill" id="loading-bar-fill"></div>
@@ -60,8 +60,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </dialog>
     <script type="module" src="/index.js"></script>
-    <div id="scale-gui"></div>
   </body>
 </html>

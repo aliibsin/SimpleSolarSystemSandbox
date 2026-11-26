@@ -33,6 +33,7 @@ export default defineConfig({
     {
       command: `npx vite --port ${DEV_PORT} --strictPort`,
       url: `http://localhost:${DEV_PORT}${BASE_PATH}`,
+      reuseExistingServer: !process.env.CI,
       timeout: 120_000,
     },
   ],
