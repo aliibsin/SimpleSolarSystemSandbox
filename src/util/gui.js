@@ -1,10 +1,20 @@
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 import humanize from './humanizeString.js';
 
-const setupGui = (planets, userState) => {
+const setupGui = (planets, userState, focusNames, setFocus) => {
   const gui = new GUI();
+  const focusFolder = gui.addFolder('Focus Camera').close();
   const orbitPaths = gui.addFolder('Toggle Orbit Paths').close();
   const scaleFolder = gui.addFolder('Scale Controls').close();
+
+  const focusButtons = { release: () => setFocus('none') };
+
+  focusNames.forEach((name) => {
+    focusButtons[name] = () => setFocus(name);
+    focusFolder.add(focusButtons, name).name(humanize(name));
+  });
+
+  focusFolder.add(focusButtons, 'release').name('Release Focus');
 
   const togglePaths = {
     showAll: () => showAllPaths(planets),

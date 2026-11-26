@@ -61,6 +61,21 @@ function differingPixels(a, b) {
   return diff;
 }
 
+async function captureCanvasCenter(page, size = 40) {
+  const box = await page.locator('body > canvas').first().boundingBox();
+  const png = PNG.sync.read(await page.screenshot({
+    clip: { x: box.x + box.width / 2 - size / 2, y: box.y + box.height / 2 - size / 2, width: size, height: size },
+    style: CANVAS_ONLY_CSS,
+  }));
+  return png;
+}
+
+function averageBrightness(data) {
+  let total = 0;
+  for (let i = 0; i < data.length; i += 4) total += (data[i] + data[i + 1] + data[i + 2]) / 3;
+  return total / (data.length / 4);
+}
+
 const closeIntro = (page) => page.locator('#intro-box-modal').click({ position: { x: 10, y: 10 } });
 
 test.describe('Simple Solar System Sandbox', () => {
@@ -184,5 +199,41 @@ test.describe('Simple Solar System Sandbox', () => {
       }),
     );
     expect(gizmoInCorner, 'the viewport gizmo should be in the bottom-right corner').toBe(true);
+  });
+
+  test('focus controls fly to a planet and show its facts', async ({ page }) => {
+    await closeIntro(page);
+    const panel = page.locator('#info-panel');
+    const gui = page.locator('.lil-gui');
+
+    await gui.getByText('Focus Camera').click();
+    await gui.getByRole('button', { name: 'Jupiter', exact: true }).click();
+    await expect(panel).toBeVisible();
+    await expect(page.locator('#info-panel-title')).toHaveText('Jupiter');
+    await expect(panel).toContainText('69,911 km');
+
+    await page.waitForTimeout(2000);
+    const { data } = await captureCanvasCenter(page);
+    expect(averageBrightness(data), 'the focused planet should fill the center of the view').toBeGreaterThan(60);
+
+    await gui.getByRole('button', { name: 'Release Focus' }).click();
+    await expect(panel).toBeHidden();
+
+    await gui.getByRole('button', { name: 'Saturn', exact: true }).click();
+    await expect(page.locator('#info-panel-title')).toHaveText('Saturn');
+    await page.locator('#info-panel-close').click();
+    await expect(panel).toBeHidden();
+  });
+
+  test('clicking a planet focuses it and Escape releases it', async ({ page }) => {
+    await closeIntro(page);
+    const panel = page.locator('#info-panel');
+
+    await page.mouse.click(120, 400);
+    await expect(panel).toBeVisible();
+    await expect(page.locator('#info-panel-title')).toHaveText('Earth');
+
+    await page.keyboard.press('Escape');
+    await expect(panel).toBeHidden();
   });
 });

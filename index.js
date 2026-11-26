@@ -10,6 +10,9 @@ import setupLoadingProgress from './src/util/loadingProgress.js';
 import setupMusic from './src/util/musicControl.js';
 import setupStats from './src/util/stats.js';
 import setupGui from './src/util/gui.js';
+import setupInfoPanel from './src/util/infoPanel.js';
+import setupPicking from './src/util/picking.js';
+import FocusControl from './src/util/focusControl.js';
 import addBackground from './src/util/background.js';
 import { addAmbientLight, addSunLight } from './src/util/lights.js';
 import Sun from './src/objects/sun.js';
@@ -24,7 +27,8 @@ let userState = {
   intro: true,
   timePause: false,
   time: 1,
-  size: 25
+  size: 25,
+  focus: 'none'
 }
 
 const renderer = setupRenderer();
@@ -68,7 +72,29 @@ planets = planets.map((planet) => {
   return new Planet(scene, planet, GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
 });
 
-setupGui(planets, userState);
+const focusables = new Map([sun, ...planets].map((object) => [object.name, object]));
+const focusControl = new FocusControl(camera, controls);
+const infoPanel = setupInfoPanel(() => setFocus('none'));
+
+function setFocus(name) {
+  const object = focusables.get(name);
+  userState.focus = object ? name : 'none';
+
+  if (object) {
+    focusControl.focus(object);
+    infoPanel.show(object);
+  } else {
+    focusControl.release();
+    infoPanel.hide();
+  }
+}
+
+setupPicking(renderer.domElement, camera, [...focusables.values()], (object) => setFocus(object.name));
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && userState.focus !== 'none') setFocus('none');
+});
+
+setupGui(planets, userState, [...focusables.keys()], setFocus);
 
 const timer = new THREE.Timer();
 timer.connect(document);
@@ -82,7 +108,6 @@ function animate(timestamp) {
   const delta = timer.getDelta();
 
   stats.begin();
-  controls.update();
 
   if (!userState.timePause) {
     sun.rotate(userState.time, delta);
@@ -98,6 +123,9 @@ function animate(timestamp) {
     earth.body.getWorldPosition(objectPosition);
     camera.position.copy(objectPosition).add(cameraOffset);
   }
+
+  focusControl.update(delta);
+  controls.update();
 
   bloomComposer.render();
   gizmo.render();

@@ -2,6 +2,7 @@
 
 export const sunProperties = {
   texture: 'sun.jpg',
+  fact: 'Contains about 99.8% of all the mass in the solar system.',
   radius: 695_700,
   rotationHours: 609.1,
   rotationDirection: 1
@@ -10,6 +11,7 @@ export const sunProperties = {
 export const planetProperties = {
   mercury: {
     texture: 'mercury.jpg',
+    fact: 'The smallest planet and the closest to the Sun.',
     radius: 2_440,
     rotationHours: 1407.6,
     rotationDirection: 1,
@@ -22,6 +24,7 @@ export const planetProperties = {
   },
   venus: {
     texture: 'venus.jpg',
+    fact: 'The hottest planet, and it spins in the opposite direction to most planets.',
     radius: 6_052,
     rotationHours: 5832.6,
     rotationDirection: -1,
@@ -34,6 +37,7 @@ export const planetProperties = {
   },
   earth: {
     texture: 'earth.jpg',
+    fact: 'The only place in the universe known to support life.',
     radius: 6_371,
     rotationHours: 23.9345,
     rotationDirection: 1,
@@ -46,6 +50,7 @@ export const planetProperties = {
   },
   mars: {
     texture: 'mars.jpg',
+    fact: 'Home to Olympus Mons, the tallest known volcano in the solar system.',
     radius: 3_390,
     rotationHours: 24.6229,
     rotationDirection: 1,
@@ -58,6 +63,7 @@ export const planetProperties = {
   },
   jupiter: {
     texture: 'jupiter.jpg',
+    fact: 'The largest planet, more than twice as massive as all the other planets combined.',
     radius: 69_911,
     rotationHours: 9.925,
     rotationDirection: 1,
@@ -70,6 +76,7 @@ export const planetProperties = {
   },
   saturn: {
     texture: 'saturn.jpg',
+    fact: 'Its main rings are about 270,000 km across but typically only about 10 metres thick.',
     radius: 58_232,
     rotationHours: 10.6561,
     rotationDirection: 1,
@@ -87,9 +94,10 @@ export const planetProperties = {
   },
   uranus: {
     texture: 'uranus.jpg',
+    fact: 'Tipped on its side, so each pole gets about 42 years of continuous sunlight.',
     radius: 25_362,
     rotationHours: 17.2401,
-    rotationDirection: 1,
+    rotationDirection: -1,
     orbitHours: 736_449.60,
     eccentricity: 0.0469,
     semiMajorAxis: 2_867_043_000,
@@ -99,6 +107,7 @@ export const planetProperties = {
   },
   neptune: {
     texture: 'neptune.jpg',
+    fact: 'Has the fastest winds in the solar system, reaching over 2,000 km/h.',
     radius: 24_622,
     rotationHours: 16.11,
     rotationDirection: 1,

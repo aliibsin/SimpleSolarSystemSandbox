@@ -133,3 +133,72 @@ body {
 .music-on {
   color: aquamarine;
 }
+
+.info-panel {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  width: min(300px, calc(100vw - 20px));
+  padding: 12px 16px;
+  box-sizing: border-box;
+  background-color: rgba(42, 40, 54, 0.8);
+  border: 3px double black;
+  border-radius: 8px;
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 14px;
+}
+
+.info-panel[hidden] {
+  display: none;
+}
+
+.info-panel h2 {
+  margin-bottom: 6px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+}
+
+.info-panel-fact {
+  margin-bottom: 10px;
+  line-height: 140%;
+}
+
+.info-panel-stats {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+}
+
+.info-panel-stats dt {
+  color: darkgray;
+}
+
+.info-panel-close {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.info-panel-close:hover {
+  color: aquamarine;
+  transition: 250ms ease;
+}
+
+@media (max-width: 600px) {
+  .lil-gui.root.autoPlace {
+    top: 28px;
+  }
+
+  .info-panel {
+    top: auto;
+    bottom: 56px;
+    width: calc(100vw - 160px);
+    font-size: 13px;
+  }
+}
