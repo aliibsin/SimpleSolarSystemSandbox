@@ -21,7 +21,8 @@ const setupGui = (planets, userState) => {
 
   scaleFolder.add({ toggle: () => toggleTimePause(userState) }, 'toggle').name("Pause/Resume Time");
   scaleFolder.add(userState, "time", 1, 50, 1).name("Time Scale");
-  scaleFolder.add(userState, "size", 1, 100, 1).name("Planet Size Scale");
+  scaleFolder.add(userState, "size", 1, 100, 1).name("Planet Size Scale")
+    .onChange((size) => planets.forEach((planet) => planet.scale(size)));
 };
 
 const showAllPaths = (planets) => {

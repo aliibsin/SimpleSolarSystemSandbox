@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { ViewportGizmo } from "three-viewport-gizmo";
 
-import setupRenderer from './src/util/renderer.js';
+import setupRenderer, { getPixelRatio } from './src/util/renderer.js';
 import setupCamera from './src/util/cameraControl.js';
 import setupBloomComposer from './src/util/postProcessing.js';
 import setupIntro from './src/util/introControl.js';
@@ -24,7 +24,7 @@ let userState = {
   intro: true,
   timePause: false,
   time: 1,
-  size: 5
+  size: 25
 }
 
 const renderer = setupRenderer();
@@ -35,19 +35,6 @@ const stats = setupStats();
 const scene = new THREE.Scene();
 gizmo.attachControls(controls);
 
-// resize window adjusting
-window.addEventListener('resize', () => {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-
-  renderer.setSize(width, height);
-  renderer.setPixelRatio(window.devicePixelRatio);
-  gizmo.update();
-});
-
 setupIntro(userState);
 setupMusic();
 addBackground(scene, GLOBAL_BOUNDS);
@@ -55,6 +42,23 @@ addAmbientLight(scene);
 addSunLight(scene);
 
 const bloomComposer = setupBloomComposer(renderer, scene, camera);
+
+// resize window adjusting
+window.addEventListener('resize', () => {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const pixelRatio = getPixelRatio();
+
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+
+  renderer.setPixelRatio(pixelRatio);
+  renderer.setSize(width, height);
+  bloomComposer.setPixelRatio(pixelRatio);
+  bloomComposer.setSize(width, height);
+  gizmo.update();
+});
+
 const sun = new Sun(scene, GLOBAL_SIZE_SCALE);
 
 let planets = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']
@@ -68,7 +72,8 @@ const fpsInterval = 1000 / TARGET_MAX_FPS;
 let then = 0;
 
 const earth = planets[2]
-const cameraOffset = new THREE.Vector3(500.0, 0.0, 300.0);
+// Places Venus and Mercury in front of the sun during the intro.
+const cameraOffset = new THREE.Vector3(400.0, 0.0, 300.0);
 
 function animate(time) {
   const elapsed = time - then;
@@ -87,10 +92,6 @@ function animate(time) {
         planet.orbit(userState.time, TARGET_MAX_FPS);
       });
     };
-
-    planets.forEach((planet) => {
-      planet.scale(userState.size);
-    });
 
     if (userState.intro) {
       const objectPosition = new THREE.Vector3();

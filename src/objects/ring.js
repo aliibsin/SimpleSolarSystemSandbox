@@ -1,14 +1,12 @@
 import * as THREE from 'three';
 
 class Ring {
-  constructor(scene, name, texturePath, innerRadius, outerRadius, initialPosition, inclination, solarSystemScale) {
+  constructor(scene, name, texturePath, innerRadius, outerRadius, inclination) {
     this.name = name;
     this.texturePath = texturePath;
     this.innerRadius = innerRadius;
     this.outerRadius = outerRadius;
-    this.initialPosition = initialPosition;
     this.inclination = inclination;
-    this.solarSystemScale = solarSystemScale;
 
     this.thetaSegments = 128;
     this.phiSegments = 64;
@@ -54,7 +52,6 @@ class Ring {
   }
 
   #setInitialOrientation () {
-    this.body.position.set(0, 0, this.initialPosition / this.solarSystemScale);
     this.body.rotateX(Math.PI / 2);
     this.body.rotateX(-this.inclination * Math.PI / 180);
   }
