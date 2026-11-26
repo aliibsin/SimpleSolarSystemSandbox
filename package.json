@@ -1,9 +1,10 @@
 {
   "name": "simplesolarsystemsandbox",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "npx vite",
+    "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "test": "playwright test"
@@ -22,11 +23,11 @@
   "dependencies": {
     "stats.js": "^0.17.0",
     "three": "^0.187.0",
-    "three-viewport-gizmo": "^2.2.0",
-    "vite": "^6.1.0"
+    "three-viewport-gizmo": "^2.2.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.65.1",
-    "pngjs": "^7.0.0"
+    "pngjs": "^7.0.0",
+    "vite": "^8.4.0"
   }
 }
