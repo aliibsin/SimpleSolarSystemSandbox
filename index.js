@@ -18,6 +18,7 @@ import { addAmbientLight, addSunLight } from './src/util/lights.js';
 import Sun from './src/objects/sun.js';
 import Planet from './src/objects/planet.js';
 import Moon from './src/objects/moon.js';
+import AsteroidBelt from './src/objects/asteroidBelt.js';
 
 const GLOBAL_SIZE_SCALE = 1_000; // 1:1,000 global scale in km
 const SOLAR_SYSTEM_SIZE_SCALE = 10_000; // 1:10,000 solar system scale in km
@@ -67,6 +68,7 @@ window.addEventListener('resize', () => {
 });
 
 const sun = new Sun(scene, GLOBAL_SIZE_SCALE);
+const asteroidBelt = new AsteroidBelt(scene, GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
 
 let planets = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']
 planets = planets.map((planet) => {
@@ -99,7 +101,7 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && userState.focus !== 'none') setFocus('none');
 });
 
-setupGui(bodies, userState, [...focusables.keys()], setFocus);
+setupGui(bodies, asteroidBelt, userState, [...focusables.keys()], setFocus);
 
 const timer = new THREE.Timer();
 timer.connect(document);
@@ -115,6 +117,7 @@ function animate(timestamp) {
 
   if (!userState.timePause) {
     sun.rotate(userState.time, delta);
+    asteroidBelt.orbit(userState.time, delta);
 
     bodies.forEach((body) => {
       body.rotate(userState.time, delta);
