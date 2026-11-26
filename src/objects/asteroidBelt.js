@@ -1,8 +1,7 @@
 import * as THREE from 'three';
 
-import { asteroidBeltProperties } from './properties.js';
+import { asteroidBeltProperties, KM_PER_AU } from './properties.js';
 
-const KM_PER_AU = 149_597_871;
 const HOURS_PER_EARTH_YEAR = 8_766;
 const COUNT = asteroidBeltProperties.count;
 const SEED = 1801;
@@ -104,7 +103,6 @@ class AsteroidBelt {
     this.properties = asteroidBeltProperties;
     this.globalScale = globalScale;
     this.outerRadius = OUTER_AU * KM_PER_AU / solarSystemScale;
-    this.elapsedHours = 0;
     this.uniforms = {
       elapsedHours: { value: 0 },
       unitsPerKm: { value: 0 },
@@ -137,9 +135,8 @@ class AsteroidBelt {
     this.scale(userPlanetScale);
   }
 
-  orbit (timescale, deltaSeconds) {
-    this.elapsedHours += deltaSeconds * timescale;
-    this.uniforms.elapsedHours.value = this.elapsedHours;
+  update (clock) {
+    this.uniforms.elapsedHours.value = clock.hours;
   }
 
   scale (size) {

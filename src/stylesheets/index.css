@@ -130,6 +130,20 @@ body {
   transition: 250ms ease;
 }
 
+.clock-readout {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 .music-on {
   color: aquamarine;
 }
@@ -193,6 +207,12 @@ body {
 @media (max-width: 600px) {
   .lil-gui.root.autoPlace {
     top: 28px;
+  }
+
+  .clock-readout {
+    left: auto;
+    right: 0;
+    transform: none;
   }
 
   .info-panel {

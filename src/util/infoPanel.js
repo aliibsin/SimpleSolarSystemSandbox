@@ -1,6 +1,6 @@
 import humanize from './humanizeString.js';
+import { KM_PER_AU } from '../objects/properties.js';
 
-const KM_PER_AU = 149_597_871;
 const HOURS_PER_EARTH_YEAR = 8_766;
 
 const formatNumber = (value, digits = 0) =>
