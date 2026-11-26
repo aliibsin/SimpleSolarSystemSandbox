@@ -27,9 +27,13 @@ const stats = (properties) => {
       ? 180 - properties.equatorInclination
       : properties.equatorInclination;
 
+    const distance = properties.orbits
+      ? [`Distance from ${humanize(properties.orbits)}`, `${formatNumber(properties.semiMajorAxis)} km (shown scaled with planet size)`]
+      : ['Distance from Sun', `${formatNumber(properties.semiMajorAxis / 1e6, 1)} million km (${formatNumber(properties.semiMajorAxis / KM_PER_AU, 2)} AU)`];
+
     rows.push(
-      ['Year', formatOrbit(properties.orbitHours)],
-      ['Distance from Sun', `${formatNumber(properties.semiMajorAxis / 1e6, 1)} million km (${formatNumber(properties.semiMajorAxis / KM_PER_AU, 2)} AU)`],
+      [properties.orbits ? 'Orbital period' : 'Year', formatOrbit(properties.orbitHours)],
+      distance,
       ['Axial tilt', `${formatNumber(axialTilt, 1)}°`],
       ['Orbital inclination', `${formatNumber(properties.orbitInclination, 1)}°`],
       ['Eccentricity', formatNumber(properties.eccentricity, 3)]

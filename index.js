@@ -17,6 +17,7 @@ import addBackground from './src/util/background.js';
 import { addAmbientLight, addSunLight } from './src/util/lights.js';
 import Sun from './src/objects/sun.js';
 import Planet from './src/objects/planet.js';
+import Moon from './src/objects/moon.js';
 
 const GLOBAL_SIZE_SCALE = 1_000; // 1:1,000 global scale in km
 const SOLAR_SYSTEM_SIZE_SCALE = 10_000; // 1:10,000 solar system scale in km
@@ -72,7 +73,11 @@ planets = planets.map((planet) => {
   return new Planet(scene, planet, GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
 });
 
-const focusables = new Map([sun, ...planets].map((object) => [object.name, object]));
+const earth = planets[2];
+const moon = new Moon(scene, earth, GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
+const bodies = [...planets.slice(0, 3), moon, ...planets.slice(3)];
+
+const focusables = new Map([sun, ...bodies].map((object) => [object.name, object]));
 const focusControl = new FocusControl(camera, controls);
 const infoPanel = setupInfoPanel(() => setFocus('none'));
 
@@ -94,12 +99,11 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && userState.focus !== 'none') setFocus('none');
 });
 
-setupGui(planets, userState, [...focusables.keys()], setFocus);
+setupGui(bodies, userState, [...focusables.keys()], setFocus);
 
 const timer = new THREE.Timer();
 timer.connect(document);
 
-const earth = planets[2]
 // Places Venus and Mercury in front of the sun during the intro.
 const cameraOffset = new THREE.Vector3(400.0, 0.0, 300.0);
 
@@ -112,9 +116,9 @@ function animate(timestamp) {
   if (!userState.timePause) {
     sun.rotate(userState.time, delta);
 
-    planets.forEach((planet) => {
-      planet.rotate(userState.time, delta);
-      planet.orbit(userState.time, delta);
+    bodies.forEach((body) => {
+      body.rotate(userState.time, delta);
+      body.orbit(userState.time, delta);
     });
   };
 

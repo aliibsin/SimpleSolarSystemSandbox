@@ -225,6 +225,17 @@ test.describe('Simple Solar System Sandbox', () => {
     await expect(panel).toBeHidden();
   });
 
+  test('the Moon can be focused and notes its scaled distance', async ({ page }) => {
+    await expect(page.locator('.scale-text')).toContainText('Moon Distance');
+    await closeIntro(page);
+    const gui = page.locator('.lil-gui');
+
+    await gui.getByText('Focus Camera').click();
+    await gui.getByRole('button', { name: 'Moon', exact: true }).click();
+    await expect(page.locator('#info-panel-title')).toHaveText('Moon');
+    await expect(page.locator('#info-panel')).toContainText('384,400 km (shown scaled with planet size)');
+  });
+
   test('clicking a planet focuses it and Escape releases it', async ({ page }) => {
     await closeIntro(page);
     const panel = page.locator('#info-panel');
