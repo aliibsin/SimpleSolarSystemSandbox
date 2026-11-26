@@ -15,7 +15,7 @@ class Sun extends Sphere {
   rotate (timescale, targetFps) {
     const { rotationHours, rotationDirection } = sunProperties;
     const radiansPerFrame = (2 * Math.PI) / ((rotationHours / timescale) * targetFps);
-    this.body.rotateY(radiansPerFrame * rotationDirection * timescale);
+    this.body.rotateY(radiansPerFrame * rotationDirection);
   }
 }
 

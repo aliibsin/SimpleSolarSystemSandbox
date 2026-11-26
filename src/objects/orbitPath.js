@@ -2,39 +2,48 @@ import * as THREE from 'three';
 
 class OrbitPath {
   constructor(scene, semiMajorAxis, semiMinorAxis, orbitInclination, solarSystemScale) {
-    this.semiMajorAxis = semiMajorAxis;
-    this.semiMinorAxis = semiMinorAxis;
+    this.semiMajorAxis = semiMajorAxis / solarSystemScale;
+    this.semiMinorAxis = semiMinorAxis / solarSystemScale;
+    this.focalDistance = Math.sqrt(this.semiMajorAxis ** 2 - this.semiMinorAxis ** 2);
     this.orbitInclination = orbitInclination;
-    this.solarSystemScale = solarSystemScale;
     this.orbitSegments = 128;
 
-    this.curve = this.#curve();
+    this.orientation = this.#orientation();
     this.geometry = this.#geometry();
-    this.#setInitialOrientation()
     this.material = this.#material();
     this.body = this.#body();
 
     scene.add(this.body);
   }
 
-  #curve () {
-    return new THREE.EllipseCurve(
-      0, 0,
-      this.semiMajorAxis / this.solarSystemScale, this.semiMinorAxis / this.solarSystemScale,
-      0, 2 * Math.PI,
-      false, 0
-    );
+  positionAt (angle, target = new THREE.Vector3()) {
+    return target
+      .set(
+        this.semiMajorAxis * Math.cos(angle) - this.focalDistance,
+        this.semiMinorAxis * Math.sin(angle),
+        0
+      )
+      .applyMatrix4(this.orientation);
+  }
+
+  get alignedStartAngle () {
+    return -Math.acos(this.focalDistance / this.semiMajorAxis);
+  }
+
+  #orientation () {
+    const flatten = new THREE.Matrix4().makeRotationX(-Math.PI / 2);
+    const incline = new THREE.Matrix4().makeRotationZ(-this.orbitInclination * Math.PI / 180);
+    return incline.multiply(flatten);
   }
 
   #geometry () {
-    const points = this.curve.getPoints(this.orbitSegments);
-    const geometry = new THREE.BufferGeometry().setFromPoints(points);
-    return geometry;
-  }
+    const points = [];
 
-  #setInitialOrientation () {
-    this.geometry.rotateX(Math.PI / 2);
-    this.geometry.rotateZ(-this.orbitInclination * Math.PI / 180);
+    for (let i = 0; i <= this.orbitSegments; i++) {
+      points.push(this.positionAt((i / this.orbitSegments) * 2 * Math.PI));
+    }
+
+    return new THREE.BufferGeometry().setFromPoints(points);
   }
 
   #material () {

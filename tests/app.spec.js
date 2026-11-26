@@ -107,10 +107,21 @@ test.describe('Simple Solar System Sandbox', () => {
 
     await page.waitForTimeout(1500);
     const second = await captureCanvas(page);
+    const runningDiff = differingPixels(first.data, second.data);
+
+    const pause = page.locator('.lil-gui').getByRole('button', { name: 'Pause/Resume Time' });
+    await pause.click();
+    await page.waitForTimeout(500);
+    const pausedFirst = await captureCanvas(page);
+    await page.waitForTimeout(1500);
+    const pausedSecond = await captureCanvas(page);
+    const pausedDiff = differingPixels(pausedFirst.data, pausedSecond.data);
+
+    expect(pausedDiff, 'the scene should hold still while time is paused').toBeLessThan(50);
     expect(
-      differingPixels(first.data, second.data),
+      runningDiff,
       'the scene should change over time (animation loop running)',
-    ).toBeGreaterThan(2000);
+    ).toBeGreaterThan(Math.max(300, pausedDiff * 10));
   });
 
   test('intro can be closed and reopened with the About button', async ({ page }) => {

@@ -2,10 +2,12 @@ import * as THREE from 'three';
 
 const MAX_DEVICE_PIXEL_RATIO = 2;
 
+export const getPixelRatio = () => Math.min(window.devicePixelRatio, MAX_DEVICE_PIXEL_RATIO);
+
 const setupRenderer = () => {
   const renderer = new THREE.WebGLRenderer(rendererSettings());
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_DEVICE_PIXEL_RATIO));
+  renderer.setPixelRatio(getPixelRatio());
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
   document.body.appendChild(renderer.domElement);
