@@ -21,7 +21,7 @@
   "description": "",
   "dependencies": {
     "stats.js": "^0.17.0",
-    "three": "^0.173.0",
+    "three": "^0.187.0",
     "three-viewport-gizmo": "^2.2.0",
     "vite": "^6.1.0"
   },
