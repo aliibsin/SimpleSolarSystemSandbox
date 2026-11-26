@@ -13,8 +13,6 @@ class Planet extends Sphere {
     this.solarSystemScale = solarSystemScale;
 
     this.#setInitialOrientation();
-    this.body.castShadow = true;
-    this.body.receiveShadow = true;
     scene.add(this.body);
 
     this.ring = this.#ring();
@@ -25,23 +23,22 @@ class Planet extends Sphere {
     this.scale(userPlanetScale);
   }
 
-  // For simple one axis rotation calculations, radians per frame = 2pi / (rotation period * frames)
+  // For simple one axis rotation calculations, radians = 2pi * elapsed seconds * timescale / period in hours
 
-  rotate (timescale, targetFps) {
+  rotate (timescale, deltaSeconds) {
     const { rotationHours, rotationDirection } = this.properties;
-    const radiansPerFrame = (2 * Math.PI) / ((rotationHours / timescale) * targetFps);
-    this.body.rotateY(radiansPerFrame * rotationDirection);
+    const radians = (2 * Math.PI * deltaSeconds * timescale) / rotationHours;
+    this.body.rotateY(radians * rotationDirection);
 
     if (this.ring) {
-      this.ring.body.rotateZ(radiansPerFrame * rotationDirection);
+      this.ring.body.rotateZ(radians * rotationDirection);
     }
   }
 
-  orbit (timescale, targetFps) {
+  orbit (timescale, deltaSeconds) {
     const { orbitHours } = this.properties;
-    const radiansPerFrame = (2 * Math.PI) / ((orbitHours / timescale) * targetFps);
 
-    this.angle += radiansPerFrame;
+    this.angle += (2 * Math.PI * deltaSeconds * timescale) / orbitHours;
     this.#updatePosition();
   }
 

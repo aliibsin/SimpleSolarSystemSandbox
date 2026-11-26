@@ -19,7 +19,6 @@ const GLOBAL_SIZE_SCALE = 1_000; // 1:1,000 global scale in km
 const SOLAR_SYSTEM_SIZE_SCALE = 10_000; // 1:10,000 solar system scale in km
 const BOUNDS = 300_000_000_000; // Oort cloud starts ~299,195,741,382 km from the sun
 const GLOBAL_BOUNDS = BOUNDS / SOLAR_SYSTEM_SIZE_SCALE;
-const TARGET_MAX_FPS = 60;
 
 let userState = {
   intro: true,
@@ -29,8 +28,9 @@ let userState = {
 }
 
 const renderer = setupRenderer();
-const camera = setupCamera(GLOBAL_BOUNDS);
+const camera = setupCamera(GLOBAL_BOUNDS * 2);
 const controls = new OrbitControls(camera, renderer.domElement);
+controls.maxDistance = GLOBAL_BOUNDS / 2;
 const gizmo = new ViewportGizmo(camera, renderer, { placement: 'bottom-right' });
 const stats = setupStats();
 const scene = new THREE.Scene();
@@ -70,41 +70,38 @@ planets = planets.map((planet) => {
 
 setupGui(planets, userState);
 
-const fpsInterval = 1000 / TARGET_MAX_FPS;
-let then = 0;
+const timer = new THREE.Timer();
+timer.connect(document);
 
 const earth = planets[2]
 // Places Venus and Mercury in front of the sun during the intro.
 const cameraOffset = new THREE.Vector3(400.0, 0.0, 300.0);
 
-function animate(time) {
-  const elapsed = time - then;
+function animate(timestamp) {
+  timer.update(timestamp);
+  const delta = timer.getDelta();
 
-  if (elapsed > fpsInterval) {
-    then = time - (elapsed % fpsInterval);
+  stats.begin();
+  controls.update();
 
-    stats.begin();
-    controls.update();
+  if (!userState.timePause) {
+    sun.rotate(userState.time, delta);
 
-    if (!userState.timePause) {
-      sun.rotate(userState.time, TARGET_MAX_FPS);
+    planets.forEach((planet) => {
+      planet.rotate(userState.time, delta);
+      planet.orbit(userState.time, delta);
+    });
+  };
 
-      planets.forEach((planet) => {
-        planet.rotate(userState.time, TARGET_MAX_FPS);
-        planet.orbit(userState.time, TARGET_MAX_FPS);
-      });
-    };
-
-    if (userState.intro) {
-      const objectPosition = new THREE.Vector3();
-      earth.body.getWorldPosition(objectPosition);
-      camera.position.copy(objectPosition).add(cameraOffset);
-    }
-
-    bloomComposer.render();
-    gizmo.render();
-    stats.end();
+  if (userState.intro) {
+    const objectPosition = new THREE.Vector3();
+    earth.body.getWorldPosition(objectPosition);
+    camera.position.copy(objectPosition).add(cameraOffset);
   }
+
+  bloomComposer.render();
+  gizmo.render();
+  stats.end();
 }
 
 renderer.setAnimationLoop(animate);

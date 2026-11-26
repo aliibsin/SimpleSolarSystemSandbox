@@ -45,10 +45,7 @@ class Ring {
   }
 
   #body () {
-    const body = new THREE.Mesh(this.geometry, this.material);
-    body.castShadow = true;
-    body.receiveShadow = true;
-    return body;
+    return new THREE.Mesh(this.geometry, this.material);
   }
 
   #setInitialOrientation () {

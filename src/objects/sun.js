@@ -10,12 +10,12 @@ class Sun extends Sphere {
     scene.add(this.body);
   }
 
-  // For simple one axis rotation calculations, radians per frame = 2pi / (rotation period * frames)
+  // For simple one axis rotation calculations, radians = 2pi * elapsed seconds * timescale / period in hours
 
-  rotate (timescale, targetFps) {
+  rotate (timescale, deltaSeconds) {
     const { rotationHours, rotationDirection } = sunProperties;
-    const radiansPerFrame = (2 * Math.PI) / ((rotationHours / timescale) * targetFps);
-    this.body.rotateY(radiansPerFrame * rotationDirection);
+    const radians = (2 * Math.PI * deltaSeconds * timescale) / rotationHours;
+    this.body.rotateY(radians * rotationDirection);
   }
 }
 

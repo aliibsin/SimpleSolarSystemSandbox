@@ -8,8 +8,6 @@ const setupRenderer = () => {
   const renderer = new THREE.WebGLRenderer(rendererSettings());
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(getPixelRatio());
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFShadowMap;
   document.body.appendChild(renderer.domElement);
 
   return renderer;
@@ -18,7 +16,8 @@ const setupRenderer = () => {
 function rendererSettings () {
   return {
     antialias: true,
-    alpha: true
+    alpha: true,
+    logarithmicDepthBuffer: true
   };
 };
 
