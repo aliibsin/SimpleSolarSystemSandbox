@@ -24,7 +24,9 @@ class FocusControl {
     this.focused = object;
     object.body.getWorldPosition(this.position);
 
-    const offset = this.#viewDirection().multiplyScalar(this.#radius(object) * VIEW_DISTANCE_IN_RADII);
+    const offset = object.focusOffset
+      ? object.focusOffset(this.camera)
+      : this.#viewDirection().multiplyScalar(this.#radius(object) * VIEW_DISTANCE_IN_RADII);
     this.#startTransition(offset);
   }
 
@@ -37,7 +39,7 @@ class FocusControl {
   update (delta) {
     if (this.focused) {
       this.focused.body.getWorldPosition(this.position);
-      this.controls.minDistance = this.#radius(this.focused) * MIN_DISTANCE_IN_RADII;
+      this.controls.minDistance = this.focused.focusOffset ? 0 : this.#radius(this.focused) * MIN_DISTANCE_IN_RADII;
     }
 
     if (this.transition) {

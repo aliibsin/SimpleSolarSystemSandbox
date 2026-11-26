@@ -79,13 +79,16 @@ const earth = planets[2];
 const moon = new Moon(scene, earth, GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
 const bodies = [...planets.slice(0, 3), moon, ...planets.slice(3)];
 
-const focusables = new Map([sun, ...bodies].map((object) => [object.name, object]));
+const focusables = new Map(
+  [sun, ...bodies.slice(0, 5), asteroidBelt, ...bodies.slice(5)].map((object) => [object.name, object])
+);
 const focusControl = new FocusControl(camera, controls);
 const infoPanel = setupInfoPanel(() => setFocus('none'));
 
 function setFocus(name) {
   const object = focusables.get(name);
   userState.focus = object ? name : 'none';
+  asteroidBelt.highlight(object === asteroidBelt);
 
   if (object) {
     focusControl.focus(object);
@@ -96,7 +99,7 @@ function setFocus(name) {
   }
 }
 
-setupPicking(renderer.domElement, camera, [...focusables.values()], (object) => setFocus(object.name));
+setupPicking(renderer.domElement, camera, [sun, ...bodies], (object) => setFocus(object.name));
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && userState.focus !== 'none') setFocus('none');
 });

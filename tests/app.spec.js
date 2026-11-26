@@ -258,6 +258,21 @@ test.describe('Simple Solar System Sandbox', () => {
     expect(differingPixels(shown.data, shownAgain.data), 'showing it again should restore the view').toBeLessThan(20);
   });
 
+  test('the asteroid belt can be focused and shows its details', async ({ page }) => {
+    await closeIntro(page);
+    const gui = page.locator('.lil-gui');
+    const panel = page.locator('#info-panel');
+
+    await gui.getByText('Focus Camera').click();
+    await gui.getByRole('button', { name: 'Asteroid Belt', exact: true }).click();
+    await expect(page.locator('#info-panel-title')).toHaveText('Asteroid Belt');
+    await expect(panel).toContainText('1.1–1.9 million');
+    await expect(panel).toContainText('enlarged for visibility');
+
+    await gui.getByRole('button', { name: 'Release Focus' }).click();
+    await expect(panel).toBeHidden();
+  });
+
   test('clicking a planet focuses it and Escape releases it', async ({ page }) => {
     await closeIntro(page);
     const panel = page.locator('#info-panel');

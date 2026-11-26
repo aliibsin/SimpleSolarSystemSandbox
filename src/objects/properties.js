@@ -23,6 +23,21 @@ export const moonProperties = {
   equatorInclination: 6.68
 }
 
+const ASTEROIDS_SHOWN = 8_000;
+
+export const asteroidBeltProperties = {
+  fact: 'Rocky leftovers from the formation of the solar system, kept from forming a planet by Jupiter\'s gravity.',
+  count: ASTEROIDS_SHOWN,
+  details: [
+    ['Location', 'Between Mars and Jupiter, about 2.2–3.2 AU from the Sun'],
+    ['Asteroids', '1.1–1.9 million wider than 1 km, plus millions of smaller ones'],
+    ['Total mass', 'Less than 10% of the Moon\'s, about a third of it in Ceres'],
+    ['Spacing', 'Over 1 million km apart on average'],
+    ['Kirkwood gaps', '2.50, 2.82 and 2.95 AU, cleared by Jupiter\'s gravity'],
+    ['Shown here', `${ASTEROIDS_SHOWN.toLocaleString('en-US')} asteroids, enlarged for visibility`]
+  ]
+}
+
 export const planetProperties = {
   mercury: {
     texture: 'mercury.jpg',

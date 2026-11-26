@@ -1,8 +1,10 @@
 import * as THREE from 'three';
 
+import { asteroidBeltProperties } from './properties.js';
+
 const KM_PER_AU = 149_597_871;
 const HOURS_PER_EARTH_YEAR = 8_766;
-const COUNT = 8_000;
+const COUNT = asteroidBeltProperties.count;
 const SEED = 1801;
 const INNER_AU = 2.1;
 const OUTER_AU = 3.3;
@@ -16,6 +18,9 @@ const SIZE_DISTRIBUTION_SLOPE = 1.5;
 const SIZE_EXAGGERATION = 20;
 const MIN_POINT_SIZE_PX = 2;
 const MIN_OPACITY = 0.04;
+const HIGHLIGHTED_MIN_OPACITY = 0.2;
+const FOCUS_ELEVATION_DEG = 60;
+const FOCUS_FRAME_MARGIN = 1.45;
 
 // Roughly the real mix of dark carbon-rich, stony and metallic asteroids.
 const TYPES = [
@@ -31,6 +36,7 @@ attribute vec3 phase;
 attribute float radiusKm;
 uniform float elapsedHours;
 uniform float unitsPerKm;
+uniform float highlight;
 varying float vOpacity;
 `;
 
@@ -63,7 +69,7 @@ vec3 toCamera = normalize(-mvPosition.xyz);
 float sunlit = 0.35 + 0.65 * (0.5 + 0.5 * dot(toSun, toCamera));
 float coverage = diameterPx / gl_PointSize;
 
-vOpacity = clamp(coverage * coverage, ${MIN_OPACITY}, 1.0) * sunlit;
+vOpacity = clamp(coverage * coverage, mix(${MIN_OPACITY}, ${HIGHLIGHTED_MIN_OPACITY}, highlight), 1.0) * sunlit;
 `;
 
 const FRAGMENT_DECLARATIONS = `
@@ -94,11 +100,15 @@ const pickType = (roll) => {
 
 class AsteroidBelt {
   constructor(scene, globalScale, solarSystemScale, userPlanetScale) {
+    this.name = 'asteroid_belt';
+    this.properties = asteroidBeltProperties;
     this.globalScale = globalScale;
+    this.outerRadius = OUTER_AU * KM_PER_AU / solarSystemScale;
     this.elapsedHours = 0;
     this.uniforms = {
       elapsedHours: { value: 0 },
-      unitsPerKm: { value: 0 }
+      unitsPerKm: { value: 0 },
+      highlight: { value: 0 }
     };
 
     const material = new THREE.PointsMaterial({
@@ -138,6 +148,23 @@ class AsteroidBelt {
 
   toggle () {
     this.body.visible = !this.body.visible;
+  }
+
+  highlight (enabled) {
+    this.uniforms.highlight.value = enabled ? 1 : 0;
+  }
+
+  focusOffset (camera) {
+    const halfFov = THREE.MathUtils.degToRad(camera.fov / 2);
+    const halfHorizontalFov = Math.atan(Math.tan(halfFov) * camera.aspect);
+    const distance = this.outerRadius * FOCUS_FRAME_MARGIN / Math.tan(Math.min(halfFov, halfHorizontalFov));
+    const elevation = THREE.MathUtils.degToRad(FOCUS_ELEVATION_DEG);
+
+    const horizontal = new THREE.Vector3(camera.position.x, 0, camera.position.z);
+    if (horizontal.lengthSq() === 0) horizontal.set(0, 0, 1);
+    horizontal.normalize().multiplyScalar(Math.cos(elevation));
+
+    return horizontal.setY(Math.sin(elevation)).multiplyScalar(distance);
   }
 
   #geometry (solarSystemScale) {
