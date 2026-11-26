@@ -3,6 +3,7 @@ import Sphere from '../util/sphere.js';
 import { planetProperties } from './properties.js';
 import OrbitPath from './orbitPath.js';
 import Ring from './ring.js';
+import applyRingShadows from './ringShadows.js';
 
 class Planet extends Sphere {
   constructor(scene, name, globalScale, solarSystemScale, userPlanetScale) {
@@ -16,6 +17,7 @@ class Planet extends Sphere {
     scene.add(this.body);
 
     this.ring = this.#ring();
+    if (this.ring) applyRingShadows(this);
     this.orbitPath = this.#orbitPath();
 
     this.angle = this.orbitPath.alignedStartAngle;
