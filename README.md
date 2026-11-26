@@ -51,7 +51,7 @@ Smoke tests use [Playwright](https://playwright.dev/) to load the app in headles
  * Run `npx playwright install chromium` (first time only)
  * Run `npm test`
 
-The same tests run on every pull request through GitHub Actions.
+Run them before opening a pull request, especially after upgrading dependencies.
 
 ## Future Considerations
 
