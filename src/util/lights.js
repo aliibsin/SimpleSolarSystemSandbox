@@ -15,6 +15,5 @@ export const addAmbientLight = (scene) => {
 export const addSunLight = (scene) => {
   const pointLight = new THREE.PointLight(SUN_LIGHT_COLOR, SUN_LIGHT_INTENSITY, SUN_LIGHT_DISTANCE, SUN_LIGHT_DECAY);
   pointLight.position.set(0, 0, 0);
-  pointLight.castShadow = true;
   scene.add(pointLight);
 }
