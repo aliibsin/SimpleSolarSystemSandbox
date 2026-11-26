@@ -9,7 +9,6 @@ class Ring {
     this.inclination = inclination;
 
     this.thetaSegments = 128;
-    this.phiSegments = 64;
 
     this.geometry = this.#geometry();
     this.#setUvForMapTexture();
@@ -26,18 +25,22 @@ class Ring {
   }
 
   #setUvForMapTexture () {
-    const midRadius = (this.innerRadius + this.outerRadius) / 2;
-    let pos = this.geometry.attributes.position;
-    let v3 = new THREE.Vector3();
+    const pos = this.geometry.attributes.position;
+    const uv = this.geometry.attributes.uv;
+    const v3 = new THREE.Vector3();
+    const width = this.outerRadius - this.innerRadius;
 
     for (let i = 0; i < pos.count; i++) {
       v3.fromBufferAttribute(pos, i);
-      this.geometry.attributes.uv.setXY(i, v3.length() < midRadius ? 0 : 1, 1);
+      uv.setXY(i, (v3.length() - this.innerRadius) / width, 1);
     }
   }
 
   #texture () {
-    return new THREE.TextureLoader().load(this.texturePath);
+    const texture = new THREE.TextureLoader().load(this.texturePath);
+    texture.colorSpace = THREE.SRGBColorSpace;
+
+    return texture;
   }
 
   #material () {

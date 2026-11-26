@@ -3,14 +3,19 @@ body {
 }
 
 .intro-box-modal {
-  /* display: none; */
-  position: fixed;
-  z-index: 99999;
-  left: 0;
-  top: 0;
   width: 100vw;
   height: 100vh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
   background-color: rgba(42, 40, 54, 0.6);
+}
+
+.intro-box-modal::backdrop {
+  background: transparent;
 }
 
 .intro-box {
@@ -19,8 +24,9 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(42, 40, 54, 0.6);
-  width: 800px;
-  height: auto;
+  width: min(800px, 90vw);
+  max-height: 90vh;
+  overflow-y: auto;
   border: 5px double black;
   border-radius: 12px;
   font-family: 'Orbitron', sans-serif;
@@ -104,12 +110,6 @@ body {
   transition: 500ms ease;
 }
 
-#scale-gui { 
-  position: absolute; 
-  bottom: 0%; 
-  right: 1%; 
-}
-
 #about-bg {
   position: absolute;
   top: 0;
@@ -132,12 +132,4 @@ body {
 
 .music-on {
   color: aquamarine;
-}
-
-li.title {
-  font-size: 18px;
-}
-
-span.property-name {
-  font-size: 14px;
 }
