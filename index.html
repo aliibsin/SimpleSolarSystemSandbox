@@ -20,6 +20,12 @@
       <button class="about-button" id="about-button">About</button>
       <button class="music-button" id="music-button">Toggle Audio</button>
     </div>
+    <aside class="info-panel" id="info-panel" hidden>
+      <button class="info-panel-close" id="info-panel-close" aria-label="Close">&times;</button>
+      <h2 id="info-panel-title"></h2>
+      <p class="info-panel-fact" id="info-panel-fact"></p>
+      <dl class="info-panel-stats" id="info-panel-stats"></dl>
+    </aside>
     <audio loop preload="none" id="music">
       <source src="assets/meditative-space.mp3">
     </audio>
@@ -31,7 +37,7 @@
           </h1>
           <p class="modal-text">
             This is a simple sandbox of our solar system featuring the sun and the main 8 planets.
-            Click and drag the mouse to rotate. Use the mouse wheel to zoom. Control the 
+            Click and drag the mouse to rotate. Use the mouse wheel to zoom. Click a planet or use the Focus Camera controls to follow it and learn more. Control the
             planet scale, time scale, and orbit visibility through the controls at the top right.
           </p>
           <h2>
