@@ -17,6 +17,8 @@ const formatOrbit = (hours) => {
 };
 
 const stats = (properties) => {
+  if (properties.details) return properties.details;
+
   const rows = [
     ['Radius', `${formatNumber(properties.radius)} km`],
     ['Rotation', formatRotation(properties.rotationHours, properties.rotationDirection)]

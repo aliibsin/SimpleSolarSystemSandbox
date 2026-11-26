@@ -1,10 +1,11 @@
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 import humanize from './humanizeString.js';
 
-const setupGui = (planets, userState, focusNames, setFocus) => {
+const setupGui = (planets, asteroidBelt, userState, focusNames, setFocus) => {
   const gui = new GUI();
   const focusFolder = gui.addFolder('Focus Camera').close();
   const orbitPaths = gui.addFolder('Toggle Orbit Paths').close();
+  const asteroidBeltFolder = gui.addFolder('Toggle Asteroid Belt').close();
   const scaleFolder = gui.addFolder('Scale Controls').close();
 
   const focusButtons = { release: () => setFocus('none') };
@@ -29,10 +30,12 @@ const setupGui = (planets, userState, focusNames, setFocus) => {
   orbitPaths.add(togglePaths, 'showAll').name('Show All');
   orbitPaths.add(togglePaths, 'hideAll').name('Hide All');
 
+  asteroidBeltFolder.add({ toggle: () => asteroidBelt.toggle() }, 'toggle').name('Asteroid Belt');
+
   scaleFolder.add({ toggle: () => toggleTimePause(userState) }, 'toggle').name("Pause/Resume Time");
   scaleFolder.add(userState, "time", 1, 50, 1).name("Time Scale");
   scaleFolder.add(userState, "size", 1, 100, 1).name("Planet Size Scale")
-    .onChange((size) => planets.forEach((planet) => planet.scale(size)));
+    .onChange((size) => [...planets, asteroidBelt].forEach((object) => object.scale(size)));
 };
 
 const showAllPaths = (planets) => {

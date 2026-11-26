@@ -18,6 +18,7 @@ import { addAmbientLight, addSunLight } from './src/util/lights.js';
 import Sun from './src/objects/sun.js';
 import Planet from './src/objects/planet.js';
 import Moon from './src/objects/moon.js';
+import AsteroidBelt from './src/objects/asteroidBelt.js';
 
 const GLOBAL_SIZE_SCALE = 1_000; // 1:1,000 global scale in km
 const SOLAR_SYSTEM_SIZE_SCALE = 10_000; // 1:10,000 solar system scale in km
@@ -67,6 +68,7 @@ window.addEventListener('resize', () => {
 });
 
 const sun = new Sun(scene, GLOBAL_SIZE_SCALE);
+const asteroidBelt = new AsteroidBelt(scene, GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
 
 let planets = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']
 planets = planets.map((planet) => {
@@ -77,13 +79,16 @@ const earth = planets[2];
 const moon = new Moon(scene, earth, GLOBAL_SIZE_SCALE, SOLAR_SYSTEM_SIZE_SCALE, userState.size);
 const bodies = [...planets.slice(0, 3), moon, ...planets.slice(3)];
 
-const focusables = new Map([sun, ...bodies].map((object) => [object.name, object]));
+const focusables = new Map(
+  [sun, ...bodies.slice(0, 5), asteroidBelt, ...bodies.slice(5)].map((object) => [object.name, object])
+);
 const focusControl = new FocusControl(camera, controls);
 const infoPanel = setupInfoPanel(() => setFocus('none'));
 
 function setFocus(name) {
   const object = focusables.get(name);
   userState.focus = object ? name : 'none';
+  asteroidBelt.highlight(object === asteroidBelt);
 
   if (object) {
     focusControl.focus(object);
@@ -94,12 +99,12 @@ function setFocus(name) {
   }
 }
 
-setupPicking(renderer.domElement, camera, [...focusables.values()], (object) => setFocus(object.name));
+setupPicking(renderer.domElement, camera, [sun, ...bodies], (object) => setFocus(object.name));
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && userState.focus !== 'none') setFocus('none');
 });
 
-setupGui(bodies, userState, [...focusables.keys()], setFocus);
+setupGui(bodies, asteroidBelt, userState, [...focusables.keys()], setFocus);
 
 const timer = new THREE.Timer();
 timer.connect(document);
@@ -115,6 +120,7 @@ function animate(timestamp) {
 
   if (!userState.timePause) {
     sun.rotate(userState.time, delta);
+    asteroidBelt.orbit(userState.time, delta);
 
     bodies.forEach((body) => {
       body.rotate(userState.time, delta);
