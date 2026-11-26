@@ -6,6 +6,7 @@ import setupRenderer, { getPixelRatio } from './src/util/renderer.js';
 import setupCamera from './src/util/cameraControl.js';
 import setupBloomComposer from './src/util/postProcessing.js';
 import setupIntro from './src/util/introControl.js';
+import setupLoadingProgress from './src/util/loadingProgress.js';
 import setupMusic from './src/util/musicControl.js';
 import setupStats from './src/util/stats.js';
 import setupGui from './src/util/gui.js';
@@ -36,6 +37,7 @@ const scene = new THREE.Scene();
 gizmo.attachControls(controls);
 
 setupIntro(userState);
+setupLoadingProgress();
 setupMusic();
 addBackground(scene, GLOBAL_BOUNDS);
 addAmbientLight(scene);

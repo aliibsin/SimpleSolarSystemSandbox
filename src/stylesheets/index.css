@@ -71,6 +71,22 @@ body {
   margin: auto 0;
 }
 
+.loading-bar {
+  width: 60%;
+  height: 4px;
+  margin: 0 auto 2%;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-bar-fill {
+  width: 0;
+  height: 100%;
+  background-color: aquamarine;
+  transition: width 200ms ease;
+}
+
 .link-container {
   text-align: center;
   margin-top: 3.5%;

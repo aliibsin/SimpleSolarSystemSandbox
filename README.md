@@ -1,7 +1,7 @@
 # SimpleSolarSystemSandbox
 
 <div align="center">
-   <img src=public/assets/SSSS.png >
+   <img src=docs/images/SSSS.png >
 </div>
 <br/>
 
@@ -12,7 +12,7 @@ Tihs sandbox requires a browser that supports WebGL.
 
 <br/>
 <div align="center">
-   <img src=public/assets/opening.png >
+   <img src=docs/images/opening.png >
 </div>
 <br/>
 
@@ -20,7 +20,7 @@ Click and drag your mouse or use the viewports at the bottom right to rotate. Us
 
 <br/>
 <div align="center">
-   <img src=public/assets/anim_camera.gif >
+   <img src=docs/images/anim_camera.gif >
 </div>
 <br/>
 
@@ -28,7 +28,7 @@ Use controls on top right to change time scale, planet size scale, and orbit vis
 
 <br/>
 <div align="center">
-   <img src=public/assets/anim_scales.gif >
+   <img src=docs/images/anim_scales.gif >
 </div>
 <br/>
 

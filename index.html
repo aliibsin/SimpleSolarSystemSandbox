@@ -20,7 +20,7 @@
       <button class="about-button" id="about-button">About</button>
       <button class="music-button" id="music-button">Toggle Audio</button>
     </div>
-    <audio loop id="music">
+    <audio loop preload="none" id="music">
       <source src="assets/meditative-space.mp3">
     </audio>
     <div class="intro-box-modal" id="intro-box-modal">
@@ -43,8 +43,11 @@
             <div>Planets: 1/1,000 minimum</div>
             <div>TIme: 1/3600 minimum</div>
           </div>
-          <p class="begin">
-            Click anywhere outside this box to begin.
+          <div class="loading-bar" id="loading-bar">
+            <div class="loading-bar-fill" id="loading-bar-fill"></div>
+          </div>
+          <p class="begin" id="begin-text">
+            Loading textures...
           </p>
           <div class="link-container" >
             <a href="https://github.com/aliibsin/SimpleSolarSystemSandbox" target="_blank">
