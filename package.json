@@ -5,7 +5,8 @@
   "scripts": {
     "start": "npx vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "playwright test"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,9 @@
     "three": "^0.173.0",
     "three-viewport-gizmo": "^2.0.2",
     "vite": "^6.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "pngjs": "^7.0.0"
   }
 }

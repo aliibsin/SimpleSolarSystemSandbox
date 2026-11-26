@@ -45,6 +45,14 @@ This app uses
  * Run `npm start`
  * Get local url and paste it in your browser
 
+## Testing
+Smoke tests use [Playwright](https://playwright.dev/) to load the app in headless Chromium, against both the production build and the dev server. They check that it loads without errors or missing assets, renders and animates the scene, and that the intro, controls, music toggle, and camera respond.
+
+ * Run `npx playwright install chromium` (first time only)
+ * Run `npm test`
+
+The same tests run on every pull request through GitHub Actions.
+
 ## Future Considerations
 
  * Asteroid belts
